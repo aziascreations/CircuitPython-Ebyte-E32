@@ -1,0 +1,25 @@
+# IDEs
+.idea/
+.vscode/
+
+# Python
+.env
+.venv
+venv*/
+
+# Python > CPython
+__pycache__
+*.pyc
+
+# Python > CircuitPython
+*.mpy
+
+# MacOS
+*.DS_Store
+
+# Documentation
+docs/build/
+
+# Build artifacts
+output/
+build/
