@@ -1,4 +1,4 @@
-.. include:: ../README.rst
+.. include:: ./introduction.rst
 
 Table of Contents
 =================
@@ -8,6 +8,11 @@ Table of Contents
     :hidden:
 
     self
+
+.. toctree::
+    :caption: Examples
+
+    examples
 
 .. toctree::
    :maxdepth: 2

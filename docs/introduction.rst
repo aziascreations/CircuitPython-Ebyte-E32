@@ -81,6 +81,10 @@ Links
 
 * `Ebyte documentation for most E32-433T33D  (On manualslib.com) <https://www.manualslib.com/manual/2924523/Ebyte-E32-433t33d.html?page=2#manual>`_
 
+https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan
+
+https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters
+
 License
 *******
 This project is licensed under the `MIT license <LICENSE>`_.

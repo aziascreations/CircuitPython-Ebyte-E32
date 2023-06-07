@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2023 Herwin Bozet
+#
+# SPDX-License-Identifier: MIT
 """
 `ebyte_e32.t33`
 ====================================================

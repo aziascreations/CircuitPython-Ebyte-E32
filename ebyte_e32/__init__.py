@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2023 Herwin Bozet
+#
+# SPDX-License-Identifier: MIT
 """
 `ebyte_e32`
 ====================================================
@@ -5,17 +8,18 @@
 """
 
 try:
-    from typing import Union, Optional
+    from typing import Union, Optional, Tuple
 except ImportError:
     pass
 
 from binascii import hexlify
 from busio import UART
+from collections import namedtuple
 from digitalio import Direction, DigitalInOut
 from microcontroller import Pin
 from time import sleep
 
-# TODO: Remove useless imports from minified version
+# FIXME: Apply custom parity on UART on mode change !
 
 
 class Modes:
@@ -59,6 +63,8 @@ class Modes:
 class SerialParity:
     """
     aaa
+    
+    This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
     
     PARITY_NONE = 0b00
@@ -78,7 +84,7 @@ class SerialBaudRate:
     """
     UART baud rate for all communications between the module and the MCU.
     
-    It is not related to the LoRa transmission rate and can be different between communicating modules.
+    This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
     
     BAUD_1200 = (0b000, 1200)
@@ -113,7 +119,7 @@ class AirDataRate:
     """
     ???
     
-    This rate must be the same between all [members of a communication].
+    **This setting must be the same between all communicating modules.**
     """
     
     RATE_0_3K = 0b000
@@ -138,17 +144,129 @@ class AirDataRate:
     "Default air data rate on E32 devices"
 
 
-TX_POWER_MIN = 0b00
-"""Minimal allowed TX power value.  (Inclusive)"""
+class TransmissionMode:
+    """
+    ???
+    """
+    
+    TRANSMISSION_TRANSPARENT = 0b0
+    "???"
+    
+    TRANSMISSION_FIXED = 0b1
+    "???"
+    
+    TRANSMISSION_DEFAULT = TRANSMISSION_TRANSPARENT
+    """
+    Default transmission mode on E32 devices.
+    
+    This is not explicitly indicated in the E32 datasheets, but it practice this is the case.
+    """
 
-TX_POWER_MAX = 0b11
-"""Maximal allowed TX power value.  (Inclusive)"""
+
+class WakeUpTime:
+    """
+    ???
+    
+    [Not on mode 0 !]
+    
+    This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
+    """
+    
+    WAKE_TIME_250MS = 0b000
+    "???"
+    
+    WAKE_TIME_500MS = 0b001
+    "???"
+    
+    WAKE_TIME_750MS = 0b010
+    "???"
+    
+    WAKE_TIME_1000MS = 0b011
+    "???"
+    
+    WAKE_TIME_1250MS = 0b100
+    "???"
+    
+    WAKE_TIME_1500MS = 0b101
+    "???"
+    
+    WAKE_TIME_1750MS = 0b110
+    "???"
+    
+    WAKE_TIME_2000MS = 0b111
+    "???"
+    
+    WAKE_TIME_DEFAULT = WAKE_TIME_250MS
+    "Default wake-up time on E32 devices"
+
+
+class IODriveMode:
+    """
+    ???
+    
+    This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
+    """
+    
+    DRIVE_OPEN = 0b0
+    """
+    Both `TX` and `AUX` pins will be push-pull outputs.
+    
+    The `RX` pin will be a pull-up input.
+    """
+    
+    DRIVE_PULL = 0b1
+    """
+    Both `TX` and `AUX` pins will be open-collector outputs.
+    
+    The `RX` pin will be an open-collector input.
+    """
+    
+    DRIVE_DEFAULT = DRIVE_PULL
+    "Default IO drive mode E32 devices"
+
+
+class ForwardErrorCorrection:
+    """
+    ???
+    
+    **This setting must be the same between all communicating modules.**
+    """
+    
+    FEC_DISABLED = False
+    "Enables forward error correction"
+    
+    FEC_ENABLE = True
+    "Disables forward error correction"
+    
+    FEC_DEFAULT = FEC_ENABLE
+    "Default FEC status on E32 devices"
+
 
 CHANNEL_MIN = 0
 """Minimal allowed channel number.  (Inclusive)"""
 
 CHANNEL_MAX = 31
 """Maximal allowed channel number.  (Inclusive)"""
+
+
+TX_POWER_MIN = 0b00
+"""Minimal allowed TX power value.  (Inclusive)"""
+
+TX_POWER_MAX = 0b11
+"""Maximal allowed TX power value.  (Inclusive)"""
+
+
+E32DeviceVersion = namedtuple("E32DeviceVersion", (
+    "model", "version", "features"
+))
+"""Named tuple returned by the `E32DeviceConfig` when fetching the module's version."""
+
+
+E32DeviceConfig = namedtuple("E32DeviceConfig", (
+    "address", "uart_parity", "uart_rate", "data_rate", "channel", "tx_mode", "io_drive_mode", "wake_up_time",
+    "forward_error_correction", "tx_power"
+))
+"""Named tuple returned by the `E32DeviceConfig` when fetching the module's current config."""
 
 
 class E32Device:
@@ -179,6 +297,10 @@ class E32Device:
     _uart_rate: Union[tuple[int, int], SerialBaudRate]
     _data_rate: Union[int, AirDataRate]
     _channel: int
+    _tx_mode: int
+    _io_drive_mode: int
+    _wake_up_time: int
+    _fec: bool
     _tx_power: int
     
     def __init__(self,
@@ -193,7 +315,10 @@ class E32Device:
                  uart_rate: Union[tuple[int, int], SerialBaudRate] = SerialBaudRate.BAUD_DEFAULT,
                  data_rate: Union[int, AirDataRate] = AirDataRate.RATE_DEFAULT,
                  channel: int = 0,
-                 # TODO: Add missing config fields
+                 tx_mode: Union[int, TransmissionMode] = TransmissionMode.TRANSMISSION_DEFAULT,
+                 io_drive_mode: Union[int, IODriveMode] = IODriveMode.DRIVE_DEFAULT,
+                 wake_up_time: Union[int, WakeUpTime] = WakeUpTime.WAKE_TIME_DEFAULT,
+                 forward_error_correction: Union[bool, ForwardErrorCorrection] = True,
                  tx_power: int = 0b00,
                  ):
         # Preparing pins
@@ -220,13 +345,18 @@ class E32Device:
         self._uart_rate = uart_rate
         self._data_rate = data_rate
         self._channel = channel
-        # TODO: Add missing config fields
+        self._tx_mode = tx_mode
+        self._io_drive_mode = io_drive_mode
+        self._wake_up_time = wake_up_time
+        self._fec = forward_error_correction
         self._tx_power = tx_power
         
-        # Validating and applying configuration
+        # Checking if the module works by fetching its version and not getting any data validation errors.
         self.mode = Modes.MODE_SLEEP
+        self.get_version()
         
-        # TODO: Check if it works.
+        # Validating and applying configuration
+        self.update_config()
     
     def __del__(self):
         self.deinit()
@@ -238,6 +368,7 @@ class E32Device:
         :return: ``None``
         """
         # ? => deinit_pins: bool = True
+        self.reset()
         self.m0.deinit()
         self.m1.deinit()
         self.uart.deinit()
@@ -251,20 +382,21 @@ class E32Device:
         if self.uart.in_waiting > 0:
             self.uart.read(self.uart.in_waiting)
     
-    def wait_aux(self):
+    def wait_aux(self, max_wait_ms: int = 150):
         """
         Wait for the `AUX` pin to go high meaning that the module is ready for communications.
         
         If no `AUX` pin was given, or if it stays low, the waiting period will be 150ms at most.
         
+        :type max_wait_ms: Max amount of time in milliseconds to wait for the `AUX` pin to go high.  (Default: ``150``)
         :return: ``None``
         """
         if self.aux is None:
-            sleep(0.1)
+            sleep(max_wait_ms / 1000)
             return
         
         wait_loop_count = 0
-        while not self.aux.value and wait_loop_count < 14:
+        while not self.aux.value and wait_loop_count < (max_wait_ms / 10) - 1:
             print("Waiting for AUX...")
             sleep(0.01)
             wait_loop_count += 1
@@ -299,7 +431,11 @@ class E32Device:
                      ((self._uart_rate[0] & 0b111) << 3) | \
                      (self._data_rate & 0b111)
         command[4] = self._channel & 0b00011111
-        command[5] = 0b01000100 | (self._tx_power & 0b11)
+        command[5] = ((self._tx_mode & 0b1) << 7) | \
+                     ((self._io_drive_mode & 0b1) << 6) | \
+                     ((self._wake_up_time & 0b111) << 3) | \
+                     ((self._fec & 0b1) << 2) | \
+                     (self._tx_power & 0b11)
         
         print(hexlify(command, '-'))
         
@@ -356,6 +492,70 @@ class E32Device:
         
         return raw_config
     
+    def get_config(self) -> E32DeviceConfig:
+        raw_config = self.get_raw_config()
+        
+        return E32DeviceConfig(
+            raw_config[1:3],  # Address
+            (raw_config[3] & 0b11000000) >> 6,  # UART Parity
+            (raw_config[3] & 0b111000) >> 3,  # UART Rate
+            raw_config[3] & 0b111,  # Air data rate
+            raw_config[4] & 0b11111,  # Channel
+            (raw_config[5] & 0b10000000) >> 7,  # Transmission mode
+            (raw_config[5] & 0b1000000) >> 6,  # IO drive mode
+            (raw_config[5] & 0b111000) >> 3,  # Wake-up time
+            (raw_config[5] & 0b100) >> 2,  # FEC status
+            raw_config[5] & 0b11,  # TX Power
+        )
+    
+    def get_raw_version(self) -> bytes:
+        """
+        Fetches the raw version number and returns it.
+        
+        **The module will temporarily go into sleep mode and flush the UART buffer.**
+        
+        :return: The raw response as a ``bytes`` object of length 4.
+        """
+        original_mode = self.mode
+        
+        if original_mode != Modes.MODE_SLEEP:
+            self.mode = Modes.MODE_SLEEP
+        
+        self.uart.write(b'\xC3\xC3\xC3')
+        self.wait_aux()
+        if self.uart.in_waiting != 4:
+            raise RuntimeError("The operating parameters request returned {} byte(s) instead of 4 !".format(
+                self.uart.in_waiting
+            ))
+        raw_version = self.uart.read(4)
+        
+        if original_mode != Modes.MODE_SLEEP:
+            self.mode = original_mode
+            self.uart.baudrate = self._uart_rate[1]
+        
+        return raw_version
+    
+    def get_version(self) -> E32DeviceVersion:
+        """
+        Fetches the module's model, version number and its features.
+        
+        **Ebyte's documentation doesn't explain the content of the second and third values in details.**
+        
+        :return: A tuple containing the module's model, its version number, ant its features
+        """
+        raw_version = self.get_raw_version()
+        
+        if raw_version[0] != 0xC3:
+            raise RuntimeError("The version data has a bad response code !")
+        
+        if raw_version[1] != 0x32:
+            raise RuntimeError("The version data has an invalid model !")
+        
+        return E32DeviceVersion(raw_version[1], raw_version[2], raw_version[3])
+    
+    def reset(self):
+        pass
+    
     @property
     def mode(self) -> Union[tuple[int, int], Modes]:
         """
@@ -374,6 +574,58 @@ class E32Device:
         self.flush_uart()
     
     @property
+    def uart_parity(self) -> int:
+        """
+        Module's UART parity used on the `RX` and `TX` lines when in non-sleep modes,
+        as transmitted via the save parameters command.
+        
+        Must be between one of the values in ``SerialParity``.
+        
+        This value is automatically applied to the uart bus when switching modes.
+        
+        **Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.**
+        """
+        return self._uart_parity
+    
+    @uart_parity.setter
+    def uart_parity(self, value: int):
+        if not (0b00 <= value <= 0b11):
+            raise ValueError(f"The 'uart_parity' isn't between 0 and 3 !  (It's {value})")
+        self._uart_parity = value
+        self.update_config()
+        
+    @property
+    def uart_rate(self) -> tuple[int, int] | SerialBaudRate:
+        """
+        Module's UART rate used on the `RX` and `TX` lines when in non-sleep modes.
+        
+        Must be between one of the values in ``SerialBaudRate``.
+        
+        This value is automatically applied to the uart bus when switching modes.
+        
+        **Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.**
+        """
+        return self._uart_rate
+    
+    @uart_rate.setter
+    def uart_rate(self, value: tuple[int, int] | SerialBaudRate):
+        if not (0b000 <= value[0] <= 0b111):
+            raise ValueError(f"The 'uart_rate' isn't between 0 and 7 !  (It's {value[0]})")
+        self._uart_rate = value
+        self.update_config()
+    
+    # TODO:
+    # Air data rate
+    # Channel
+    # Transmission mode
+    # IO drive mode
+    # Wake-up time
+    # FEC status
+    
+    # if not (0 <= self.channel <= 31):
+    #     raise ValueError(f"The 'channel' isn't between 0 and 31 !  (It's {self.channel})")
+    
+    @property
     def tx_power(self) -> int:
         """
         Module's TX power as transmitted via the save parameters command.
@@ -390,7 +642,3 @@ class E32Device:
             raise ValueError(f"The 'tx_power' isn't between 0 and 3 !  (It's {value})")
         self._tx_power = value
         self.update_config()
-
-
-# if not (0 <= self.channel <= 31):
-#     raise ValueError(f"The 'channel' isn't between 0 and 31 !  (It's {self.channel})")
