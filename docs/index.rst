@@ -14,6 +14,7 @@ Table of Contents
 
     examples_instantiation
     examples_config
+    examples_transmit_fixed
 
 .. toctree::
    :maxdepth: 2

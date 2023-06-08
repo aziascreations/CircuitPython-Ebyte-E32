@@ -4,9 +4,6 @@
 
 import board
 
-from busio import UART
-from digitalio import DigitalInOut
-
 import ebyte_e32
 
 PIN_M0 = board.IO13
@@ -16,12 +13,12 @@ PIN_TXD = board.IO10  # Pin marked as TX on the module
 PIN_AUX = board.IO9
 
 e32 = ebyte_e32.E32Device(
-    pin_m0=DigitalInOut(PIN_M0),    # Direction is set in constructor.
-    pin_m1=DigitalInOut(PIN_M1),    # Direction is set in constructor.
-    pin_aux=DigitalInOut(PIN_AUX),  # Direction is set in constructor.
-    pin_tx=None,
-    pin_rx=None,
-    uart=UART(PIN_RXD, PIN_TXD),  # Parameters are set when the module changes its mode.
+    pin_m0=PIN_M0,
+    pin_m1=PIN_M1,
+    pin_aux=PIN_AUX,
+    pin_tx=PIN_TXD,
+    pin_rx=PIN_RXD,
+    uart_buffer_size=64,  # Default for `busio.UART`
     address=0x0000,
     uart_parity=ebyte_e32.SerialParity.PARITY_DEFAULT,
     uart_rate=ebyte_e32.SerialBaudRate.BAUD_DEFAULT,

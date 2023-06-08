@@ -8,9 +8,6 @@ CircuitPython driver for Ebyte's E32 UART LoRa modules.
   * Channel <-> frequency converters.
   * ~~Maximum packet size calculators~~.  (TODO)
   * Entirely optional via separate modules.
-* Beginner-friendly:
-  * Automatic DigitalInOut instantiation
-  * Automatic UART bus instantiation
 * Minified versions for devices with tiny storage space:
   * ~75% smaller for `.py` files
   * ~5% smaller for `.mpy` files  *(Due to shortened local variables, mostly)*

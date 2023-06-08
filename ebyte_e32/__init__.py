@@ -290,6 +290,10 @@ class E32Device:
     UART connection to the E32 module.
     """
     
+    _uart_pin_tx: Pin
+    _uart_pin_rx: Pin
+    _uart_buffer_size: int
+    
     _address: int
     _uart_parity: Union[int, SerialParity]
     _uart_rate: Union[tuple[int, int], SerialBaudRate]
@@ -302,12 +306,12 @@ class E32Device:
     _tx_power: int
     
     def __init__(self,
-                 pin_m0: Union[Pin, DigitalInOut],
-                 pin_m1: Union[Pin, DigitalInOut],
-                 pin_aux: Optional[Union[Pin, DigitalInOut]],
-                 pin_tx: Optional[Pin] = None,
-                 pin_rx: Optional[Pin] = None,
-                 uart: Optional[UART] = None,
+                 pin_m0: Pin,
+                 pin_m1: Pin,
+                 pin_aux: Optional[Pin],
+                 pin_tx: Pin,
+                 pin_rx: Pin,
+                 uart_buffer_size: int = 64,
                  address: int = 0x0000,
                  uart_parity: Union[int, SerialParity] = SerialParity.PARITY_NONE,
                  uart_rate: Union[tuple[int, int], SerialBaudRate] = SerialBaudRate.BAUD_DEFAULT,
@@ -320,16 +324,16 @@ class E32Device:
                  tx_power: int = 0b11,
                  ):
         # Preparing pins
-        self.m0 = pin_m0 if pin_m0 is DigitalInOut else DigitalInOut(pin_m0)
-        self.m1 = pin_m1 if pin_m1 is DigitalInOut else DigitalInOut(pin_m1)
-        self.aux = pin_aux if (pin_aux is DigitalInOut or pin_aux is None) else DigitalInOut(pin_aux)
+        self.m0 = DigitalInOut(pin_m0)
+        self.m1 = DigitalInOut(pin_m1)
+        self.aux = None if pin_aux is None else DigitalInOut(pin_aux)
         
-        if uart is not None:
-            self.uart = uart
-        elif pin_tx is not None and pin_rx is not None:
-            self.uart = UART(pin_rx, pin_tx)
-        else:
-            raise ValueError("No UART bus or TX and RX pins given !")
+        # Preparing UART bus
+        self._uart_pin_tx = pin_rx
+        self._uart_pin_rx = pin_tx
+        self._uart_buffer_size = uart_buffer_size
+        self.uart = None
+        self.prepare_uart(9600, None)
         
         # Correcting some pin-related stuff
         self.m0.direction = Direction.OUTPUT
@@ -371,6 +375,23 @@ class E32Device:
         self.m1.deinit()
         self.uart.deinit()
     
+    def prepare_uart(self, baudrate: int, parity: Optional[UART.Parity]):
+        """
+        Prepares the UART bus for further communications.
+        
+        :param baudrate: TODO
+        :param parity: TODO
+        :return: ``None``
+        """
+        if self.uart is not None:
+            self.flush_uart()
+            self.uart.deinit()
+        
+        self.uart = UART(
+            self._uart_pin_tx, self._uart_pin_rx,
+            parity=parity, baudrate=baudrate,
+            receiver_buffer_size=self._uart_buffer_size)
+    
     def flush_uart(self):
         """
         Empties out the UART buffer if possible.
@@ -379,6 +400,8 @@ class E32Device:
         """
         if self.uart.in_waiting > 0:
             self.uart.read(self.uart.in_waiting)
+        
+        # FIXME: Use uart.reset_input_buffer() !
     
     def wait_aux(self, max_wait_ms: int = 150):
         """
@@ -438,7 +461,6 @@ class E32Device:
         # print(hexlify(command, '-'))
         
         # Preparing the UART bus
-        self.uart.baudrate = 9600  # Redundant !
         self.flush_uart()
         
         # Sending config
@@ -587,10 +609,12 @@ class E32Device:
         self.m0.value = value[0]
         self.m1.value = value[1]
         self.wait_aux()
-        self.uart.baudrate = 9600 if self.mode == Modes.MODE_SLEEP else self._uart_rate[1]
-        self.uart.Parity = (
-            None if self.mode == Modes.MODE_SLEEP or self.uart_parity == SerialParity.PARITY_NONE else (
-                UART.Parity.ODD if self.uart_parity == SerialParity.PARITY_ODD else UART.Parity.EVEN
+        self.prepare_uart(
+            baudrate=9600 if self.mode == Modes.MODE_SLEEP else self._uart_rate[1],
+            parity=(
+                None if self.mode == Modes.MODE_SLEEP or self.uart_parity == SerialParity.PARITY_NONE else (
+                    UART.Parity.ODD if self.uart_parity == SerialParity.PARITY_ODD else UART.Parity.EVEN
+                )
             )
         )
         self.flush_uart()
