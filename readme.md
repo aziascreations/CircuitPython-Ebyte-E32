@@ -1,29 +1,29 @@
 # CircuitPython Ebyte E32 Library (W.I.P.)
-CircuitPython driver for Ebyte's E32 LoRa modules.
+CircuitPython driver for Ebyte's E32 UART LoRa modules.
 
 ## Features
-* Supports all standard E32 modules.
+* Supports all standard E32 UART modules.
 * Extra support on a per-frequency and per-power basis:
   * More descriptive constants for TX power.
   * Channel <-> frequency converters.
   * ~~Maximum packet size calculators~~.  (TODO)
-  * Entirely optional.
+  * Entirely optional via separate modules.
 * Beginner-friendly:
   * Automatic DigitalInOut instantiation
   * Automatic UART bus instantiation
+* Minified versions for devices with tiny storage space:
+  * ~75% smaller for `.py` files
+  * ~5% smaller for `.mpy` files  *(Due to shortened local variables, mostly)*
 
 ## Limitations
+* **No built-in packet size limit:**
+  * Wildly different between frequencies & operating parameters.
+  * Not documented clearly enough in LoRA and LoRaWAN documentation.
 * No built-in protocol:
   * All LoRa packets are glued back-to-back when received.
   * **No LoraWAN support**
 * Missing extra support for some modules:
   * Modules with `170`, `400`, `868`, `900`, and `915` prefix.  *(Will improve overtime)*
-  * Modules with the `27` suffix.*
-
-*: The `E32-433T27D` variant is mentionned in the
-[E32 V1.30 User Manual](https://www.ebyte.com/en/pdf-down.aspx?id=775),
-but no datasheet or product listing can be found for it,
-no other modules with that suffix appear to exist.
 
 ## Dependencies
 This driver depends on:
@@ -36,6 +36,26 @@ TODO
 ## Usage
 Usage examples can be found in the [examples](examples) folder,
 or in the [Examples](#) section of the documentation.
+
+### Wiring
+| E32 Module | MCU                             |
+|------------|---------------------------------|
+| `M0`       | Any digital output pin          |
+| `M1`       | Any digital output pin          |
+| `RXD`      | Any UART **TX** capable pin*    |
+| `TXD`      | Any UART **RX** capable pin*    |
+| `AUX`      | Any digital input pin**         |
+| `VCC`      | Power supply 2.3V to 5.2V DC*** |
+
+*: Some devices like the *STM32 Black Pill* may require you to use very specific pins for the UART bus.<br>
+**: Analogue input pins might work, but this type of setup isn't supported !<br>
+***: More than 5.2V can cause damage, and make sure to double-check the datasheet !
+
+### *"Making sure it works"*
+The `E32Device` class will raise a `RuntimeError` exception during instantiation if it can't communicate to
+your module.
+
+The same error may be raised when you change any operating setting.
 
 ## Links
 
@@ -67,7 +87,7 @@ We also keep copies of them over at [files.nibblepoker.lu](https://files.nibblep
 ## Legal Disclaimer
 Proper usage of E32 modules and adherence to your local laws and other RF-related laws all fall under your
 responsibility.<br>
-Improper use can result in physical damage to your module, and it may also break some of your local laws,
+Improper use can result in physical damage to your module, and may also break some of your local laws,
 especially those regarding RF transmissions.
 
 An example of these law-related issues would be the usage of `E32-443T30D` / `TTL-1W` modules in most of europe.<br>

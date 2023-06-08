@@ -11,7 +11,7 @@ None of the module's parameters will be customized.
 
 .. literalinclude:: ../examples/instantiation_basic.py
     :caption: examples/instantiation_basic.py
-    :emphasize-lines: 17
+    :emphasize-lines: 15,18
     :linenos:
 
 Complete

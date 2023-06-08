@@ -12,14 +12,12 @@ try:
 except ImportError:
     pass
 
-from binascii import hexlify
+# from binascii import hexlify
 from busio import UART
 from collections import namedtuple
 from digitalio import Direction, DigitalInOut
 from microcontroller import Pin
 from time import sleep
-
-# FIXME: Apply custom parity on UART on mode change !
 
 
 class Modes:
@@ -397,7 +395,7 @@ class E32Device:
         
         wait_loop_count = 0
         while not self.aux.value and wait_loop_count < (max_wait_ms / 10) - 1:
-            print("Waiting for AUX...")
+            # print("Waiting for AUX...")
             sleep(0.01)
             wait_loop_count += 1
         
@@ -416,7 +414,7 @@ class E32Device:
         :return: ``None``
         :raises RuntimeError: If the config couldn't be applied.
         """
-        print("Updating module's config...")
+        # print("Updating module's config...")
         
         original_mode = self.mode
         
@@ -437,10 +435,10 @@ class E32Device:
                      ((self._fec & 0b1) << 2) | \
                      (self._tx_power & 0b11)
         
-        print(hexlify(command, '-'))
+        # print(hexlify(command, '-'))
         
         # Preparing the UART bus
-        self.uart.baudrate = 9600
+        self.uart.baudrate = 9600  # Redundant !
         self.flush_uart()
         
         # Sending config
@@ -456,14 +454,13 @@ class E32Device:
         
         if verify:
             raw_config = self.get_raw_config()
-            print("Raw: ")
-            print(hexlify(command, '-'))
+            # print("Raw: ")
+            # print(hexlify(command, '-'))
             if raw_config[1:] != command[1:]:
                 raise RuntimeError("The module doesn't return the new config !")
         
         if original_mode != Modes.MODE_SLEEP:
             self.mode = original_mode
-            self.uart.baudrate = self._uart_rate[1]
     
     def get_raw_config(self) -> bytes:
         """
@@ -488,7 +485,6 @@ class E32Device:
         
         if original_mode != Modes.MODE_SLEEP:
             self.mode = original_mode
-            self.uart.baudrate = self._uart_rate[1]
         
         return raw_config
     
@@ -531,7 +527,6 @@ class E32Device:
         
         if original_mode != Modes.MODE_SLEEP:
             self.mode = original_mode
-            self.uart.baudrate = self._uart_rate[1]
         
         return raw_version
     
@@ -553,8 +548,30 @@ class E32Device:
         
         return E32DeviceVersion(raw_version[1], raw_version[2], raw_version[3])
     
-    def reset(self):
-        pass
+    def reset(self, stay_in_sleep_mode: bool = True):
+        """
+        Sends the `RESET` command to the module and stays in sleep mode waiting for further configuration unless
+        instructed not to.
+        
+        The module is left in sleep mode to prevent rogue communications with an undesired operating configuration.
+        
+        **The module will temporarily go into sleep mode and flush the UART buffer.**
+        
+        **The module will likely be unresponsive for a couple of seconds !**
+        
+        :param stay_in_sleep_mode: Whether the module should be left in sleep mode after the reset.  (Default: ``True``)
+        :return: ``None``
+        """
+        original_mode = self.mode
+        
+        if original_mode != Modes.MODE_SLEEP:
+            self.mode = Modes.MODE_SLEEP
+        
+        self.uart.write(b'\xC4\xC4\xC4')
+        self.wait_aux(1500)  # May not be enough, it doesn't respond directly, even if AUX is high...
+        
+        if not stay_in_sleep_mode and original_mode != Modes.MODE_SLEEP:
+            self.mode = original_mode
     
     @property
     def mode(self) -> Union[tuple[int, int], Modes]:
@@ -571,7 +588,11 @@ class E32Device:
         self.m1.value = value[1]
         self.wait_aux()
         self.uart.baudrate = 9600 if self.mode == Modes.MODE_SLEEP else self._uart_rate[1]
-        # FIXME: Setup the baudrate too !
+        self.uart.Parity = (
+            None if self.mode == Modes.MODE_SLEEP or self.uart_parity == SerialParity.PARITY_NONE else (
+                UART.Parity.ODD if self.uart_parity == SerialParity.PARITY_ODD else UART.Parity.EVEN
+            )
+        )
         self.flush_uart()
     
     @property
