@@ -12,7 +12,8 @@ Table of Contents
 .. toctree::
     :caption: Examples
 
-    examples
+    examples_instantiation
+    examples_config
 
 .. toctree::
    :maxdepth: 2

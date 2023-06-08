@@ -12,4 +12,6 @@ PIN_RXD = board.IO11  # Pin marked as RX on the module
 PIN_TXD = board.IO10  # Pin marked as TX on the module
 PIN_AUX = board.IO9
 
-e32 = ebyte_e32.E32Device(PIN_M0, PIN_M1, PIN_AUX, PIN_TXD, PIN_RXD, None, 0xBEEF)
+# These pins can also be given in their `digitalio.DigitalIO` and `busio.UART` variant.
+
+e32 = ebyte_e32.E32Device(PIN_M0, PIN_M1, PIN_AUX, PIN_TXD, PIN_RXD)

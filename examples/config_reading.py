@@ -13,27 +13,25 @@ PIN_RXD = board.IO11  # Pin marked as RX on the module
 PIN_TXD = board.IO10  # Pin marked as TX on the module
 PIN_AUX = board.IO9
 
-e32 = ebyte_e32.E32Device(PIN_M0, PIN_M1, PIN_AUX, PIN_TXD, PIN_RXD, None, 0xBEEF)
+e32 = ebyte_e32.E32Device(PIN_M0, PIN_M1, PIN_AUX, PIN_TXD, PIN_RXD)
+
+# /!\ This operation will cause the module to go into sleep mode and flush the UART buffer /!\
 
 # Grabbing the config in a named tuple.
 config = e32.get_config()
 
-print("Current config:")
+print(config)
 
-print("* Address: " + binascii.hexlify(config.address, ":").decode("utf-8"))
-
-print("* UART Parity:")
-print("  * Value: " + bin(config.uart_parity))
-for const_name, value in ebyte_e32.SerialParity.__dict__.items():
-    if value == config.uart_parity:
-        print("  * Const: " + const_name)
-        break  # Avoids printing the default constants
-
-print("* UART Rate:")
-print("  * Value: " + bin(config.uart_rate))
-for const_name, value in ebyte_e32.SerialBaudRate.__dict__.items():
-    # FIXME: NOT WORKING: Matches the first !
-    if value[0] == config.uart_parity:
-        print("  * Const: " + const_name)
-        print("  * Baudrate: " + str(value[1]))
-        break  # Avoids printing the default constants
+# Output:
+# E32DeviceConfig(
+#     address=b'\x00\x00',
+#     uart_parity=0,
+#     uart_rate=3,
+#     data_rate=2,
+#     channel=0,
+#     tx_mode=0,
+#     io_drive_mode=1,
+#     wake_up_time=0,
+#     forward_error_correction=1,
+#     tx_power=3
+# )
