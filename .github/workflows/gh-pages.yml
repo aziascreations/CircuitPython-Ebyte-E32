@@ -20,6 +20,11 @@ jobs:
           submodules: true
           fetch-depth: 0
 
+      - name: Copy Python files
+        run: |
+          sudo mkdir -p docs/ebyte_e32
+          sudo cp ebyte_e32/*.py docs/ebyte_e32/
+
       - name: Build Sphinx documentation
         uses: ammaraskar/sphinx-action@master
         with:
