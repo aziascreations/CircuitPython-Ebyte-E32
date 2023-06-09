@@ -38,13 +38,13 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
           pip install -r docs/requirements.txt
-          pip install -e .; fi
+          pip install -e .
 
       - name: Build Sphinx documentation
         run: |
           cd docs/
           sphinx-build -M clean ./ build
-          sphinx-build -M html ./ build; fi
+          sphinx-build -M html ./ build
 
       - name: Deploy documentation to gh-pages
         uses: peaceiris/actions-gh-pages@v3
