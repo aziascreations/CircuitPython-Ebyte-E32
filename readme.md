@@ -34,6 +34,8 @@ TODO
 Usage examples can be found in the [examples](examples) folder,
 or in the [Examples](#) section of the documentation.
 
+https://aziascreations.github.io/CircuitPython_Ebyte_E32/
+
 ### Wiring
 | E32 Module | MCU                             |
 |------------|---------------------------------|
@@ -70,6 +72,8 @@ The same error may be raised when you change any operating setting.
 * [???](https://lora-developers.semtech.com/documentation/tech-papers-and-guides/the-book/packet-size-considerations/)
 
 * [???](https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters)
+
+* [???](https://www.rfwireless-world.com/calculators/LoRa-Data-Rate-Calculator.html)
 
 ### Datasheets
 All datasheets are hosted by Ebyte on ebyte.com unless specified otherwise.

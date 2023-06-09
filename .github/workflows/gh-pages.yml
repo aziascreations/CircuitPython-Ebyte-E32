@@ -9,10 +9,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
     permissions:
       contents: write
+
     concurrency:
       group: cicd-docs
+
     steps:
       - name: Checkout Git submodules
         uses: actions/checkout@v3
@@ -20,15 +27,24 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Copy Python files
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
         run: |
-          sudo mkdir -p docs/ebyte_e32
-          sudo cp ebyte_e32/*.py docs/ebyte_e32/
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -r docs/requirements.txt
+          pip install -e .
 
       - name: Build Sphinx documentation
-        uses: ammaraskar/sphinx-action@master
-        with:
-          docs-folder: "docs/"
+        run: |
+          cd docs/
+          sphinx-build -M clean ./ build
+          sphinx-build -M html ./ build
 
       - name: Deploy documentation to gh-pages
         uses: peaceiris/actions-gh-pages@v3
