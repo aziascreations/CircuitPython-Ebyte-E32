@@ -9,10 +9,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
     permissions:
       contents: write
+
     concurrency:
       group: cicd-docs
+
     steps:
       - name: Checkout Git submodules
         uses: actions/checkout@v3
@@ -20,11 +27,24 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Build Sphinx documentation
-        uses: ammaraskar/sphinx-action@master
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
         with:
-          pre-build-command: "pip install -e ."
-          docs-folder: "docs/"
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -r docs/requirements.txt
+          pip install -e .; fi
+
+      - name: Build Sphinx documentation
+        run: |
+          cd docs/
+          sphinx-build -M clean ./ build
+          sphinx-build -M html ./ build; fi
 
       - name: Deploy documentation to gh-pages
         uses: peaceiris/actions-gh-pages@v3
