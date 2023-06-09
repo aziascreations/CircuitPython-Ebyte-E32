@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - master
+      - dev-actions-fix
   pull_request:
 
 jobs:
@@ -20,19 +20,15 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Copy Python files
-        run: |
-          sudo mkdir -p docs/ebyte_e32
-          sudo cp ebyte_e32/*.py docs/ebyte_e32/
-
       - name: Build Sphinx documentation
         uses: ammaraskar/sphinx-action@master
         with:
+          pre-build-command: "pip install -e ."
           docs-folder: "docs/"
 
       - name: Deploy documentation to gh-pages
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/dev-actions-fix' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build/html

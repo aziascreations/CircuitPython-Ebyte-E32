@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney for Adafruit Industries
+#
+# SPDX-License-Identifier: MIT
+
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+    "setuptools-scm",
+]
+
+[project]
+name = "nibblepoker-circuitpython-e32-driver"
+description = "CircuitPython driver for Ebyte's E32 LoRa modules."
+version = "0.0.0+auto.0"
+readme = "readme.md"
+authors = [
+    {name = "Herwin Bozet", email = "herwin.bozet@gmail.com"}
+]
+urls = {Homepage = "https://github.com/aziascreations/CircuitPython_Ebyte_E32.git"}
+keywords = [
+    "blinka",
+    "circuitpython",
+    "micropython",
+    "ebyte",
+    "e32",
+    "lora",
+    "driver",
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: MicroPython",
+    "Topic :: Software Development :: Embedded Systems",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Hardware",
+]
+dynamic = ["dependencies"]
+
+[tool.setuptools]
+packages = ["ebyte_e32"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+#optional-dependencies = {optional = {file = ["requirements-optional.txt"]}}
