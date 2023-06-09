@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
+  <title>ebyte_e32 &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
@@ -54,6 +54,158 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><cite>ebyte_e32</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.AirDataRate"><code class="docutils literal notranslate"><span class="pre">AirDataRate</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_0_3K"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_0_3K</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_19_2K"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_19_2K</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_1_2K"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_1_2K</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_2_4K"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_2_4K</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_4_8K"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_4_8K</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_9_6K"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_9_6K</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.AirDataRate.RATE_DEFAULT"><code class="docutils literal notranslate"><span class="pre">AirDataRate.RATE_DEFAULT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.CHANNEL_MAX"><code class="docutils literal notranslate"><span class="pre">CHANNEL_MAX</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.CHANNEL_MIN"><code class="docutils literal notranslate"><span class="pre">CHANNEL_MIN</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.E32Device"><code class="docutils literal notranslate"><span class="pre">E32Device</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.address"><code class="docutils literal notranslate"><span class="pre">E32Device.address</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.aux"><code class="docutils literal notranslate"><span class="pre">E32Device.aux</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.channel"><code class="docutils literal notranslate"><span class="pre">E32Device.channel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.data_rate"><code class="docutils literal notranslate"><span class="pre">E32Device.data_rate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.deinit"><code class="docutils literal notranslate"><span class="pre">E32Device.deinit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.flush_uart"><code class="docutils literal notranslate"><span class="pre">E32Device.flush_uart()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.forward_error_correction"><code class="docutils literal notranslate"><span class="pre">E32Device.forward_error_correction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_raw_config"><code class="docutils literal notranslate"><span class="pre">E32Device.get_raw_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_raw_version"><code class="docutils literal notranslate"><span class="pre">E32Device.get_raw_version()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_version"><code class="docutils literal notranslate"><span class="pre">E32Device.get_version()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.io_drive_mode"><code class="docutils literal notranslate"><span class="pre">E32Device.io_drive_mode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.m0"><code class="docutils literal notranslate"><span class="pre">E32Device.m0</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.m1"><code class="docutils literal notranslate"><span class="pre">E32Device.m1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.mode"><code class="docutils literal notranslate"><span class="pre">E32Device.mode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.prepare_uart"><code class="docutils literal notranslate"><span class="pre">E32Device.prepare_uart()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.reset"><code class="docutils literal notranslate"><span class="pre">E32Device.reset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.tx_mode"><code class="docutils literal notranslate"><span class="pre">E32Device.tx_mode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.tx_power"><code class="docutils literal notranslate"><span class="pre">E32Device.tx_power</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.uart"><code class="docutils literal notranslate"><span class="pre">E32Device.uart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.uart_parity"><code class="docutils literal notranslate"><span class="pre">E32Device.uart_parity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.uart_rate"><code class="docutils literal notranslate"><span class="pre">E32Device.uart_rate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.update_config"><code class="docutils literal notranslate"><span class="pre">E32Device.update_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.wait_aux"><code class="docutils literal notranslate"><span class="pre">E32Device.wait_aux()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.wake_up_time"><code class="docutils literal notranslate"><span class="pre">E32Device.wake_up_time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.address"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.address</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.channel"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.channel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.data_rate"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.data_rate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.forward_error_correction"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.forward_error_correction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.io_drive_mode"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.io_drive_mode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.tx_mode"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.tx_mode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.tx_power"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.tx_power</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.uart_parity"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.uart_parity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.uart_rate"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.uart_rate</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig.wake_up_time"><code class="docutils literal notranslate"><span class="pre">E32DeviceConfig.wake_up_time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.E32DeviceVersion"><code class="docutils literal notranslate"><span class="pre">E32DeviceVersion</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceVersion.features"><code class="docutils literal notranslate"><span class="pre">E32DeviceVersion.features</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceVersion.model"><code class="docutils literal notranslate"><span class="pre">E32DeviceVersion.model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32DeviceVersion.version"><code class="docutils literal notranslate"><span class="pre">E32DeviceVersion.version</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection"><code class="docutils literal notranslate"><span class="pre">ForwardErrorCorrection</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection.FEC_DEFAULT"><code class="docutils literal notranslate"><span class="pre">ForwardErrorCorrection.FEC_DEFAULT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection.FEC_DISABLED"><code class="docutils literal notranslate"><span class="pre">ForwardErrorCorrection.FEC_DISABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection.FEC_ENABLE"><code class="docutils literal notranslate"><span class="pre">ForwardErrorCorrection.FEC_ENABLE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.IODriveMode"><code class="docutils literal notranslate"><span class="pre">IODriveMode</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.IODriveMode.DRIVE_DEFAULT"><code class="docutils literal notranslate"><span class="pre">IODriveMode.DRIVE_DEFAULT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.IODriveMode.DRIVE_OPEN"><code class="docutils literal notranslate"><span class="pre">IODriveMode.DRIVE_OPEN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.IODriveMode.DRIVE_PULL"><code class="docutils literal notranslate"><span class="pre">IODriveMode.DRIVE_PULL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.Modes"><code class="docutils literal notranslate"><span class="pre">Modes</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.Modes.MODE_NORMAL"><code class="docutils literal notranslate"><span class="pre">Modes.MODE_NORMAL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.Modes.MODE_POWER_SAVE"><code class="docutils literal notranslate"><span class="pre">Modes.MODE_POWER_SAVE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.Modes.MODE_SLEEP"><code class="docutils literal notranslate"><span class="pre">Modes.MODE_SLEEP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.Modes.MODE_WAKE_UP"><code class="docutils literal notranslate"><span class="pre">Modes.MODE_WAKE_UP</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.SerialBaudRate"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_115200"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_115200</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_1200"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_1200</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_19200"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_19200</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_2400"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_2400</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_38400"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_38400</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_4800"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_4800</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_57600"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_57600</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_9600"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_9600</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialBaudRate.BAUD_DEFAULT"><code class="docutils literal notranslate"><span class="pre">SerialBaudRate.BAUD_DEFAULT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.SerialParity"><code class="docutils literal notranslate"><span class="pre">SerialParity</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialParity.PARITY_DEFAULT"><code class="docutils literal notranslate"><span class="pre">SerialParity.PARITY_DEFAULT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialParity.PARITY_EVEN"><code class="docutils literal notranslate"><span class="pre">SerialParity.PARITY_EVEN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialParity.PARITY_NONE"><code class="docutils literal notranslate"><span class="pre">SerialParity.PARITY_NONE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.SerialParity.PARITY_ODD"><code class="docutils literal notranslate"><span class="pre">SerialParity.PARITY_ODD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.TX_POWER_MAX"><code class="docutils literal notranslate"><span class="pre">TX_POWER_MAX</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.TX_POWER_MIN"><code class="docutils literal notranslate"><span class="pre">TX_POWER_MIN</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.TransmissionMode"><code class="docutils literal notranslate"><span class="pre">TransmissionMode</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT"><code class="docutils literal notranslate"><span class="pre">TransmissionMode.TRANSMISSION_DEFAULT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.TransmissionMode.TRANSMISSION_FIXED"><code class="docutils literal notranslate"><span class="pre">TransmissionMode.TRANSMISSION_FIXED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT"><code class="docutils literal notranslate"><span class="pre">TransmissionMode.TRANSMISSION_TRANSPARENT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.WakeUpTime"><code class="docutils literal notranslate"><span class="pre">WakeUpTime</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1000MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_1000MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1250MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_1250MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1500MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_1500MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1750MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_1750MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_2000MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_2000MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_250MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_250MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_500MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_500MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_750MS"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_750MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.WakeUpTime.WAKE_TIME_DEFAULT"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_DEFAULT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte-e32-eu433"><cite>ebyte_e32.eu433</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.channel_to_frequency"><code class="docutils literal notranslate"><span class="pre">channel_to_frequency()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.frequency_to_channel"><code class="docutils literal notranslate"><span class="pre">frequency_to_channel()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte-e32-t20"><cite>ebyte_e32.t20</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.t20.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t20.TransmitPower.TX_POWER_10DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_10DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t20.TransmitPower.TX_POWER_14DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_14DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t20.TransmitPower.TX_POWER_17DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_17DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t20.TransmitPower.TX_POWER_20DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_20DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t20.TransmitPower.TX_POWER_DEFAULT"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_DEFAULT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte-e32-t30"><cite>ebyte_e32.t30</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.t30.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t30.TransmitPower.TX_POWER_21DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_21DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t30.TransmitPower.TX_POWER_24DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_24DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t30.TransmitPower.TX_POWER_27DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_27DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t30.TransmitPower.TX_POWER_30DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_30DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t30.TransmitPower.TX_POWER_DEFAULT"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_DEFAULT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte-e32-t33"><cite>ebyte_e32.t33</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.t33.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t33.TransmitPower.TX_POWER_24DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_24DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t33.TransmitPower.TX_POWER_27DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_27DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t33.TransmitPower.TX_POWER_30DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_30DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t33.TransmitPower.TX_POWER_33DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_33DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.t33.TransmitPower.TX_POWER_DEFAULT"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_DEFAULT</span></code></a></li>
+</ul>
+</li>
+</ul>
 
         </div>
       </div>
@@ -69,7 +221,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active"><cite>ebyte_e32</cite></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,7 +231,871 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <span class="target" id="module-ebyte_e32"></span><section id="ebyte-e32">
+<h1><cite>ebyte_e32</cite><a class="headerlink" href="#ebyte-e32" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>Author(s): Herwin Bozet</p></li>
+</ul>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">AirDataRate</span></span><a class="headerlink" href="#ebyte_e32.AirDataRate" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+<p><strong>This setting must be the same between all communicating modules.</strong></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_0_3K">
+<span class="sig-name descname"><span class="pre">RATE_0_3K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_0_3K" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 0.3 kbps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_19_2K">
+<span class="sig-name descname"><span class="pre">RATE_19_2K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_19_2K" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 19.2 kbps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_1_2K">
+<span class="sig-name descname"><span class="pre">RATE_1_2K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_1_2K" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 1.2 kbps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_2_4K">
+<span class="sig-name descname"><span class="pre">RATE_2_4K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_2_4K" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 2.4 kbps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_4_8K">
+<span class="sig-name descname"><span class="pre">RATE_4_8K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_4_8K" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 4.8 kbps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_9_6K">
+<span class="sig-name descname"><span class="pre">RATE_9_6K</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_9_6K" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 9.6 kbps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_DEFAULT">
+<span class="sig-name descname"><span class="pre">RATE_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.AirDataRate.RATE_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default air data rate on E32 devices</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.CHANNEL_MAX">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">CHANNEL_MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">31</span></em><a class="headerlink" href="#ebyte_e32.CHANNEL_MAX" title="Permalink to this definition"></a></dt>
+<dd><p>Maximal allowed channel number.  (Inclusive)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.CHANNEL_MIN">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">CHANNEL_MIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.CHANNEL_MIN" title="Permalink to this definition"></a></dt>
+<dd><p>Minimal allowed channel number.  (Inclusive)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">E32Device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin_m0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_m1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_aux</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_rx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_parity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.SerialParity" title="ebyte_e32.SerialParity"><span class="pre">SerialParity</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.SerialBaudRate" title="ebyte_e32.SerialBaudRate"><span class="pre">SerialBaudRate</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(3,</span> <span class="pre">9600)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.AirDataRate" title="ebyte_e32.AirDataRate"><span class="pre">AirDataRate</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.TransmissionMode" title="ebyte_e32.TransmissionMode"><span class="pre">TransmissionMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">io_drive_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.IODriveMode" title="ebyte_e32.IODriveMode"><span class="pre">IODriveMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wake_up_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.WakeUpTime" title="ebyte_e32.WakeUpTime"><span class="pre">WakeUpTime</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_error_correction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection" title="ebyte_e32.ForwardErrorCorrection"><span class="pre">ForwardErrorCorrection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_power</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device" title="Permalink to this definition"></a></dt>
+<dd><p>sbc</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.address">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.address" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s address that is used in “fixed transmissions” and ignored when receiving broadcast messages.</p>
+<p>Must be between <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> and <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.aux">
+<span class="sig-name descname"><span class="pre">aux</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">digitalio.DigitalInOut</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ebyte_e32.E32Device.aux" title="Permalink to this definition"></a></dt>
+<dd><p>AUX pin used by the module to indicate its working status or to wake up the MCU.</p>
+<p>May be left floating and ignored during normal operations.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.channel">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.channel" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s channel used for any LoRa communications in non-sleep modes.</p>
+<p><strong>FIXME: Check how this applies to different TX modes !  (May be bypassed)</strong></p>
+<p>Must be between <code class="docutils literal notranslate"><span class="pre">CHANNEL_MIN</span></code> and <code class="docutils literal notranslate"><span class="pre">CHANNEL_MAX</span></code>.  (Both are inclusive limits)</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.data_rate">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data_rate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.AirDataRate" title="ebyte_e32.AirDataRate"><span class="pre">AirDataRate</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.data_rate" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s data rate for any LoRa communications in non-sleep modes.</p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">AirDataRate</span></code>.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.deinit">
+<span class="sig-name descname"><span class="pre">deinit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.deinit" title="Permalink to this definition"></a></dt>
+<dd><p>Deinitializes the E32 module instance and all its pins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.flush_uart">
+<span class="sig-name descname"><span class="pre">flush_uart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.flush_uart" title="Permalink to this definition"></a></dt>
+<dd><p>Empties out the UART buffer if possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.forward_error_correction">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward_error_correction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection" title="ebyte_e32.ForwardErrorCorrection"><span class="pre">ForwardErrorCorrection</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.forward_error_correction" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s forward error correction toggle for any LoRa communications when in non-sleep modes.</p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">ForwardErrorCorrection</span></code>.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.get_raw_config">
+<span class="sig-name descname"><span class="pre">get_raw_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ebyte_e32.E32Device.get_raw_config" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches the raw operating config from the module and returns it.</p>
+<p><strong>The module will temporarily go into sleep mode and flush the UART buffer.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The raw response as a <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object of length 6.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.get_raw_version">
+<span class="sig-name descname"><span class="pre">get_raw_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ebyte_e32.E32Device.get_raw_version" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches the raw version number and returns it.</p>
+<p><strong>The module will temporarily go into sleep mode and flush the UART buffer.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The raw response as a <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object of length 4.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ebyte_e32.E32DeviceVersion" title="ebyte_e32.E32DeviceVersion"><span class="pre">E32DeviceVersion</span></a></span></span><a class="headerlink" href="#ebyte_e32.E32Device.get_version" title="Permalink to this definition"></a></dt>
+<dd><p>Fetches the module’s model, version number and its features.</p>
+<p><strong>Ebyte’s documentation doesn’t explain the content of the second and third values in details.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing the module’s model, its version number, ant its features</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.io_drive_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">io_drive_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.IODriveMode" title="ebyte_e32.IODriveMode"><span class="pre">IODriveMode</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.io_drive_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s IO drive mode for its <code class="docutils literal notranslate"><span class="pre">RX</span></code>, <code class="docutils literal notranslate"><span class="pre">TX</span></code> and <code class="docutils literal notranslate"><span class="pre">AUX</span></code> pins.</p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">IODriveMode</span></code>.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.m0">
+<span class="sig-name descname"><span class="pre">m0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">digitalio.DigitalInOut</span></em><a class="headerlink" href="#ebyte_e32.E32Device.m0" title="Permalink to this definition"></a></dt>
+<dd><p>M0 pin used to set the module’s mode.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.m1">
+<span class="sig-name descname"><span class="pre">m1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">digitalio.DigitalInOut</span></em><a class="headerlink" href="#ebyte_e32.E32Device.m1" title="Permalink to this definition"></a></dt>
+<dd><p>M1 pin used to set the module’s mode.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.Modes" title="ebyte_e32.Modes"><span class="pre">Modes</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.mode" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s mode as it is or should be represented on the <cite>M0</cite> and <cite>M1</cite> pins.</p>
+<p><strong>Changing this property will flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.prepare_uart">
+<span class="sig-name descname"><span class="pre">prepare_uart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">baudrate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">busio.UART.Parity</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.prepare_uart" title="Permalink to this definition"></a></dt>
+<dd><p>Prepares the UART bus for further communications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>baudrate</strong> – TODO</p></li>
+<li><p><strong>parity</strong> – TODO</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stay_in_sleep_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Sends the <cite>RESET</cite> command to the module and stays in sleep mode waiting for further configuration unless
+instructed not to.</p>
+<p>The module is left in sleep mode to prevent rogue communications with an undesired operating configuration.</p>
+<p><strong>The module will temporarily go into sleep mode and flush the UART buffer.</strong></p>
+<p><strong>The module will likely be unresponsive for a couple of seconds !</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stay_in_sleep_mode</strong> – Whether the module should be left in sleep mode after the reset.  (Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.tx_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tx_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.TransmissionMode" title="ebyte_e32.TransmissionMode"><span class="pre">TransmissionMode</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.tx_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s transmission mode used for any LoRa communications in non-sleep modes.</p>
+<p><strong>FIXME: Check how this applies to different channels !  (May bypass them)</strong></p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">TransmissionMode</span></code>.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.tx_power">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tx_power</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.tx_power" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s TX power as transmitted via the save parameters command.</p>
+<p>Must be between <code class="docutils literal notranslate"><span class="pre">TX_POWER_MIN</span></code> and <code class="docutils literal notranslate"><span class="pre">TX_POWER_MAX</span></code>, both are inclusive.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.uart">
+<span class="sig-name descname"><span class="pre">uart</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">busio.UART</span></em><a class="headerlink" href="#ebyte_e32.E32Device.uart" title="Permalink to this definition"></a></dt>
+<dd><p>UART connection to the E32 module.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.uart_parity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uart_parity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.uart_parity" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s UART parity used on the <cite>RX</cite> and <cite>TX</cite> lines when in non-sleep modes,
+as transmitted via the save parameters command.</p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">SerialParity</span></code>.</p>
+<p>This value is automatically applied to the uart bus when switching modes.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.uart_rate">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uart_rate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.SerialBaudRate" title="ebyte_e32.SerialBaudRate"><span class="pre">SerialBaudRate</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.uart_rate" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s UART rate used on the <cite>RX</cite> and <cite>TX</cite> lines when in non-sleep modes.</p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">SerialBaudRate</span></code>.</p>
+<p>This value is automatically applied to the uart bus when switching modes.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.update_config">
+<span class="sig-name descname"><span class="pre">update_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">make_permanent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ebyte_e32.E32Device.update_config" title="Permalink to this definition"></a></dt>
+<dd><p>Applies the current config to the module.</p>
+<p><strong>The module will temporarily go into sleep mode and flush the UART buffer.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>make_permanent</strong> – Whether the config should be saved when the module is powered-down.  (Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><strong>verify</strong> – Whether the config should be fetched and checked afterward.  (Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the config couldn’t be applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.wait_aux">
+<span class="sig-name descname"><span class="pre">wait_aux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_wait_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">150</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.wait_aux" title="Permalink to this definition"></a></dt>
+<dd><p>Wait for the <cite>AUX</cite> pin to go high meaning that the module is ready for communications.</p>
+<p>If no <cite>AUX</cite> pin was given, or if it stays low, the waiting period will be 150ms at most.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.wake_up_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wake_up_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.WakeUpTime" title="ebyte_e32.WakeUpTime"><span class="pre">WakeUpTime</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.wake_up_time" title="Permalink to this definition"></a></dt>
+<dd><p>Module’s wake-up time when in non-sleep and non-normal modes.</p>
+<p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">WakeUpTime</span></code>.</p>
+<p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">E32DeviceConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_parity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">io_drive_mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wake_up_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_error_correction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_power</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Named tuple returned by the <cite>E32DeviceConfig</cite> when fetching the module’s current config.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.address">
+<span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.address" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.channel">
+<span class="sig-name descname"><span class="pre">channel</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.channel" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.data_rate">
+<span class="sig-name descname"><span class="pre">data_rate</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.data_rate" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.forward_error_correction">
+<span class="sig-name descname"><span class="pre">forward_error_correction</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.forward_error_correction" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 8</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.io_drive_mode">
+<span class="sig-name descname"><span class="pre">io_drive_mode</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.io_drive_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 6</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.tx_mode">
+<span class="sig-name descname"><span class="pre">tx_mode</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.tx_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.tx_power">
+<span class="sig-name descname"><span class="pre">tx_power</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.tx_power" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 9</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.uart_parity">
+<span class="sig-name descname"><span class="pre">uart_parity</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.uart_parity" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.uart_rate">
+<span class="sig-name descname"><span class="pre">uart_rate</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.uart_rate" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceConfig.wake_up_time">
+<span class="sig-name descname"><span class="pre">wake_up_time</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceConfig.wake_up_time" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 7</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceVersion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">E32DeviceVersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32DeviceVersion" title="Permalink to this definition"></a></dt>
+<dd><p>Named tuple returned by the <cite>E32DeviceConfig</cite> when fetching the module’s version.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceVersion.features">
+<span class="sig-name descname"><span class="pre">features</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceVersion.features" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceVersion.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceVersion.model" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.E32DeviceVersion.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#ebyte_e32.E32DeviceVersion.version" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">ForwardErrorCorrection</span></span><a class="headerlink" href="#ebyte_e32.ForwardErrorCorrection" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+<p><strong>This setting must be the same between all communicating modules.</strong></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection.FEC_DEFAULT">
+<span class="sig-name descname"><span class="pre">FEC_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#ebyte_e32.ForwardErrorCorrection.FEC_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default FEC status on E32 devices</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection.FEC_DISABLED">
+<span class="sig-name descname"><span class="pre">FEC_DISABLED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ebyte_e32.ForwardErrorCorrection.FEC_DISABLED" title="Permalink to this definition"></a></dt>
+<dd><p>Enables forward error correction</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection.FEC_ENABLE">
+<span class="sig-name descname"><span class="pre">FEC_ENABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#ebyte_e32.ForwardErrorCorrection.FEC_ENABLE" title="Permalink to this definition"></a></dt>
+<dd><p>Disables forward error correction</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.IODriveMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">IODriveMode</span></span><a class="headerlink" href="#ebyte_e32.IODriveMode" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+<p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.IODriveMode.DRIVE_DEFAULT">
+<span class="sig-name descname"><span class="pre">DRIVE_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.IODriveMode.DRIVE_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default IO drive mode E32 devices</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.IODriveMode.DRIVE_OPEN">
+<span class="sig-name descname"><span class="pre">DRIVE_OPEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.IODriveMode.DRIVE_OPEN" title="Permalink to this definition"></a></dt>
+<dd><p>Both <cite>TX</cite> and <cite>AUX</cite> pins will be push-pull outputs.</p>
+<p>The <cite>RX</cite> pin will be a pull-up input.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.IODriveMode.DRIVE_PULL">
+<span class="sig-name descname"><span class="pre">DRIVE_PULL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.IODriveMode.DRIVE_PULL" title="Permalink to this definition"></a></dt>
+<dd><p>Both <cite>TX</cite> and <cite>AUX</cite> pins will be open-collector outputs.</p>
+<p>The <cite>RX</cite> pin will be an open-collector input.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.Modes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">Modes</span></span><a class="headerlink" href="#ebyte_e32.Modes" title="Permalink to this definition"></a></dt>
+<dd><p>Refers to the E32 module’s operating modes set via the <cite>M0</cite> and <cite>M1</cite> pins.</p>
+<p>The constants’ values are organized in the following manner:
+<cite>list[M0: int, M1_Value: int]</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.Modes.MODE_NORMAL">
+<span class="sig-name descname"><span class="pre">MODE_NORMAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">0)</span></em><a class="headerlink" href="#ebyte_e32.Modes.MODE_NORMAL" title="Permalink to this definition"></a></dt>
+<dd><p>UART and LoRa radio are ready to receive and return packages.</p>
+<p>Also known as <cite>Mode 0</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.Modes.MODE_POWER_SAVE">
+<span class="sig-name descname"><span class="pre">MODE_POWER_SAVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">1)</span></em><a class="headerlink" href="#ebyte_e32.Modes.MODE_POWER_SAVE" title="Permalink to this definition"></a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.Modes.MODE_SLEEP">
+<span class="sig-name descname"><span class="pre">MODE_SLEEP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1,</span> <span class="pre">1)</span></em><a class="headerlink" href="#ebyte_e32.Modes.MODE_SLEEP" title="Permalink to this definition"></a></dt>
+<dd><p>Puts the module in sleep mode where the LoRa radio is turned off and the UART bus
+can be used to set and get the module’s parameters, or reset it.</p>
+<p>Also known as <cite>Mode 3</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.Modes.MODE_WAKE_UP">
+<span class="sig-name descname"><span class="pre">MODE_WAKE_UP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1,</span> <span class="pre">0)</span></em><a class="headerlink" href="#ebyte_e32.Modes.MODE_WAKE_UP" title="Permalink to this definition"></a></dt>
+<dd><p>Same as normal mode, with a preamble added to sent data to wake up the receiver.</p>
+<p>The preamble’s code length depends on the [???] set in the module operating configuration.</p>
+<p>Also known as <cite>Mode 1</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">SerialBaudRate</span></span><a class="headerlink" href="#ebyte_e32.SerialBaudRate" title="Permalink to this definition"></a></dt>
+<dd><p>UART baud rate for all communications between the module and the MCU.</p>
+<p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_115200">
+<span class="sig-name descname"><span class="pre">BAUD_115200</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(7,</span> <span class="pre">115200)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_115200" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 115200 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_1200">
+<span class="sig-name descname"><span class="pre">BAUD_1200</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">1200)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_1200" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 1200 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_19200">
+<span class="sig-name descname"><span class="pre">BAUD_19200</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(4,</span> <span class="pre">19200)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_19200" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 19200 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_2400">
+<span class="sig-name descname"><span class="pre">BAUD_2400</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(1,</span> <span class="pre">2400)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_2400" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 2400 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_38400">
+<span class="sig-name descname"><span class="pre">BAUD_38400</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(5,</span> <span class="pre">38400)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_38400" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 38400 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_4800">
+<span class="sig-name descname"><span class="pre">BAUD_4800</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(2,</span> <span class="pre">4800)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_4800" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 4800 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_57600">
+<span class="sig-name descname"><span class="pre">BAUD_57600</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(6,</span> <span class="pre">57600)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_57600" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 57600 bps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_9600">
+<span class="sig-name descname"><span class="pre">BAUD_9600</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(3,</span> <span class="pre">9600)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_9600" title="Permalink to this definition"></a></dt>
+<dd><p>Equal to 9600 bps  (Default)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_DEFAULT">
+<span class="sig-name descname"><span class="pre">BAUD_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(3,</span> <span class="pre">9600)</span></em><a class="headerlink" href="#ebyte_e32.SerialBaudRate.BAUD_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default baud rate on E32 devices</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.SerialParity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">SerialParity</span></span><a class="headerlink" href="#ebyte_e32.SerialParity" title="Permalink to this definition"></a></dt>
+<dd><p>aaa</p>
+<p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialParity.PARITY_DEFAULT">
+<span class="sig-name descname"><span class="pre">PARITY_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.SerialParity.PARITY_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default UART parity on E32 devices</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialParity.PARITY_EVEN">
+<span class="sig-name descname"><span class="pre">PARITY_EVEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.SerialParity.PARITY_EVEN" title="Permalink to this definition"></a></dt>
+<dd><p>Same as 8E1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialParity.PARITY_NONE">
+<span class="sig-name descname"><span class="pre">PARITY_NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.SerialParity.PARITY_NONE" title="Permalink to this definition"></a></dt>
+<dd><p>Same as 8N1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.SerialParity.PARITY_ODD">
+<span class="sig-name descname"><span class="pre">PARITY_ODD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.SerialParity.PARITY_ODD" title="Permalink to this definition"></a></dt>
+<dd><p>Same as 8O1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.TX_POWER_MAX">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">TX_POWER_MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebyte_e32.TX_POWER_MAX" title="Permalink to this definition"></a></dt>
+<dd><p>Maximal allowed TX power value.  (Inclusive)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.TX_POWER_MIN">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">TX_POWER_MIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.TX_POWER_MIN" title="Permalink to this definition"></a></dt>
+<dd><p>Minimal allowed TX power value.  (Inclusive)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.TransmissionMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">TransmissionMode</span></span><a class="headerlink" href="#ebyte_e32.TransmissionMode" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT">
+<span class="sig-name descname"><span class="pre">TRANSMISSION_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default transmission mode on E32 devices.</p>
+<p>This is not explicitly indicated in the E32 datasheets, but it practice this is the case.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_FIXED">
+<span class="sig-name descname"><span class="pre">TRANSMISSION_FIXED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_FIXED" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT">
+<span class="sig-name descname"><span class="pre">TRANSMISSION_TRANSPARENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">WakeUpTime</span></span><a class="headerlink" href="#ebyte_e32.WakeUpTime" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+<p>[Not on mode 0 !]</p>
+<p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_1000MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_1000MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1000MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_1250MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_1250MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1250MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_1500MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_1500MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1500MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_1750MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_1750MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_1750MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_2000MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_2000MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_2000MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_250MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_250MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_250MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_500MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_500MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_500MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_750MS">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_750MS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_750MS" title="Permalink to this definition"></a></dt>
+<dd><p>???</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.WakeUpTime.WAKE_TIME_DEFAULT">
+<span class="sig-name descname"><span class="pre">WAKE_TIME_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.WakeUpTime.WAKE_TIME_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default wake-up time on E32 devices</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ebyte_e32.eu433"></span><section id="ebyte-e32-eu433">
+<h1><cite>ebyte_e32.eu433</cite><a class="headerlink" href="#ebyte-e32-eu433" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>Author(s): Herwin Bozet</p></li>
+</ul>
+</section>
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.eu433.FREQUENCY_MAXIMUM">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.eu433.</span></span><span class="sig-name descname"><span class="pre">FREQUENCY_MAXIMUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">441.0</span></em><a class="headerlink" href="#ebyte_e32.eu433.FREQUENCY_MAXIMUM" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum LoRa EU443 frequency in MHz corresponding to channel <cite>31</cite>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.eu433.FREQUENCY_MINIMUM">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.eu433.</span></span><span class="sig-name descname"><span class="pre">FREQUENCY_MINIMUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">410.0</span></em><a class="headerlink" href="#ebyte_e32.eu433.FREQUENCY_MINIMUM" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum LoRa EU443 frequency in MHz corresponding to channel <cite>0</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ebyte_e32.eu433.channel_to_frequency">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.eu433.</span></span><span class="sig-name descname"><span class="pre">channel_to_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ebyte_e32.eu433.channel_to_frequency" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a given EU443 channel into its corresponding MHz frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> – The channel number.  (Between <cite>0</cite> and <cite>31</cite>)</p></li>
+<li><p><strong>strict</strong> – Whether a <cite>ValueError</cite> exception should be raised if an invalid value is given (Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The corresponding frequency in MHz.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ebyte_e32.eu433.frequency_to_channel">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.eu433.</span></span><span class="sig-name descname"><span class="pre">frequency_to_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#ebyte_e32.eu433.frequency_to_channel" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a given MHz frequency into its corresponding EU443 channel number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency</strong> – The frequency in MHz.  (Between <cite>409.5</cite> and <cite>441.5</cite>)</p></li>
+<li><p><strong>strict</strong> – Whether a <cite>ValueError</cite> exception should be raised if an invalid value is given (Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The closest corresponding channel number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-ebyte_e32.t20"></span><section id="ebyte-e32-t20">
+<h1><cite>ebyte_e32.t20</cite><a class="headerlink" href="#ebyte-e32-t20" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>Author(s): Herwin Bozet</p></li>
+</ul>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.t20.TransmitPower">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.t20.</span></span><span class="sig-name descname"><span class="pre">TransmitPower</span></span><a class="headerlink" href="#ebyte_e32.t20.TransmitPower" title="Permalink to this definition"></a></dt>
+<dd><p>Available transmission power values for E32 modules with the T20 suffix.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t20.TransmitPower.TX_POWER_10DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_10DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebyte_e32.t20.TransmitPower.TX_POWER_10DBM" title="Permalink to this definition"></a></dt>
+<dd><p>10 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t20.TransmitPower.TX_POWER_14DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_14DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.t20.TransmitPower.TX_POWER_14DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~25 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t20.TransmitPower.TX_POWER_17DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_17DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.t20.TransmitPower.TX_POWER_17DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~50 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t20.TransmitPower.TX_POWER_20DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_20DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.t20.TransmitPower.TX_POWER_20DBM" title="Permalink to this definition"></a></dt>
+<dd><p>100mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t20.TransmitPower.TX_POWER_DEFAULT">
+<span class="sig-name descname"><span class="pre">TX_POWER_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.t20.TransmitPower.TX_POWER_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default TX power for T20 modules</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ebyte_e32.t30"></span><section id="ebyte-e32-t30">
+<h1><cite>ebyte_e32.t30</cite><a class="headerlink" href="#ebyte-e32-t30" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>Author(s): Herwin Bozet</p></li>
+</ul>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.t30.TransmitPower">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.t30.</span></span><span class="sig-name descname"><span class="pre">TransmitPower</span></span><a class="headerlink" href="#ebyte_e32.t30.TransmitPower" title="Permalink to this definition"></a></dt>
+<dd><p>Available transmission power values for E32 modules with the T30 suffix.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t30.TransmitPower.TX_POWER_21DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_21DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebyte_e32.t30.TransmitPower.TX_POWER_21DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~125 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t30.TransmitPower.TX_POWER_24DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_24DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.t30.TransmitPower.TX_POWER_24DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~250 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t30.TransmitPower.TX_POWER_27DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_27DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.t30.TransmitPower.TX_POWER_27DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~500 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t30.TransmitPower.TX_POWER_30DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_30DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.t30.TransmitPower.TX_POWER_30DBM" title="Permalink to this definition"></a></dt>
+<dd><p>1W / 1000mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t30.TransmitPower.TX_POWER_DEFAULT">
+<span class="sig-name descname"><span class="pre">TX_POWER_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.t30.TransmitPower.TX_POWER_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default TX power for T30 modules</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ebyte_e32.t33"></span><section id="ebyte-e32-t33">
+<h1><cite>ebyte_e32.t33</cite><a class="headerlink" href="#ebyte-e32-t33" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>Author(s): Herwin Bozet</p></li>
+</ul>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="ebyte_e32.t33.TransmitPower">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.t33.</span></span><span class="sig-name descname"><span class="pre">TransmitPower</span></span><a class="headerlink" href="#ebyte_e32.t33.TransmitPower" title="Permalink to this definition"></a></dt>
+<dd><p>Available transmission power values for E32 modules with the T33 suffix.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t33.TransmitPower.TX_POWER_24DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_24DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ebyte_e32.t33.TransmitPower.TX_POWER_24DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~250 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t33.TransmitPower.TX_POWER_27DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_27DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#ebyte_e32.t33.TransmitPower.TX_POWER_27DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~500 mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t33.TransmitPower.TX_POWER_30DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_30DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.t33.TransmitPower.TX_POWER_30DBM" title="Permalink to this definition"></a></dt>
+<dd><p>1W / 1000mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t33.TransmitPower.TX_POWER_33DBM">
+<span class="sig-name descname"><span class="pre">TX_POWER_33DBM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.t33.TransmitPower.TX_POWER_33DBM" title="Permalink to this definition"></a></dt>
+<dd><p>~2W / ~2000mW</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ebyte_e32.t33.TransmitPower.TX_POWER_DEFAULT">
+<span class="sig-name descname"><span class="pre">TX_POWER_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.t33.TransmitPower.TX_POWER_DEFAULT" title="Permalink to this definition"></a></dt>
+<dd><p>Default TX power for T33 modules</p>
+</dd></dl>
+
+</dd></dl>
+
+
 
            </div>
           </div>
