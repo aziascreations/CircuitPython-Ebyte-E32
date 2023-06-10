@@ -48,6 +48,13 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">CircuitPython Ebyte E32 Library</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
@@ -86,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.mode"><code class="docutils literal notranslate"><span class="pre">E32Device.mode</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.prepare_uart"><code class="docutils literal notranslate"><span class="pre">E32Device.prepare_uart()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.reset"><code class="docutils literal notranslate"><span class="pre">E32Device.reset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.send"><code class="docutils literal notranslate"><span class="pre">E32Device.send()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.tx_mode"><code class="docutils literal notranslate"><span class="pre">E32Device.tx_mode</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.tx_power"><code class="docutils literal notranslate"><span class="pre">E32Device.tx_power</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.uart"><code class="docutils literal notranslate"><span class="pre">E32Device.uart</span></code></a></li>
@@ -240,7 +248,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.AirDataRate">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">AirDataRate</span></span><a class="headerlink" href="#ebyte_e32.AirDataRate" title="Permalink to this definition"></a></dt>
-<dd><p>???</p>
+<dd><p>Data rate in bps at which LoRa modules communicate between each other.</p>
+<p><strong>This setting directly affects the maximum packet size and communication range !</strong></p>
 <p><strong>This setting must be the same between all communicating modules.</strong></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.AirDataRate.RATE_0_3K">
@@ -337,7 +346,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ebyte_e32.E32Device.deinit">
 <span class="sig-name descname"><span class="pre">deinit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.deinit" title="Permalink to this definition"></a></dt>
-<dd><p>Deinitializes the E32 module instance and all its pins.</p>
+<dd><p>Deinitializes the E32 module instance and liberates all used pins.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
@@ -434,8 +443,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>baudrate</strong> – TODO</p></li>
-<li><p><strong>parity</strong> – TODO</p></li>
+<li><p><strong>baudrate</strong> – Baudrate used by the new UART bus.</p></li>
+<li><p><strong>parity</strong> – Parity used by the new UART bus.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -458,6 +467,23 @@ instructed not to.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_packet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.send" title="Permalink to this definition"></a></dt>
+<dd><p>Sends a message on the UART bus.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> – Message to be sent, may get truncated.</p></li>
+<li><p><strong>max_packet_size</strong> – Max byte count to send, if <cite>None</cite>, the message’s length will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The numbers of bytes written.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -705,7 +731,9 @@ as transmitted via the save parameters command.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.Modes.MODE_POWER_SAVE">
 <span class="sig-name descname"><span class="pre">MODE_POWER_SAVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(0,</span> <span class="pre">1)</span></em><a class="headerlink" href="#ebyte_e32.Modes.MODE_POWER_SAVE" title="Permalink to this definition"></a></dt>
-<dd><p>TODO</p>
+<dd><p>The UART bus is disabled, and the module waits for incoming messages with the appropriate preambles.</p>
+<p>Once received, AUX goes low for ~5ms and the UART bus is re-opened, it sends the message, and AUX goes high again.</p>
+<p>Also known as <cite>Mode 2</cite> or <cite>PS Mode</cite>.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -729,7 +757,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">SerialBaudRate</span></span><a class="headerlink" href="#ebyte_e32.SerialBaudRate" title="Permalink to this definition"></a></dt>
-<dd><p>UART baud rate for all communications between the module and the MCU.</p>
+<dd><p>UART baud rate for all communications between the module and the MCU.  (? In non-sleep modes)</p>
 <p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_115200">
@@ -790,7 +818,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.SerialParity">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">SerialParity</span></span><a class="headerlink" href="#ebyte_e32.SerialParity" title="Permalink to this definition"></a></dt>
-<dd><p>aaa</p>
+<dd><p>???  (? In non-sleep modes)</p>
 <p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.SerialParity.PARITY_DEFAULT">
@@ -838,7 +866,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT">
 <span class="sig-name descname"><span class="pre">TRANSMISSION_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT" title="Permalink to this definition"></a></dt>
 <dd><p>Default transmission mode on E32 devices.</p>
-<p>This is not explicitly indicated in the E32 datasheets, but it practice this is the case.</p>
+<p>This is not explicitly indicated in the E32 datasheets, but this is the case in practice.</p>
 </dd></dl>
 
 <dl class="py attribute">

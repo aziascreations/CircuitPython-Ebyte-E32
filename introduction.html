@@ -47,6 +47,13 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">CircuitPython Ebyte E32 Library</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
@@ -113,98 +120,22 @@
 <p>CircuitPython driver for Ebyte’s E32 LoRa modules.</p>
 <section id="legal-preamble">
 <h2>Legal Preamble<a class="headerlink" href="#legal-preamble" title="Permalink to this heading"></a></h2>
-<p>You are responsible.</p>
-<p>I cannot be held responsible for what you do with your devices.</p>
-<p>Check your local laws !</p>
+<p>TODO: Rewrite and link to other section !</p>
 </section>
-<section id="hardware">
-<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this heading"></a></h2>
-<section id="model-number-structure">
-<h3>Model Number Structure<a class="headerlink" href="#model-number-structure" title="Permalink to this heading"></a></h3>
-<p>The E32 modules all have a unique name that can help you</p>
-<p><cite>E32-{Frequency}-T{TX Power Max dBm}{Form Factor}</cite></p>
-<p><cite>S</cite> =&gt; SDM (Surface Mount Device)</p>
-<p><cite>D</cite> =&gt; DIP (Dual In-line Package)</p>
-<p><cite>DT</cite> =&gt; ???</p>
-<p><cite>DC</cite> =&gt; ???</p>
-</section>
-<section id="list">
-<h3>List<a class="headerlink" href="#list" title="Permalink to this heading"></a></h3>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Model</p></th>
-<th class="head"><p>Supported</p></th>
-<th class="head"><p>Max TX Power</p></th>
-<th class="head"><p>Frequencies</p></th>
-<th class="head"><p>Chipset</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>The 1xx and 400</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T20DC</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-443T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-443T20S2T</span></code></p>
-</td>
-<td><p>✔️</p></td>
-<td><p>20 dBm / 100 mW</p></td>
-<td><p>EU433</p></td>
-<td rowspan="4"><p>SX1278</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T27D</span></code></p></td>
-<td><p>✖️</p></td>
-<td><p>???</p></td>
-<td><p>???</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T30D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-443T30S</span></code></p>
-</td>
-<td><p>❔</p></td>
-<td><p>30 dBm / 1 W</p></td>
-<td rowspan="2"><p>EU433</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T33S</span></code></p></td>
-<td><p>❔</p></td>
-<td><p>33 dBm / 2W</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-868T20D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T30D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T30S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T20D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T30D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T30S</span></code></p>
-</td>
-<td><p>❔</p></td>
-<td><p>???</p></td>
-<td><p>???</p></td>
-<td><p>SX1276</p></td>
-</tr>
-</tbody>
-</table>
-<p>The <code class="docutils literal notranslate"><span class="pre">E32-433T27D</span></code> variant is mentionned in the <a class="reference external" href="https://www.ebyte.com/en/pdf-down.aspx?id=775">E32 V1.30 User Manual</a>,
-but no other datasheet or product listing could be found for it.</p>
-<p>All non EU433 variant aren’t supported as I cannot own and test them legally right now.</p>
-</section>
-</section>
-<section id="links">
-<h2>Links<a class="headerlink" href="#links" title="Permalink to this heading"></a></h2>
+<section id="recommended-links">
+<h2>Recommended Links<a class="headerlink" href="#recommended-links" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/">LoRa frequency plan by country (By The Things Network)</a></p></li>
 <li><p><a class="reference external" href="https://www.ebyte.com/en/data-download.html?id=214&amp;cid=31">Ebyte documentation for most E32 170/400/433/868/900/915 modules</a></p></li>
 <li><p><a class="reference external" href="https://www.manualslib.com/manual/2924523/Ebyte-E32-433t33d.html?page=2#manual">Ebyte documentation for most E32-433T33D  (On manualslib.com)</a></p></li>
+<li><p><a class="reference external" href="https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan">https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan</a></p></li>
+<li><p><a class="reference external" href="https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters">https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters</a></p></li>
 </ul>
-<p><a class="reference external" href="https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan">https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan</a></p>
-<p><a class="reference external" href="https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters">https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters</a></p>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
 <p>This project is licensed under the <a class="reference external" href="LICENSE">MIT license</a>.</p>
+<p><span class="raw-html"><hr></span></p>
 </section>
 </section>
 

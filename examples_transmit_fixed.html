@@ -49,6 +49,13 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">CircuitPython Ebyte E32 Library</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
@@ -160,7 +167,7 @@ due to RF regulations.</strong></p>
 </span><span class="hll"><span class="linenos">33</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">in_waiting</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos">34</span>        
 </span><span class="hll"><span class="linenos">35</span>        <span class="c1"># We print it and exit</span>
-</span><span class="hll"><span class="linenos">36</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We received something:&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">36</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We received a </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> byte(s) long message:&quot;</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos">37</span>        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos">38</span>        <span class="k">break</span>
 </span><span class="hll"><span class="linenos">39</span>    
