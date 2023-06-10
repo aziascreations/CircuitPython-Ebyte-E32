@@ -10,6 +10,14 @@ Table of Contents
     self
 
 .. toctree::
+    :caption: Technical Details
+
+    technical_details_preamble
+    technical_details_e32
+    technical_details_lora
+    technical_details_lorawan
+
+.. toctree::
     :caption: Examples
 
     examples_instantiation

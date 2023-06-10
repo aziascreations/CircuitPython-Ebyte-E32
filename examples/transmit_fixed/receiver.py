@@ -33,7 +33,7 @@ while True:
         data = e32.uart.read(e32.uart.in_waiting)
         
         # We print it and exit
-        print("We received something:")
+        print(f"We received a {len(data)} byte(s) long message:")
         print(data)
         break
     

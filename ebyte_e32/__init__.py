@@ -12,7 +12,6 @@ try:
 except ImportError:
     pass
 
-# from binascii import hexlify
 from busio import UART
 from collections import namedtuple
 from digitalio import Direction, DigitalInOut
@@ -46,7 +45,11 @@ class Modes:
     
     MODE_POWER_SAVE = (0, 1)
     """
-    TODO
+    The UART bus is disabled, and the module waits for incoming messages with the appropriate preambles.
+    
+    Once received, AUX goes low for ~5ms and the UART bus is re-opened, it sends the message, and AUX goes high again.
+    
+    Also known as `Mode 2` or `PS Mode`.
     """
     
     MODE_SLEEP = (1, 1)
@@ -60,7 +63,7 @@ class Modes:
 
 class SerialParity:
     """
-    aaa
+    ???  (? In non-sleep modes)
     
     This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
@@ -80,7 +83,7 @@ class SerialParity:
 
 class SerialBaudRate:
     """
-    UART baud rate for all communications between the module and the MCU.
+    UART baud rate for all communications between the module and the MCU.  (? In non-sleep modes)
     
     This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
@@ -115,7 +118,9 @@ class SerialBaudRate:
 
 class AirDataRate:
     """
-    ???
+    Data rate in bps at which LoRa modules communicate between each other.
+    
+    **This setting directly affects the maximum packet size and communication range !**
     
     **This setting must be the same between all communicating modules.**
     """
@@ -157,7 +162,7 @@ class TransmissionMode:
     """
     Default transmission mode on E32 devices.
     
-    This is not explicitly indicated in the E32 datasheets, but it practice this is the case.
+    This is not explicitly indicated in the E32 datasheets, but this is the case in practice.
     """
 
 
@@ -365,22 +370,23 @@ class E32Device:
     
     def deinit(self):
         """
-        Deinitializes the E32 module instance and all its pins.
+        Deinitializes the E32 module instance and liberates all used pins.
         
         :return: ``None``
         """
-        # ? => deinit_pins: bool = True
         self.reset()
         self.m0.deinit()
         self.m1.deinit()
+        if self.aux is not None:
+            self.aux.deinit()
         self.uart.deinit()
     
     def prepare_uart(self, baudrate: int, parity: Optional[UART.Parity]):
         """
         Prepares the UART bus for further communications.
         
-        :param baudrate: TODO
-        :param parity: TODO
+        :param baudrate: Baudrate used by the new UART bus.
+        :param parity: Parity used by the new UART bus.
         :return: ``None``
         """
         if self.uart is not None:
@@ -398,10 +404,7 @@ class E32Device:
         
         :return: ``None``
         """
-        if self.uart.in_waiting > 0:
-            self.uart.read(self.uart.in_waiting)
-        
-        # FIXME: Use uart.reset_input_buffer() !
+        self.uart.reset_input_buffer()
     
     def wait_aux(self, max_wait_ms: int = 150):
         """
@@ -425,6 +428,19 @@ class E32Device:
         # Waiting just a bit more, this helps fix some timing issues when AUX is high but data wasn't sent yet.
         # This shouldn't be happening, but it does, so... yeah...
         sleep(0.01)
+    
+    def send(self, message: bytes, max_packet_size: Optional[int] = None):
+        """
+        Sends a message on the UART bus.
+        
+        :param message: Message to be sent, may get truncated.
+        :param max_packet_size: Max byte count to send, if `None`, the message's length will be used.
+        :return: The numbers of bytes written.
+        """
+        if max_packet_size is None:
+            max_packet_size = len(message)
+        
+        return self.uart.write(message[:max_packet_size])
     
     def update_config(self, make_permanent: bool = False, verify: bool = True) -> None:
         """
@@ -458,8 +474,6 @@ class E32Device:
                      ((self._fec & 0b1) << 2) | \
                      (self._tx_power & 0b11)
         
-        # print(hexlify(command, '-'))
-        
         # Preparing the UART bus
         self.flush_uart()
         
@@ -476,8 +490,6 @@ class E32Device:
         
         if verify:
             raw_config = self.get_raw_config()
-            # print("Raw: ")
-            # print(hexlify(command, '-'))
             if raw_config[1:] != command[1:]:
                 raise RuntimeError("The module doesn't return the new config !")
         
