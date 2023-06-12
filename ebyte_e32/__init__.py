@@ -63,7 +63,7 @@ class Modes:
 
 class SerialParity:
     """
-    ???  (? In non-sleep modes)
+    UART bus parity for all communications between the module and the MCU in any non-sleep modes.
     
     This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
@@ -83,7 +83,7 @@ class SerialParity:
 
 class SerialBaudRate:
     """
-    UART baud rate for all communications between the module and the MCU.  (? In non-sleep modes)
+    UART baud rate for all communications between the module and the MCU in any non-sleep modes.
     
     This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """

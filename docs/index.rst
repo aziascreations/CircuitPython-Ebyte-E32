@@ -23,6 +23,7 @@ Table of Contents
 
     examples_instantiation
     examples_config
+    examples_uart
     examples_transmit_fixed
     examples_transmit_transparent
 

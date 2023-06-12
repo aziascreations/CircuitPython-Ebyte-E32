@@ -13,10 +13,10 @@ PIN_RXD = board.IO11  # Pin marked as RX on the module
 PIN_TXD = board.IO10  # Pin marked as TX on the module
 PIN_AUX = board.IO9
 
-e32 = ebyte_e32.E32Device(PIN_M0, PIN_M1, PIN_AUX, PIN_TXD, PIN_RXD, address=0x1377, channel=4)
+e32 = ebyte_e32.E32Device(PIN_M0, PIN_M1, PIN_AUX, PIN_TXD, PIN_RXD, address=0x1337, channel=4)
 
 # Switching to fixed transmission mode.
-e32.tx_mode = ebyte_e32.TransmissionMode.TRANSMISSION_FIXED
+e32.tx_mode = ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT
 
 # Switching to mode 0.  (Normal mode)
 e32.mode = ebyte_e32.Modes.MODE_NORMAL
