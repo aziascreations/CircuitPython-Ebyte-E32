@@ -27,6 +27,8 @@ If you need a simple example to motivate you into ready this section, read the f
     Depending on the frequencies, region and data rates, **a LoRa packet cannot be larger than 11 bytes** under
     unfavorable conditions, **or 250 bytes** under favorable ones.
 
+.. _ref-legal-aside:
+
 Legal Aside
 ^^^^^^^^^^^
 Please keep in mind that I'm only one person writing, researching and synthesizing most of this information.

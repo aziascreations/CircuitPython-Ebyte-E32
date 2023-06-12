@@ -22,10 +22,10 @@ e32.tx_mode = ebyte_e32.TransmissionMode.TRANSMISSION_FIXED
 e32.mode = ebyte_e32.Modes.MODE_NORMAL
 
 # Message content:
-#  * Receiver's address: 0x1337  (b'\x13\x37')
+#  * Receiver's address: 0xFFFF  (b'\xFF\xFF')
 #  * Receiver's channel: 4  (b'\x04')
 #  * Message: b'Hello World !'
-message = b'\x13\x37\x04Hello World !'
+message = b'\xFF\xFF\x04Hello World !'
 
 # Sending with helper
 e32.send_raw(message)

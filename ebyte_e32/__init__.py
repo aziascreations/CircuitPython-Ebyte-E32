@@ -149,14 +149,23 @@ class AirDataRate:
 
 class TransmissionMode:
     """
-    ???
+    Transmission modes available for LoRa communications.
     """
     
     TRANSMISSION_TRANSPARENT = 0b0
-    "???"
+    """
+    In this mode all devices on the same channel and address will communicate between each other.
+    """
     
     TRANSMISSION_FIXED = 0b1
-    "???"
+    """
+    In this mode all devices will be able communicate between each other by prepending the target channel and
+    address to each message.
+    
+    You can also use the special ``0xFFFF`` address to monitor or broadcast messages on a given channel.
+    
+    The module will automatically switch channel if required and will return to it's original one.
+    """
     
     TRANSMISSION_DEFAULT = TRANSMISSION_TRANSPARENT
     """
@@ -231,6 +240,8 @@ class IODriveMode:
 class ForwardErrorCorrection:
     """
     ???
+    
+    FIXME: Figure out the ratio since LoRaWAN wants 5/4 !
     
     **This setting must be the same between all communicating modules.**
     """
@@ -421,7 +432,6 @@ class E32Device:
         
         wait_loop_count = 0
         while not self.aux.value and wait_loop_count < (max_wait_ms / 10) - 1:
-            # print("Waiting for AUX...")
             sleep(0.01)
             wait_loop_count += 1
         
@@ -429,18 +439,24 @@ class E32Device:
         # This shouldn't be happening, but it does, so... yeah...
         sleep(0.01)
     
-    def send(self, message: bytes, max_packet_size: Optional[int] = None):
+    def send_raw(self, message: bytes, max_packet_size: Optional[int] = None, wait_aux: bool = True):
         """
         Sends a message on the UART bus.
         
         :param message: Message to be sent, may get truncated.
         :param max_packet_size: Max byte count to send, if `None`, the message's length will be used.
+        :param wait_aux: Whether the method should wait for AUX pin  (Default: ``True``)
         :return: The numbers of bytes written.
         """
         if max_packet_size is None:
             max_packet_size = len(message)
         
-        return self.uart.write(message[:max_packet_size])
+        bytes_sent = self.uart.write(message[:max_packet_size])
+        
+        if wait_aux:
+            self.wait_aux()
+        
+        return bytes_sent
     
     def update_config(self, make_permanent: bool = False, verify: bool = True) -> None:
         """
@@ -453,8 +469,6 @@ class E32Device:
         :return: ``None``
         :raises RuntimeError: If the config couldn't be applied.
         """
-        # print("Updating module's config...")
-        
         original_mode = self.mode
         
         if original_mode != Modes.MODE_SLEEP:
@@ -638,6 +652,9 @@ class E32Device:
         
         Must be between ``0x0000`` and ``0xFFFF``.
         
+        If the module is in fixed communications mode, you can also use the special ``0xFFFF`` address to monitor
+        or broadcast messages on a given channel.
+        
         **Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.**
         """
         return self._address
@@ -713,9 +730,10 @@ class E32Device:
         """
         Module's channel used for any LoRa communications in non-sleep modes.
         
-        **FIXME: Check how this applies to different TX modes !  (May be bypassed)**
-        
         Must be between ``CHANNEL_MIN`` and ``CHANNEL_MAX``.  (Both are inclusive limits)
+        
+        If the module is in fixed communications mode, it may change its channel to the targeted one and will return
+        to the original one afterward.
         
         **Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.**
         """
@@ -732,8 +750,6 @@ class E32Device:
     def tx_mode(self) -> int | TransmissionMode:
         """
         Module's transmission mode used for any LoRa communications in non-sleep modes.
-        
-        **FIXME: Check how this applies to different channels !  (May bypass them)**
         
         Must be between one of the values in ``TransmissionMode``.
         

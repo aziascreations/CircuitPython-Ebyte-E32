@@ -35,7 +35,6 @@ while True:
         # We print it and exit
         print(f"We received a {len(data)} byte(s) long message:")
         print(data)
-        break
     
     # If nothing was received, we wait.
     time.sleep(0.1)

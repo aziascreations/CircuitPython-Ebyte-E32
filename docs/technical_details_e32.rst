@@ -1,5 +1,32 @@
+.. role:: raw-html(raw)
+    :format: html
+
 E32 Modules
 -----------
+
+Wiring
+^^^^^^
++------------+---------------------------------+
+| E32 Module | MCU                             |
++============+=================================+
+| `M0`       | Any digital output pin          |
++------------+---------------------------------+
+| `M1`       | Any digital output pin          |
++------------+---------------------------------+
+| `RXD`      | Any UART **TX** capable pin*    |
++------------+---------------------------------+
+| `TXD`      | Any UART **RX** capable pin*    |
++------------+---------------------------------+
+| `AUX`      | Any digital input pin**         |
++------------+---------------------------------+
+| `VCC`      | Power supply 2.3V to 5.2V DC*** |
++------------+---------------------------------+
+
+\*: Some devices may require you to use very specific pins for the UART bus.
+:raw-html:`<br>`
+\*\*: Analogue input pins might work, but this type of setup isn't supported !
+:raw-html:`<br>`
+\*\*\*: More than 5.2V can cause damage, and make sure to double-check the datasheet !
 
 Model Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
