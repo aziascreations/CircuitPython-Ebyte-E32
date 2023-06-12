@@ -87,12 +87,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.deinit"><code class="docutils literal notranslate"><span class="pre">E32Device.deinit()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.flush_uart"><code class="docutils literal notranslate"><span class="pre">E32Device.flush_uart()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.forward_error_correction"><code class="docutils literal notranslate"><span class="pre">E32Device.forward_error_correction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_config"><code class="docutils literal notranslate"><span class="pre">E32Device.get_config()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_raw_config"><code class="docutils literal notranslate"><span class="pre">E32Device.get_raw_config()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_raw_version"><code class="docutils literal notranslate"><span class="pre">E32Device.get_raw_version()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.get_version"><code class="docutils literal notranslate"><span class="pre">E32Device.get_version()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.io_drive_mode"><code class="docutils literal notranslate"><span class="pre">E32Device.io_drive_mode</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.m0"><code class="docutils literal notranslate"><span class="pre">E32Device.m0</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.m1"><code class="docutils literal notranslate"><span class="pre">E32Device.m1</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.mode"><code class="docutils literal notranslate"><span class="pre">E32Device.mode</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.prepare_uart"><code class="docutils literal notranslate"><span class="pre">E32Device.prepare_uart()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.reset"><code class="docutils literal notranslate"><span class="pre">E32Device.reset()</span></code></a></li>
@@ -380,6 +379,17 @@ to the original one afterward.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ebyte_e32.E32DeviceConfig" title="ebyte_e32.E32DeviceConfig"><span class="pre">E32DeviceConfig</span></a></span></span><a class="headerlink" href="#ebyte_e32.E32Device.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Get a named tuple containing the module’s current operating configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <code class="docutils literal notranslate"><span class="pre">E32DeviceConfig</span></code> with the module’s current operating configuration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ebyte_e32.E32Device.get_raw_config">
 <span class="sig-name descname"><span class="pre">get_raw_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#ebyte_e32.E32Device.get_raw_config" title="Permalink to this definition"></a></dt>
 <dd><p>Fetches the raw operating config from the module and returns it.</p>
@@ -421,18 +431,6 @@ to the original one afterward.</p>
 <dd><p>Module’s IO drive mode for its <code class="docutils literal notranslate"><span class="pre">RX</span></code>, <code class="docutils literal notranslate"><span class="pre">TX</span></code> and <code class="docutils literal notranslate"><span class="pre">AUX</span></code> pins.</p>
 <p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">IODriveMode</span></code>.</p>
 <p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ebyte_e32.E32Device.m0">
-<span class="sig-name descname"><span class="pre">m0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">digitalio.DigitalInOut</span></em><a class="headerlink" href="#ebyte_e32.E32Device.m0" title="Permalink to this definition"></a></dt>
-<dd><p>M0 pin used to set the module’s mode.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ebyte_e32.E32Device.m1">
-<span class="sig-name descname"><span class="pre">m1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">digitalio.DigitalInOut</span></em><a class="headerlink" href="#ebyte_e32.E32Device.m1" title="Permalink to this definition"></a></dt>
-<dd><p>M1 pin used to set the module’s mode.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -699,6 +697,7 @@ as transmitted via the save parameters command.</p>
 <dt class="sig sig-object py" id="ebyte_e32.IODriveMode">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">IODriveMode</span></span><a class="headerlink" href="#ebyte_e32.IODriveMode" title="Permalink to this definition"></a></dt>
 <dd><p>???</p>
+<p><strong>This setting hasn’t been tested yet !</strong></p>
 <p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.IODriveMode.DRIVE_DEFAULT">
