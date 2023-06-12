@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ebyte_e32" href="api.html" />
+    <link rel="next" title="Transparent Transmissions" href="examples_transmit_transparent.html" />
     <link rel="prev" title="Configuration" href="examples_config.html" /> 
 </head>
 
@@ -52,6 +52,7 @@
 <p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
@@ -61,11 +62,13 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Fixed Transmissions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#receiver">Receiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unicast-receiver">Unicast Receiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-receiver">Monitoring Receiver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unicast-sender">Unicast Sender</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#broadcast-sender">Broadcast Sender</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -124,14 +127,17 @@
              
   <section id="fixed-transmissions">
 <h1>Fixed Transmissions<a class="headerlink" href="#fixed-transmissions" title="Permalink to this heading"></a></h1>
-<section id="receiver">
-<h2>Receiver<a class="headerlink" href="#receiver" title="Permalink to this heading"></a></h2>
-<p>Waits on channel <cite>4</cite> with the <cite>0x1337</cite> address for any incoming unicast or broadcast messages and exits once one is
-received.</p>
+<p>These examples will show you how to send and receive messages in fixed mode in unicast and broadcast.</p>
+<p>In this mode, each message needs to contain the target channel and address before the actual data.
+<span class="raw-html"><br></span>
+You can also use the special <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> address to monitor or broadcast messages on a given channel.</p>
+<section id="unicast-receiver">
+<h2>Unicast Receiver<a class="headerlink" href="#unicast-receiver" title="Permalink to this heading"></a></h2>
+<p>Waits on channel <cite>4</cite> with the <cite>0x1337</cite> address for any incoming unicast or broadcast messages.</p>
 <p>⚠️ <strong>Received messages may be truncated at specific lengths depending on the frequencies and operating parameters used
 due to RF regulations.</strong></p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">examples/transmit_fixed/receiver.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">examples/transmit_fixed/receiver_unicast.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
 <span class="linenos"> 2</span><span class="c1">#</span>
 <span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
@@ -169,14 +175,68 @@ due to RF regulations.</strong></p>
 </span><span class="hll"><span class="linenos">35</span>        <span class="c1"># We print it and exit</span>
 </span><span class="hll"><span class="linenos">36</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We received a </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> byte(s) long message:&quot;</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos">37</span>        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span class="hll"><span class="linenos">38</span>        <span class="k">break</span>
-</span><span class="hll"><span class="linenos">39</span>    
-</span><span class="hll"><span class="linenos">40</span>    <span class="c1"># If nothing was received, we wait.</span>
-</span><span class="hll"><span class="linenos">41</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-</span><span class="linenos">42</span>
-<span class="linenos">43</span><span class="nb">print</span><span class="p">()</span>
-<span class="linenos">44</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Now exiting...&quot;</span><span class="p">)</span>
-<span class="linenos">45</span><span class="n">e32</span><span class="o">.</span><span class="n">deinit</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">38</span>    
+</span><span class="hll"><span class="linenos">39</span>    <span class="c1"># If nothing was received, we wait.</span>
+</span><span class="hll"><span class="linenos">40</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span><span class="linenos">41</span>
+<span class="linenos">42</span><span class="nb">print</span><span class="p">()</span>
+<span class="linenos">43</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Now exiting...&quot;</span><span class="p">)</span>
+<span class="linenos">44</span><span class="n">e32</span><span class="o">.</span><span class="n">deinit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="monitoring-receiver">
+<h2>Monitoring Receiver<a class="headerlink" href="#monitoring-receiver" title="Permalink to this heading"></a></h2>
+<p>Waits on channel <cite>4</cite> with the special <cite>0xFFFF</cite> address for any unicast or broadcast messages on that channel.</p>
+<p>⚠️ <strong>Received messages may be truncated at specific lengths depending on the frequencies and operating parameters used
+due to RF regulations.</strong></p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">examples/transmit_fixed/receiver_broadcast.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
+<span class="linenos"> 2</span><span class="c1">#</span>
+<span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">board</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kn">import</span> <span class="nn">ebyte_e32</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">PIN_M0</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">B3</span>
+<span class="linenos">11</span><span class="n">PIN_M1</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">B4</span>
+<span class="linenos">12</span><span class="n">PIN_RXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">A2</span>  <span class="c1"># Pin marked as RX on the module</span>
+<span class="linenos">13</span><span class="n">PIN_TXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">A3</span>  <span class="c1"># Pin marked as TX on the module</span>
+<span class="linenos">14</span><span class="n">PIN_AUX</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">B7</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0xFFFF</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="c1"># Switching to fixed transmission mode.</span>
+<span class="hll"><span class="linenos">19</span><span class="n">e32</span><span class="o">.</span><span class="n">tx_mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">TransmissionMode</span><span class="o">.</span><span class="n">TRANSMISSION_FIXED</span>
+</span><span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Switching to mode 0.  (Normal mode)</span>
+<span class="hll"><span class="linenos">22</span><span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_NORMAL</span>
+</span><span class="linenos">23</span>
+<span class="linenos">24</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monitoring for messages... on channel </span><span class="si">{</span><span class="n">e32</span><span class="o">.</span><span class="n">channel</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="hll"><span class="linenos">26</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">27</span>    <span class="c1"># Checking if the module sent us some data</span>
+</span><span class="hll"><span class="linenos">28</span>    <span class="k">if</span> <span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">in_waiting</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">29</span>        <span class="c1"># Wait for the module to finish receiving data</span>
+</span><span class="hll"><span class="linenos">30</span>        <span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">31</span>        
+</span><span class="hll"><span class="linenos">32</span>        <span class="c1"># We grab the data, and can process it here</span>
+</span><span class="hll"><span class="linenos">33</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">in_waiting</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">34</span>        
+</span><span class="hll"><span class="linenos">35</span>        <span class="c1"># We print it and exit</span>
+</span><span class="hll"><span class="linenos">36</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We received a </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> byte(s) long message:&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">37</span>        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">38</span>    
+</span><span class="hll"><span class="linenos">39</span>    <span class="c1"># If nothing was received, we wait.</span>
+</span><span class="hll"><span class="linenos">40</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span><span class="linenos">41</span>
+<span class="linenos">42</span><span class="nb">print</span><span class="p">()</span>
+<span class="linenos">43</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Now exiting...&quot;</span><span class="p">)</span>
+<span class="linenos">44</span><span class="n">e32</span><span class="o">.</span><span class="n">deinit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -186,8 +246,8 @@ due to RF regulations.</strong></p>
 <p>Sends a unicast message to any modules on channel <cite>4</cite> with the <cite>0x1337</cite> address.</p>
 <p>⚠️ <strong>Sent messages may be truncated at specific lengths depending on the frequencies and operating parameters used
 due to RF regulations.</strong></p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">examples/transmit_fixed/sender_unicast.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">examples/transmit_fixed/sender_unicast.py</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
 <span class="linenos"> 2</span><span class="c1">#</span>
 <span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
@@ -217,17 +277,71 @@ due to RF regulations.</strong></p>
 <span class="linenos">27</span><span class="c1">#  * Message: b&#39;Hello World !&#39;</span>
 <span class="hll"><span class="linenos">28</span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x13\x37\x04</span><span class="s1">Hello World !&#39;</span>
 </span><span class="linenos">29</span>
-<span class="hll"><span class="linenos">30</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class="linenos">31</span>
-<span class="linenos">32</span><span class="c1"># The message may be truncated at specific lengths depending on the frequencies used.</span>
-<span class="linenos">33</span><span class="c1"># Please check the documentation for more information !</span>
+<span class="hll"><span class="linenos">30</span><span class="c1"># Sending with helper</span>
+</span><span class="hll"><span class="linenos">31</span><span class="n">e32</span><span class="o">.</span><span class="n">send_raw</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class="linenos">32</span>
+<span class="linenos">33</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Waiting to prevent RF spamming</span>
+<span class="linenos">34</span>
+<span class="hll"><span class="linenos">35</span><span class="c1"># Sending manually</span>
+</span><span class="hll"><span class="linenos">36</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">37</span><span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="linenos">38</span>
+<span class="linenos">39</span><span class="c1"># The message may be truncated at specific lengths depending on the frequencies used.</span>
+<span class="linenos">40</span><span class="c1"># Please check the documentation for more information !</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="broadcast-sender">
 <h2>Broadcast Sender<a class="headerlink" href="#broadcast-sender" title="Permalink to this heading"></a></h2>
-<p>TODO</p>
+<p>Sends a broadcast message to any modules on channel <cite>4</cite> by using the target address <cite>0xFFFF</cite>.</p>
+<p>⚠️ <strong>Sent messages may be truncated at specific lengths depending on the frequencies and operating parameters used
+due to RF regulations.</strong></p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">examples/transmit_fixed/sender_broadcast.py</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
+<span class="linenos"> 2</span><span class="c1">#</span>
+<span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">board</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kn">import</span> <span class="nn">ebyte_e32</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">PIN_M0</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO13</span>
+<span class="linenos">11</span><span class="n">PIN_M1</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO12</span>
+<span class="linenos">12</span><span class="n">PIN_RXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO11</span>  <span class="c1"># Pin marked as RX on the module</span>
+<span class="linenos">13</span><span class="n">PIN_TXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO10</span>  <span class="c1"># Pin marked as TX on the module</span>
+<span class="linenos">14</span><span class="n">PIN_AUX</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO9</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0xBEEF</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="c1"># Switching to fixed transmission mode.</span>
+<span class="hll"><span class="linenos">19</span><span class="n">e32</span><span class="o">.</span><span class="n">tx_mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">TransmissionMode</span><span class="o">.</span><span class="n">TRANSMISSION_FIXED</span>
+</span><span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Switching to mode 0.  (Normal mode)</span>
+<span class="hll"><span class="linenos">22</span><span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_NORMAL</span>
+</span><span class="linenos">23</span>
+<span class="linenos">24</span><span class="c1"># Message content:</span>
+<span class="linenos">25</span><span class="c1">#  * Receiver&#39;s address: 0xFFFF  (b&#39;\xFF\xFF&#39;)</span>
+<span class="linenos">26</span><span class="c1">#  * Receiver&#39;s channel: 4  (b&#39;\x04&#39;)</span>
+<span class="linenos">27</span><span class="c1">#  * Message: b&#39;Hello World !&#39;</span>
+<span class="hll"><span class="linenos">28</span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xFF\xFF\x04</span><span class="s1">Hello World !&#39;</span>
+</span><span class="linenos">29</span>
+<span class="hll"><span class="linenos">30</span><span class="c1"># Sending with helper</span>
+</span><span class="hll"><span class="linenos">31</span><span class="n">e32</span><span class="o">.</span><span class="n">send_raw</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class="linenos">32</span>
+<span class="linenos">33</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Waiting to prevent RF spamming</span>
+<span class="linenos">34</span>
+<span class="hll"><span class="linenos">35</span><span class="c1"># Sending manually</span>
+</span><span class="hll"><span class="linenos">36</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">37</span><span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="linenos">38</span>
+<span class="linenos">39</span><span class="c1"># The message may be truncated at specific lengths depending on the frequencies used.</span>
+<span class="linenos">40</span><span class="c1"># Please check the documentation for more information !</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -236,7 +350,7 @@ due to RF regulations.</strong></p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="examples_config.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api.html" class="btn btn-neutral float-right" title="ebyte_e32" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="examples_transmit_transparent.html" class="btn btn-neutral float-right" title="Transparent Transmissions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

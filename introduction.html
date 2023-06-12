@@ -50,6 +50,7 @@
 <p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
@@ -59,6 +60,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -115,26 +117,79 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="circuitpython-ebyte-e32-library">
+  <a class="reference internal image-reference" href="_images/computer_v1_happy_strong.png"><img alt="Drawing of an old computer with a warning sign shown on its screen." class="align-right" src="_images/computer_v1_happy_strong.png" style="width: 132.0px; height: 125.0px;" /></a>
+<section id="circuitpython-ebyte-e32-library">
 <h1>CircuitPython Ebyte E32 Library<a class="headerlink" href="#circuitpython-ebyte-e32-library" title="Permalink to this heading"></a></h1>
 <p>CircuitPython driver for Ebyte’s E32 LoRa modules.</p>
 <section id="legal-preamble">
 <h2>Legal Preamble<a class="headerlink" href="#legal-preamble" title="Permalink to this heading"></a></h2>
-<p>TODO: Rewrite and link to other section !</p>
+<p>You should really check the <a class="reference internal" href="technical_details_preamble.html#ref-legal-aside"><span class="std std-ref">Legal Aside</span></a> section.
+<span class="raw-html"><br></span>
+Im’ not responsible for what you do with your module, act responsibly.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Supports all standard E32 UART modules.</p></li>
+<li><p>Extra support on a per-frequency and per-power basis:</p>
+<ul>
+<li><p>More descriptive constants for TX power.</p></li>
+<li><p>Channel &lt;-&gt; frequency converters.</p></li>
+<li><p>Maximum packet size calculators.  (TODO)</p></li>
+<li><p>Entirely optional via separate modules.</p></li>
+</ul>
+</li>
+<li><p>Minified versions for devices with tiny storage space:</p>
+<ul>
+<li><p>~75% smaller for <cite>.py</cite> files</p></li>
+<li><p>~5% smaller for <cite>.mpy</cite> files  <em>(Due to shortened local variables, mostly)</em></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>No built-in packet size limit:</strong></p>
+<ul>
+<li><p>Wildly different between frequencies &amp; operating parameters.</p></li>
+<li><p>Not documented clearly enough in LoRA and LoRaWAN documentation.</p></li>
+</ul>
+</li>
+<li><p>No built-in protocol:</p>
+<ul>
+<li><p>All LoRa packets are glued back-to-back when received.</p></li>
+<li><p><strong>No LoraWAN support</strong></p></li>
+</ul>
+</li>
+<li><p>Missing extra support for some modules:</p>
+<ul>
+<li><p>Modules with <cite>170</cite>, <cite>400</cite>, <cite>868</cite>, <cite>900</cite>, and <cite>915</cite> prefix.  <em>(Will improve overtime)</em></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/adafruit/circuitpython">Adafruit CircuitPython</a></p></li>
+<li><p><a class="reference external" href="https://github.com/adafruit/Adafruit_Blinka">Adafruit Blinka</a></p></li>
+</ul>
 </section>
 <section id="recommended-links">
 <h2>Recommended Links<a class="headerlink" href="#recommended-links" title="Permalink to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference external" href="https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan">LoRa and LoRaWAN quick overview  (By SemTech)</a></p></li>
 <li><p><a class="reference external" href="https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/">LoRa frequency plan by country (By The Things Network)</a></p></li>
-<li><p><a class="reference external" href="https://www.ebyte.com/en/data-download.html?id=214&amp;cid=31">Ebyte documentation for most E32 170/400/433/868/900/915 modules</a></p></li>
+<li><p><a class="reference external" href="http://wiki.lahoud.fr/lib/exe/fetch.php?media=an1200.22.pdf">LoRa RF modulation basics  (On wiki.lahoud.fr)</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/data-download.html?id=214&amp;cid=31">Ebyte documentation for most E32 170/400/433/868/900/915 modules  (On ebyte.com)</a></p></li>
 <li><p><a class="reference external" href="https://www.manualslib.com/manual/2924523/Ebyte-E32-433t33d.html?page=2#manual">Ebyte documentation for most E32-433T33D  (On manualslib.com)</a></p></li>
-<li><p><a class="reference external" href="https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan">https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan</a></p></li>
-<li><p><a class="reference external" href="https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters">https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters</a></p></li>
+<li><p><a class="reference external" href="https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters">LoRaWAN Regional Parameters  (By LoRa Alliance)</a></p></li>
 </ul>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
-<p>This project is licensed under the <a class="reference external" href="LICENSE">MIT license</a>.</p>
+<p>This project is licensed under the <a class="reference external" href="https://github.com/aziascreations/CircuitPython_Ebyte_E32/blob/master/LICENSE">MIT license</a>.</p>
 <p><span class="raw-html"><hr></span></p>
 </section>
 </section>

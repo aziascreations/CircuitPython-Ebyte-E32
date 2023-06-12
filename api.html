@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Fixed Transmissions" href="examples_transmit_fixed.html" /> 
+    <link rel="prev" title="Transparent Transmissions" href="examples_transmit_transparent.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,6 +51,7 @@
 <p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
@@ -60,6 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
@@ -93,7 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.mode"><code class="docutils literal notranslate"><span class="pre">E32Device.mode</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.prepare_uart"><code class="docutils literal notranslate"><span class="pre">E32Device.prepare_uart()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.reset"><code class="docutils literal notranslate"><span class="pre">E32Device.reset()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.send"><code class="docutils literal notranslate"><span class="pre">E32Device.send()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.send_raw"><code class="docutils literal notranslate"><span class="pre">E32Device.send_raw()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.tx_mode"><code class="docutils literal notranslate"><span class="pre">E32Device.tx_mode</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.tx_power"><code class="docutils literal notranslate"><span class="pre">E32Device.tx_power</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ebyte_e32.E32Device.uart"><code class="docutils literal notranslate"><span class="pre">E32Device.uart</span></code></a></li>
@@ -316,6 +318,8 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.address" title="Permalink to this definition"></a></dt>
 <dd><p>Module’s address that is used in “fixed transmissions” and ignored when receiving broadcast messages.</p>
 <p>Must be between <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> and <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>.</p>
+<p>If the module is in fixed communications mode, you can also use the special <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> address to monitor
+or broadcast messages on a given channel.</p>
 <p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
 </dd></dl>
 
@@ -330,8 +334,9 @@
 <dt class="sig sig-object py" id="ebyte_e32.E32Device.channel">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.channel" title="Permalink to this definition"></a></dt>
 <dd><p>Module’s channel used for any LoRa communications in non-sleep modes.</p>
-<p><strong>FIXME: Check how this applies to different TX modes !  (May be bypassed)</strong></p>
 <p>Must be between <code class="docutils literal notranslate"><span class="pre">CHANNEL_MIN</span></code> and <code class="docutils literal notranslate"><span class="pre">CHANNEL_MAX</span></code>.  (Both are inclusive limits)</p>
+<p>If the module is in fixed communications mode, it may change its channel to the targeted one and will return
+to the original one afterward.</p>
 <p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
 </dd></dl>
 
@@ -472,14 +477,15 @@ instructed not to.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ebyte_e32.E32Device.send">
-<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_packet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.send" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ebyte_e32.E32Device.send_raw">
+<span class="sig-name descname"><span class="pre">send_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_packet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_aux</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device.send_raw" title="Permalink to this definition"></a></dt>
 <dd><p>Sends a message on the UART bus.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>message</strong> – Message to be sent, may get truncated.</p></li>
 <li><p><strong>max_packet_size</strong> – Max byte count to send, if <cite>None</cite>, the message’s length will be used.</p></li>
+<li><p><strong>wait_aux</strong> – Whether the method should wait for AUX pin  (Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -492,7 +498,6 @@ instructed not to.</p>
 <dt class="sig sig-object py" id="ebyte_e32.E32Device.tx_mode">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tx_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.TransmissionMode" title="ebyte_e32.TransmissionMode"><span class="pre">TransmissionMode</span></a></em><a class="headerlink" href="#ebyte_e32.E32Device.tx_mode" title="Permalink to this definition"></a></dt>
 <dd><p>Module’s transmission mode used for any LoRa communications in non-sleep modes.</p>
-<p><strong>FIXME: Check how this applies to different channels !  (May bypass them)</strong></p>
 <p>Must be between one of the values in <code class="docutils literal notranslate"><span class="pre">TransmissionMode</span></code>.</p>
 <p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
 </dd></dl>
@@ -667,6 +672,7 @@ as transmitted via the save parameters command.</p>
 <dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">ForwardErrorCorrection</span></span><a class="headerlink" href="#ebyte_e32.ForwardErrorCorrection" title="Permalink to this definition"></a></dt>
 <dd><p>???</p>
+<p>FIXME: Figure out the ratio since LoRaWAN wants 5/4 !</p>
 <p><strong>This setting must be the same between all communicating modules.</strong></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection.FEC_DEFAULT">
@@ -861,7 +867,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.TransmissionMode">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">TransmissionMode</span></span><a class="headerlink" href="#ebyte_e32.TransmissionMode" title="Permalink to this definition"></a></dt>
-<dd><p>???</p>
+<dd><p>Transmission modes available for LoRa communications.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT">
 <span class="sig-name descname"><span class="pre">TRANSMISSION_DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_DEFAULT" title="Permalink to this definition"></a></dt>
@@ -872,13 +878,16 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_FIXED">
 <span class="sig-name descname"><span class="pre">TRANSMISSION_FIXED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_FIXED" title="Permalink to this definition"></a></dt>
-<dd><p>???</p>
+<dd><p>In this mode all devices will be able communicate between each other by prepending the target channel and
+address to each message.</p>
+<p>You can also use the special <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> address to monitor or broadcast messages on a given channel.</p>
+<p>The module will automatically switch channel if required and will return to it’s original one.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT">
 <span class="sig-name descname"><span class="pre">TRANSMISSION_TRANSPARENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT" title="Permalink to this definition"></a></dt>
-<dd><p>???</p>
+<dd><p>In this mode all devices on the same channel and address will communicate between each other.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1128,7 +1137,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="examples_transmit_fixed.html" class="btn btn-neutral float-left" title="Fixed Transmissions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples_transmit_transparent.html" class="btn btn-neutral float-left" title="Transparent Transmissions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

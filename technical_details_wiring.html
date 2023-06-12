@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E32 Modules &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
+  <title>Power-supply Considerations &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="LoRa" href="technical_details_lora.html" />
-    <link rel="prev" title="Power-supply Considerations" href="technical_details_wiring.html" /> 
+    <link rel="next" title="E32 Modules" href="technical_details_e32.html" />
+    <link rel="prev" title="Preamble ⚠️ Must-read ⚠️" href="technical_details_preamble.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,14 +52,8 @@
 <p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">E32 Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#wiring">Wiring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#model-number-structure">Model Number Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#modules-specifications">Modules specifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#datasheets">Datasheets</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Power-supply Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
 </ul>
@@ -115,9 +109,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">E32 Modules</li>
+      <li class="breadcrumb-item active">Power-supply Considerations</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/technical_details_e32.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/technical_details_wiring.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -125,135 +119,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="e32-modules">
-<h1>E32 Modules<a class="headerlink" href="#e32-modules" title="Permalink to this heading"></a></h1>
-<section id="wiring">
-<h2>Wiring<a class="headerlink" href="#wiring" title="Permalink to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>E32 Module</p></th>
-<th class="head"><p>MCU</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><cite>M0</cite></p></td>
-<td><p>Any digital output pin</p></td>
-</tr>
-<tr class="row-odd"><td><p><cite>M1</cite></p></td>
-<td><p>Any digital output pin</p></td>
-</tr>
-<tr class="row-even"><td><p><cite>RXD</cite></p></td>
-<td><p>Any UART <strong>TX</strong> capable pin*</p></td>
-</tr>
-<tr class="row-odd"><td><p><cite>TXD</cite></p></td>
-<td><p>Any UART <strong>RX</strong> capable pin*</p></td>
-</tr>
-<tr class="row-even"><td><p><cite>AUX</cite></p></td>
-<td><p>Any digital input pin**</p></td>
-</tr>
-<tr class="row-odd"><td><p><cite>VCC</cite></p></td>
-<td><p>Power supply 2.3V to 5.2V DC***</p></td>
-</tr>
-</tbody>
-</table>
-<p>*: Some devices may require you to use very specific pins for the UART bus.
-<span class="raw-html"><br></span>
-**: Analogue input pins might work, but this type of setup isn’t supported !
-<span class="raw-html"><br></span>
-***: More than 5.2V can cause damage, and make sure to double-check the datasheet !</p>
-</section>
-<section id="model-number-structure">
-<h2>Model Number Structure<a class="headerlink" href="#model-number-structure" title="Permalink to this heading"></a></h2>
-<p>The E32 modules all have a unique name that can help you</p>
-<p><cite>E32-{Frequency}-T{TX Power Max dBm}{Form Factor}</cite></p>
-<p><cite>S</cite> =&gt; SDM (Surface Mount Device)</p>
-<p><cite>D</cite> =&gt; DIP (Dual In-line Package)</p>
-<p><cite>DT</cite> =&gt; ???</p>
-<p><cite>DC</cite> =&gt; ???</p>
-</section>
-<section id="modules-specifications">
-<h2>Modules specifications<a class="headerlink" href="#modules-specifications" title="Permalink to this heading"></a></h2>
-<p>abc</p>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Model</p></th>
-<th class="head"><p>Supported</p></th>
-<th class="head"><p>Max TX Power</p></th>
-<th class="head"><p>Frequencies</p></th>
-<th class="head"><p>Chipset</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>The 1xx and 400</p></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T20DC</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-443T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-443T20S2T</span></code></p>
-</td>
-<td><p>✔️</p></td>
-<td><p>20 dBm / 100 mW</p></td>
-<td><p>EU433</p></td>
-<td rowspan="4"><p>SX1278</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T27D</span></code></p></td>
-<td><p>✖️</p></td>
-<td><p>???</p></td>
-<td><p>???</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T30D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-443T30S</span></code></p>
-</td>
-<td><p>❔</p></td>
-<td><p>30 dBm / 1 W</p></td>
-<td rowspan="2"><p>EU433</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T33S</span></code></p></td>
-<td><p>❔</p></td>
-<td><p>33 dBm / 2W</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-868T20D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T30D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T30S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T20D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T30D</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T30S</span></code></p>
-</td>
-<td><p>❔</p></td>
-<td><p>???</p></td>
-<td><p>???</p></td>
-<td><p>SX1276</p></td>
-</tr>
-</tbody>
-</table>
-<p>The <code class="docutils literal notranslate"><span class="pre">E32-433T27D</span></code> variant is mentionned in the <a class="reference external" href="https://www.ebyte.com/en/pdf-down.aspx?id=775">E32 V1.30 User Manual</a>,
-but no other datasheet or product listing could be found for it.</p>
-<p>All non EU433 variant aren’t supported as I cannot own and test them legally right now.</p>
-</section>
-<section id="datasheets">
-<h2>Datasheets<a class="headerlink" href="#datasheets" title="Permalink to this heading"></a></h2>
-<p>All datasheets are hosted by Ebyte on <em>ebyte.com</em> and <em>cdebyte.com</em> unless specified otherwise.</p>
+  <section id="power-supply-considerations">
+<h1>Power-supply Considerations<a class="headerlink" href="#power-supply-considerations" title="Permalink to this heading"></a></h1>
+<p>TODO</p>
+<p>Problems noticed:</p>
 <ul class="simple">
-<li><p>[E32-443T20DT](<a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=660">https://www.ebyte.com/en/downpdf.aspx?id=660</a>)</p></li>
-<li><p>[E32-443T30D](<a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=108">https://www.ebyte.com/en/downpdf.aspx?id=108</a>)</p></li>
-<li><p>[E32-433T33S](<a class="reference external" href="https://www.manualslib.com/manual/2938896/Ebyte-E32-433t33s.html">https://www.manualslib.com/manual/2938896/Ebyte-E32-433t33s.html</a>) (manualslib.com)</p></li>
+<li><p>Crashes when switching TX after sending packages for a while:</p>
+<ul>
+<li><p>VIN ripples</p></li>
+<li><p>Involuntary inductor  (Could be really bad at 5V !!!)</p></li>
 </ul>
-<p>If any datasheet become unavailable, please open an issue.&lt;br&gt;
-We also keep copies of them over at [files.nibblepoker.lu](<a class="reference external" href="https://files.nibblepoker.lu/datasheets/ebyte/e32/">https://files.nibblepoker.lu/datasheets/ebyte/e32/</a>) just in case.</p>
-</section>
+</li>
+</ul>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="technical_details_wiring.html" class="btn btn-neutral float-left" title="Power-supply Considerations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="technical_details_lora.html" class="btn btn-neutral float-right" title="LoRa" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="technical_details_preamble.html" class="btn btn-neutral float-left" title="Preamble ⚠️ Must-read ⚠️" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="technical_details_e32.html" class="btn btn-neutral float-right" title="E32 Modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
