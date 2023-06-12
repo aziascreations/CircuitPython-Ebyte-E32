@@ -162,12 +162,12 @@ due to RF regulations.</strong></p>
 <span class="linenos">25</span>
 <span class="hll"><span class="linenos">26</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 </span><span class="hll"><span class="linenos">27</span>    <span class="c1"># Checking if the module sent us some data</span>
-</span><span class="hll"><span class="linenos">28</span>    <span class="k">if</span> <span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">in_waiting</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">28</span>    <span class="k">if</span> <span class="n">e32</span><span class="o">.</span><span class="n">in_buffer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 </span><span class="hll"><span class="linenos">29</span>        <span class="c1"># Wait for the module to finish receiving data</span>
 </span><span class="hll"><span class="linenos">30</span>        <span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
 </span><span class="hll"><span class="linenos">31</span>        
 </span><span class="hll"><span class="linenos">32</span>        <span class="c1"># We grab the data, and can process it here</span>
-</span><span class="hll"><span class="linenos">33</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">in_waiting</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">33</span>        <span class="n">data</span> <span class="o">=</span> <span class="n">e32</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </span><span class="hll"><span class="linenos">34</span>        
 </span><span class="hll"><span class="linenos">35</span>        <span class="c1"># We print it and exit</span>
 </span><span class="hll"><span class="linenos">36</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We received a </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> byte(s) long message:&quot;</span><span class="p">)</span>
@@ -219,22 +219,18 @@ due to RF regulations.</strong></p>
 <span class="hll"><span class="linenos">27</span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;Hello World !&#39;</span>
 </span><span class="linenos">28</span>
 <span class="linenos">29</span><span class="c1"># Sending with helper</span>
-<span class="hll"><span class="linenos">30</span><span class="n">e32</span><span class="o">.</span><span class="n">send_raw</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="hll"><span class="linenos">30</span><span class="n">e32</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 </span><span class="linenos">31</span>
 <span class="linenos">32</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Waiting to prevent RF spamming</span>
 <span class="linenos">33</span>
-<span class="linenos">34</span><span class="c1"># Sending manually</span>
-<span class="hll"><span class="linenos">35</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class="hll"><span class="linenos">36</span><span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
-</span><span class="linenos">37</span>
-<span class="linenos">38</span><span class="c1"># Switching to an empty shared address and sending another message.</span>
-<span class="hll"><span class="linenos">39</span><span class="n">e32</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="mh">0xBEEF</span>
-</span><span class="hll"><span class="linenos">40</span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;You shouldn</span><span class="se">\&#39;</span><span class="s1">t receive this !&#39;</span>
-</span><span class="hll"><span class="linenos">41</span><span class="n">e32</span><span class="o">.</span><span class="n">uart</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span class="hll"><span class="linenos">42</span><span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
-</span><span class="linenos">43</span>
-<span class="linenos">44</span><span class="c1"># The message may be truncated at specific lengths depending on the frequencies used.</span>
-<span class="linenos">45</span><span class="c1"># Please check the documentation for more information !</span>
+<span class="linenos">34</span><span class="c1"># Switching to an empty shared address and sending another message.</span>
+<span class="hll"><span class="linenos">35</span><span class="n">e32</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="mh">0xBEEF</span>
+</span><span class="hll"><span class="linenos">36</span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;You shouldn</span><span class="se">\&#39;</span><span class="s1">t receive this !&#39;</span>
+</span><span class="hll"><span class="linenos">37</span><span class="n">e32</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">38</span><span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="linenos">39</span>
+<span class="linenos">40</span><span class="c1"># The message may be truncated at specific lengths depending on the frequencies used.</span>
+<span class="linenos">41</span><span class="c1"># Please check the documentation for more information !</span>
 </pre></div>
 </div>
 </div>

@@ -70,6 +70,6 @@ Recommended Links
 
 License
 ^^^^^^^
-This project is licensed under the `MIT license <https://github.com/aziascreations/CircuitPython_Ebyte_E32/blob/master/LICENSE>`_.
+This project is licensed under the `MIT license <https://github.com/aziascreations/CircuitPython-Ebyte-E32/blob/master/LICENSE>`_.
 
 :raw-html:`<hr>`

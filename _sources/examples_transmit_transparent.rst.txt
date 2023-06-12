@@ -25,5 +25,5 @@ due to RF regulations.**
 
 .. literalinclude:: ../examples/transmit_transparent/sender.py
     :caption: examples/transmit_transparent/sender.py
-    :emphasize-lines: 19,22,27,30,35-36,39-42
+    :emphasize-lines: 19,22,27,30,35-38
     :linenos:

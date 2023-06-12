@@ -42,7 +42,7 @@ due to RF regulations.**
 
 .. literalinclude:: ../examples/transmit_fixed/sender_unicast.py
     :caption: examples/transmit_fixed/sender_unicast.py
-    :emphasize-lines: 19,22,28,30-31,35-37
+    :emphasize-lines: 19,22,28,30-31
     :linenos:
 
 Broadcast Sender
@@ -54,5 +54,5 @@ due to RF regulations.**
 
 .. literalinclude:: ../examples/transmit_fixed/sender_broadcast.py
     :caption: examples/transmit_fixed/sender_broadcast.py
-    :emphasize-lines: 19,22,28,30-31,35-37
+    :emphasize-lines: 19,22,28,30-31
     :linenos:
