@@ -61,6 +61,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Transparent Transmissions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#receiver">Receiver</a></li>
@@ -204,10 +205,10 @@ due to RF regulations.</strong></p>
 <span class="linenos">13</span><span class="n">PIN_TXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO10</span>  <span class="c1"># Pin marked as TX on the module</span>
 <span class="linenos">14</span><span class="n">PIN_AUX</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO9</span>
 <span class="linenos">15</span>
-<span class="linenos">16</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0x1377</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0x1337</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="linenos">17</span>
 <span class="linenos">18</span><span class="c1"># Switching to fixed transmission mode.</span>
-<span class="hll"><span class="linenos">19</span><span class="n">e32</span><span class="o">.</span><span class="n">tx_mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">TransmissionMode</span><span class="o">.</span><span class="n">TRANSMISSION_FIXED</span>
+<span class="hll"><span class="linenos">19</span><span class="n">e32</span><span class="o">.</span><span class="n">tx_mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">TransmissionMode</span><span class="o">.</span><span class="n">TRANSMISSION_TRANSPARENT</span>
 </span><span class="linenos">20</span>
 <span class="linenos">21</span><span class="c1"># Switching to mode 0.  (Normal mode)</span>
 <span class="hll"><span class="linenos">22</span><span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_NORMAL</span>

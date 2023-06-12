@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instantiation &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
+  <title>UART Configuration &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Configuration" href="examples_config.html" />
-    <link rel="prev" title="LoRaWAN" href="technical_details_lorawan.html" /> 
+    <link rel="next" title="Fixed Transmissions" href="examples_transmit_fixed.html" />
+    <link rel="prev" title="Configuration" href="examples_config.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -59,13 +59,13 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Instantiation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#basic">Basic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#complete">Complete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UART Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#baudrate">Baudrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parity">Parity</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
 </ul>
@@ -114,9 +114,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Instantiation</li>
+      <li class="breadcrumb-item active">UART Configuration</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/examples_instantiation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/examples_uart.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -124,16 +124,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="instantiation">
-<h1>Instantiation<a class="headerlink" href="#instantiation" title="Permalink to this heading"></a></h1>
-<p>These two examples show you how to properly prepare the E32 module’s class.</p>
-<section id="basic">
-<h2>Basic<a class="headerlink" href="#basic" title="Permalink to this heading"></a></h2>
-<p>Shows you how to instantiate a <cite>E32Device</cite> with raw pins grabbed from the <cite>board</cite> module.
-The constructor will handle the process of making <cite>DigitalInOut</cite> class out of them.</p>
-<p>None of the module’s parameters are customized in this example.</p>
+  <section id="uart-configuration">
+<h1>UART Configuration<a class="headerlink" href="#uart-configuration" title="Permalink to this heading"></a></h1>
+<p>These examples will show you how to configure the UART bus for non-sleep modes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">E32Device</span></code> class will automatically re-instantiate a <code class="docutils literal notranslate"><span class="pre">UART</span></code> class with the correct parameters when
+changing the module’s mode.</p>
+<section id="baudrate">
+<h2>Baudrate<a class="headerlink" href="#baudrate" title="Permalink to this heading"></a></h2>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">examples/instantiation_basic.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">examples/uart/baudrate.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
 <span class="linenos"> 2</span><span class="c1">#</span>
 <span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
@@ -148,28 +147,32 @@ The constructor will handle the process of making <cite>DigitalInOut</cite> clas
 <span class="linenos">12</span><span class="n">PIN_TXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO10</span>  <span class="c1"># Pin marked as TX on the module</span>
 <span class="linenos">13</span><span class="n">PIN_AUX</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO9</span>
 <span class="linenos">14</span>
-<span class="hll"><span class="linenos">15</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">)</span>
-</span><span class="linenos">16</span>
-<span class="linenos">17</span><span class="c1"># The E32 module should be available and configured with the these parameters by default:</span>
-<span class="linenos">18</span><span class="c1">#  * Address: 0x0000</span>
-<span class="linenos">19</span><span class="c1">#  * UART parity: 8N1 (8 data bits, no parity)</span>
-<span class="linenos">20</span><span class="c1">#  * UART rate: 9600 bps</span>
-<span class="linenos">21</span><span class="c1">#  * Air data rate: 2.4 kbps</span>
-<span class="linenos">22</span><span class="c1">#  * Channel: 0</span>
-<span class="linenos">23</span><span class="c1">#  * TX mode: Transparent</span>
-<span class="linenos">24</span><span class="c1">#  * IO drive mode: TX and AUX as push-pull, RX as pull-up</span>
-<span class="linenos">25</span><span class="c1">#  * Wake-up time: 250ms</span>
-<span class="linenos">26</span><span class="c1">#  * Forward error correction: Enabled</span>
-<span class="linenos">27</span><span class="c1">#  * TX power: The lowest available</span>
+<span class="linenos">15</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0x1377</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># Setting the non-sleep UART bus speed</span>
+<span class="hll"><span class="linenos">18</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_rate</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">SerialBaudRate</span><span class="o">.</span><span class="n">BAUD_19200</span>
+</span><span class="hll"><span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sleep mode BPS: </span><span class="si">{</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Switching to mode 0.  (Normal mode)</span>
+<span class="hll"><span class="linenos">22</span><span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_NORMAL</span>
+</span><span class="hll"><span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Normal mode BPS: </span><span class="si">{</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="linenos">24</span>
+<span class="hll"><span class="linenos">25</span><span class="c1"># We are now communicating with the module at 19200 bps.</span>
+</span><span class="hll"><span class="linenos">26</span><span class="c1"># If we go back to sleep mode, we&#39;ll be automatically put back at 9600.</span>
+</span><span class="hll"><span class="linenos">27</span><span class="c1"># Sending messages here will work on a module that uses the same air data rate and ANY UART baudrate.</span>
+</span><span class="linenos">28</span>
+<span class="linenos">29</span><span class="c1"># Switching back to sleep mode.</span>
+<span class="linenos">30</span><span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_SLEEP</span>
+<span class="linenos">31</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sleep mode BPS: </span><span class="si">{</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">32</span>
 </pre></div>
 </div>
 </div>
 </section>
-<section id="complete">
-<h2>Complete<a class="headerlink" href="#complete" title="Permalink to this heading"></a></h2>
-<p>Shows you how to instantiate a <cite>E32Device</cite> with all the module’s parameters specified and left at their default value.</p>
+<section id="parity">
+<h2>Parity<a class="headerlink" href="#parity" title="Permalink to this heading"></a></h2>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">examples/instantiation_full.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="code-block-caption"><span class="caption-text">examples/uart/parity.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
 <span class="linenos"> 2</span><span class="c1">#</span>
 <span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
@@ -184,27 +187,20 @@ The constructor will handle the process of making <cite>DigitalInOut</cite> clas
 <span class="linenos">12</span><span class="n">PIN_TXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO10</span>  <span class="c1"># Pin marked as TX on the module</span>
 <span class="linenos">13</span><span class="n">PIN_AUX</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">IO9</span>
 <span class="linenos">14</span>
-<span class="hll"><span class="linenos">15</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span>
-</span><span class="hll"><span class="linenos">16</span>    <span class="n">pin_m0</span><span class="o">=</span><span class="n">PIN_M0</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">17</span>    <span class="n">pin_m1</span><span class="o">=</span><span class="n">PIN_M1</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">18</span>    <span class="n">pin_aux</span><span class="o">=</span><span class="n">PIN_AUX</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">19</span>    <span class="n">pin_tx</span><span class="o">=</span><span class="n">PIN_TXD</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">20</span>    <span class="n">pin_rx</span><span class="o">=</span><span class="n">PIN_RXD</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">21</span>    <span class="n">uart_buffer_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>  <span class="c1"># Default for `busio.UART`</span>
-</span><span class="hll"><span class="linenos">22</span>    <span class="n">address</span><span class="o">=</span><span class="mh">0x0000</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">23</span>    <span class="n">uart_parity</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">SerialParity</span><span class="o">.</span><span class="n">PARITY_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">24</span>    <span class="n">uart_rate</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">SerialBaudRate</span><span class="o">.</span><span class="n">BAUD_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">25</span>    <span class="n">data_rate</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">AirDataRate</span><span class="o">.</span><span class="n">RATE_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">26</span>    <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># Between: [0; 31]</span>
-</span><span class="hll"><span class="linenos">27</span>    <span class="n">tx_mode</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">TransmissionMode</span><span class="o">.</span><span class="n">TRANSMISSION_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">28</span>    <span class="n">io_drive_mode</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">IODriveMode</span><span class="o">.</span><span class="n">DRIVE_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">29</span>    <span class="n">wake_up_time</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">WakeUpTime</span><span class="o">.</span><span class="n">WAKE_TIME_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">30</span>    <span class="n">forward_error_correction</span><span class="o">=</span><span class="n">ebyte_e32</span><span class="o">.</span><span class="n">ForwardErrorCorrection</span><span class="o">.</span><span class="n">FEC_DEFAULT</span><span class="p">,</span>
-</span><span class="hll"><span class="linenos">31</span>    <span class="n">tx_power</span><span class="o">=</span><span class="mb">0b11</span><span class="p">,</span>  <span class="c1"># Highest: 0b00 =&gt; Lowest: 0b11</span>
-</span><span class="hll"><span class="linenos">32</span><span class="p">)</span>
-</span><span class="linenos">33</span>
-<span class="linenos">34</span><span class="c1"># All the config parameters have the same value as if they weren&#39;t given to the constructor.</span>
-</pre></div>
+<span class="linenos">15</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0x1377</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># Setting the non-sleep UART bus parity</span>
+<span class="hll"><span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sleep mode UART parity: </span><span class="si">{</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_parity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">19</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_parity</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">SerialParity</span><span class="o">.</span><span class="n">PARITY_ODD</span>
+</span><span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># Switching to mode 0.  (Normal mode)</span>
+<span class="hll"><span class="linenos">22</span><span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_NORMAL</span>
+</span><span class="hll"><span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Normal mode UART parity: </span><span class="si">{</span><span class="n">e32</span><span class="o">.</span><span class="n">uart_parity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="linenos">24</span>
+<span class="hll"><span class="linenos">25</span><span class="c1"># We are now communicating with the module at 9600 bps with odd parity.</span>
+</span><span class="hll"><span class="linenos">26</span><span class="c1"># If we go back to sleep mode, we&#39;ll be automatically put back at PARITY_NONE.</span>
+</span><span class="hll"><span class="linenos">27</span><span class="c1"># Sending messages here will work on a module that uses the same air data rate and ANY UART parity.</span>
+</span></pre></div>
 </div>
 </div>
 </section>
@@ -214,8 +210,8 @@ The constructor will handle the process of making <cite>DigitalInOut</cite> clas
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="technical_details_lorawan.html" class="btn btn-neutral float-left" title="LoRaWAN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="examples_config.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="examples_config.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples_transmit_fixed.html" class="btn btn-neutral float-right" title="Fixed Transmissions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

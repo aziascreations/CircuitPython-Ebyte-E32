@@ -60,6 +60,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
 </ul>
@@ -763,7 +764,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">SerialBaudRate</span></span><a class="headerlink" href="#ebyte_e32.SerialBaudRate" title="Permalink to this definition"></a></dt>
-<dd><p>UART baud rate for all communications between the module and the MCU.  (? In non-sleep modes)</p>
+<dd><p>UART baud rate for all communications between the module and the MCU in any non-sleep modes.</p>
 <p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.SerialBaudRate.BAUD_115200">
@@ -824,7 +825,7 @@ can be used to set and get the module’s parameters, or reset it.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.SerialParity">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">SerialParity</span></span><a class="headerlink" href="#ebyte_e32.SerialParity" title="Permalink to this definition"></a></dt>
-<dd><p>???  (? In non-sleep modes)</p>
+<dd><p>UART bus parity for all communications between the module and the MCU in any non-sleep modes.</p>
 <p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.SerialParity.PARITY_DEFAULT">

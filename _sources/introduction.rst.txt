@@ -12,9 +12,9 @@ CircuitPython driver for Ebyte's E32 LoRa modules.
 
 Legal Preamble
 ^^^^^^^^^^^^^^
-You should really check the :ref:`ref-legal-aside` section.
+I'm not responsible for what you do with your module, act responsibly.
 :raw-html:`<br>`
-Im' not responsible for what you do with your module, act responsibly.
+You should also really check the :ref:`ref-legal-aside` section.
 
 Features
 ^^^^^^^^
