@@ -25,12 +25,12 @@ print(f"Waiting for messages... on channel {e32.channel} between devices with th
 
 while True:
     # Checking if the module sent us some data
-    if e32.uart.in_waiting > 0:
+    if e32.in_buffer > 0:
         # Wait for the module to finish receiving data
         e32.wait_aux()
         
         # We grab the data, and can process it here
-        data = e32.uart.read(e32.uart.in_waiting)
+        data = e32.read()
         
         # We print it and exit
         print(f"We received a {len(data)} byte(s) long message:")

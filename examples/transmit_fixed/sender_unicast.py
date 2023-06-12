@@ -28,13 +28,7 @@ e32.mode = ebyte_e32.Modes.MODE_NORMAL
 message = b'\x13\x37\x04Hello World !'
 
 # Sending with helper
-e32.send_raw(message)
-
-time.sleep(0.5)  # Waiting to prevent RF spamming
-
-# Sending manually
-e32.uart.write(message)
-e32.wait_aux()
+e32.send(message)
 
 # The message may be truncated at specific lengths depending on the frequencies used.
 # Please check the documentation for more information !

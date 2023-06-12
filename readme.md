@@ -32,9 +32,7 @@ TODO
 
 ## Usage
 Usage examples can be found in the [examples](examples) folder,
-or in the [Examples](#) section of the documentation.
-
-https://aziascreations.github.io/CircuitPython_Ebyte_E32/
+or in the *Examples* section of the [documentation](https://aziascreations.github.io/CircuitPython-Ebyte-E32/).
 
 ### Wiring
 | E32 Module | MCU                             |

@@ -288,7 +288,7 @@ E32DeviceConfig = namedtuple("E32DeviceConfig", (
 
 class E32Device:
     """
-    sbc
+    Generic class for interacting with E32 modules.
     """
     
     _m0: DigitalInOut
@@ -297,14 +297,14 @@ class E32Device:
     _m1: DigitalInOut
     """M1 pin used to set the module's mode."""
     
-    aux: Optional[DigitalInOut]
+    _aux: Optional[DigitalInOut]
     """
     AUX pin used by the module to indicate its working status or to wake up the MCU.
     
     May be left floating and ignored during normal operations.
     """
     
-    uart: UART
+    _uart: UART
     """
     UART connection to the E32 module.
     """
@@ -345,20 +345,20 @@ class E32Device:
         # Preparing pins
         self._m0 = DigitalInOut(pin_m0)
         self._m1 = DigitalInOut(pin_m1)
-        self.aux = None if pin_aux is None else DigitalInOut(pin_aux)
+        self._aux = None if pin_aux is None else DigitalInOut(pin_aux)
         
         # Preparing UART bus
         self._uart_pin_tx = pin_rx
         self._uart_pin_rx = pin_tx
         self._uart_buffer_size = uart_buffer_size
-        self.uart = None
+        self._uart = None
         self.prepare_uart(9600, None)
         
         # Correcting some pin-related stuff
         self._m0.direction = Direction.OUTPUT
         self._m1.direction = Direction.OUTPUT
-        if self.aux is not None:
-            self.aux.direction = Direction.INPUT
+        if self._aux is not None:
+            self._aux.direction = Direction.INPUT
         
         # Saving configuration values
         self._address = address
@@ -391,9 +391,9 @@ class E32Device:
         self.reset()
         self._m0.deinit()
         self._m1.deinit()
-        if self.aux is not None:
-            self.aux.deinit()
-        self.uart.deinit()
+        if self._aux is not None:
+            self._aux.deinit()
+        self._uart.deinit()
     
     def prepare_uart(self, baudrate: int, parity: Optional[UART.Parity]):
         """
@@ -403,11 +403,11 @@ class E32Device:
         :param parity: Parity used by the new UART bus.
         :return: ``None``
         """
-        if self.uart is not None:
+        if self._uart is not None:
             self.flush_uart()
-            self.uart.deinit()
+            self._uart.deinit()
         
-        self.uart = UART(
+        self._uart = UART(
             self._uart_pin_tx, self._uart_pin_rx,
             parity=parity, baudrate=baudrate,
             receiver_buffer_size=self._uart_buffer_size)
@@ -418,7 +418,7 @@ class E32Device:
         
         :return: ``None``
         """
-        self.uart.reset_input_buffer()
+        self._uart.reset_input_buffer()
     
     def wait_aux(self, max_wait_ms: int = 150):
         """
@@ -429,12 +429,12 @@ class E32Device:
         :type max_wait_ms: Max amount of time in milliseconds to wait for the `AUX` pin to go high.  (Default: ``150``)
         :return: ``None``
         """
-        if self.aux is None:
+        if self._aux is None:
             sleep(max_wait_ms / 1000)
             return
         
         wait_loop_count = 0
-        while not self.aux.value and wait_loop_count < (max_wait_ms / 10) - 1:
+        while not self._aux.value and wait_loop_count < (max_wait_ms / 10) - 1:
             sleep(0.01)
             wait_loop_count += 1
         
@@ -442,7 +442,7 @@ class E32Device:
         # This shouldn't be happening, but it does, so... yeah...
         sleep(0.01)
     
-    def send_raw(self, message: bytes, max_packet_size: Optional[int] = None, wait_aux: bool = True):
+    def send(self, message: bytes, max_packet_size: Optional[int] = None, wait_aux: bool = True):
         """
         Sends a message on the UART bus.
         
@@ -454,12 +454,30 @@ class E32Device:
         if max_packet_size is None:
             max_packet_size = len(message)
         
-        bytes_sent = self.uart.write(message[:max_packet_size])
+        bytes_sent = self._uart.write(message[:max_packet_size])
         
         if wait_aux:
             self.wait_aux()
         
         return bytes_sent
+    
+    def read(self, byte_count: int = -1) -> bytearray | None:
+        """
+        Reads bytes waiting in the UART bus' buffer.
+        
+        :param byte_count: Tha maximum amount of bytes to read.  (Default: `-1`)
+        :return: The data as a `bytearray` or `None`.  (Maybe smaller than expected if not enough data is available)
+        """
+        return self._uart.read(byte_count if byte_count >= 0 else self.in_buffer)
+    
+    @property
+    def in_buffer(self) -> int:
+        """
+        Get the amount of bytes waiting in the UART bus' buffer.
+        
+        :return: Bytes in UART buffer.
+        """
+        return self._uart.in_waiting
     
     def update_config(self, make_permanent: bool = False, verify: bool = True) -> None:
         """
@@ -495,7 +513,7 @@ class E32Device:
         self.flush_uart()
         
         # Sending config
-        if self.uart.write(command) != 6:
+        if self._uart.write(command) != 6:
             raise RuntimeError("Failed to send the parameters configuration command !")
         
         # Waiting for module to react
@@ -526,13 +544,13 @@ class E32Device:
         if original_mode != Modes.MODE_SLEEP:
             self.mode = Modes.MODE_SLEEP
         
-        self.uart.write(b'\xC1\xC1\xC1')
+        self._uart.write(b'\xC1\xC1\xC1')
         self.wait_aux()
-        if self.uart.in_waiting != 6:
+        if self._uart.in_waiting != 6:
             raise RuntimeError(
-                f"The operating parameters request returned {self.uart.in_waiting} byte(s) instead of 6 !"
+                f"The operating parameters request returned {self._uart.in_waiting} byte(s) instead of 6 !"
             )
-        raw_config = self.uart.read(6)
+        raw_config = self._uart.read(6)
         
         if original_mode != Modes.MODE_SLEEP:
             self.mode = original_mode
@@ -573,13 +591,13 @@ class E32Device:
         if original_mode != Modes.MODE_SLEEP:
             self.mode = Modes.MODE_SLEEP
         
-        self.uart.write(b'\xC3\xC3\xC3')
+        self._uart.write(b'\xC3\xC3\xC3')
         self.wait_aux()
-        if self.uart.in_waiting != 4:
+        if self._uart.in_waiting != 4:
             raise RuntimeError(
-                f"The operating parameters request returned {self.uart.in_waiting} byte(s) instead of 4 !"
+                f"The operating parameters request returned {self._uart.in_waiting} byte(s) instead of 4 !"
             )
-        raw_version = self.uart.read(4)
+        raw_version = self._uart.read(4)
         
         if original_mode != Modes.MODE_SLEEP:
             self.mode = original_mode
@@ -623,7 +641,7 @@ class E32Device:
         if original_mode != Modes.MODE_SLEEP:
             self.mode = Modes.MODE_SLEEP
         
-        self.uart.write(b'\xC4\xC4\xC4')
+        self._uart.write(b'\xC4\xC4\xC4')
         self.wait_aux(1500)  # May not be enough, it doesn't respond directly, even if AUX is high...
         
         if not stay_in_sleep_mode and original_mode != Modes.MODE_SLEEP:

@@ -27,18 +27,14 @@ e32.mode = ebyte_e32.Modes.MODE_NORMAL
 message = b'Hello World !'
 
 # Sending with helper
-e32.send_raw(message)
+e32.send(message)
 
 time.sleep(0.5)  # Waiting to prevent RF spamming
-
-# Sending manually
-e32.uart.write(message)
-e32.wait_aux()
 
 # Switching to an empty shared address and sending another message.
 e32.address = 0xBEEF
 message = b'You shouldn\'t receive this !'
-e32.uart.write(message)
+e32.send(message)
 e32.wait_aux()
 
 # The message may be truncated at specific lengths depending on the frequencies used.
