@@ -7,16 +7,17 @@
 * Author(s): Herwin Bozet
 """
 
+from collections import namedtuple
+from time import sleep
+
 try:
     from typing import Union, Optional, Tuple
 except ImportError:
     pass
 
 from busio import UART
-from collections import namedtuple
 from digitalio import Direction, DigitalInOut
 from microcontroller import Pin
-from time import sleep
 
 
 class Modes:
@@ -216,6 +217,8 @@ class IODriveMode:
     """
     ???
     
+    **This setting hasn't been tested yet !**
+    
     This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
     
@@ -288,10 +291,10 @@ class E32Device:
     sbc
     """
     
-    m0: DigitalInOut
+    _m0: DigitalInOut
     """M0 pin used to set the module's mode."""
     
-    m1: DigitalInOut
+    _m1: DigitalInOut
     """M1 pin used to set the module's mode."""
     
     aux: Optional[DigitalInOut]
@@ -340,8 +343,8 @@ class E32Device:
                  tx_power: int = 0b11,
                  ):
         # Preparing pins
-        self.m0 = DigitalInOut(pin_m0)
-        self.m1 = DigitalInOut(pin_m1)
+        self._m0 = DigitalInOut(pin_m0)
+        self._m1 = DigitalInOut(pin_m1)
         self.aux = None if pin_aux is None else DigitalInOut(pin_aux)
         
         # Preparing UART bus
@@ -352,8 +355,8 @@ class E32Device:
         self.prepare_uart(9600, None)
         
         # Correcting some pin-related stuff
-        self.m0.direction = Direction.OUTPUT
-        self.m1.direction = Direction.OUTPUT
+        self._m0.direction = Direction.OUTPUT
+        self._m1.direction = Direction.OUTPUT
         if self.aux is not None:
             self.aux.direction = Direction.INPUT
         
@@ -386,8 +389,8 @@ class E32Device:
         :return: ``None``
         """
         self.reset()
-        self.m0.deinit()
-        self.m1.deinit()
+        self._m0.deinit()
+        self._m1.deinit()
         if self.aux is not None:
             self.aux.deinit()
         self.uart.deinit()
@@ -526,9 +529,9 @@ class E32Device:
         self.uart.write(b'\xC1\xC1\xC1')
         self.wait_aux()
         if self.uart.in_waiting != 6:
-            raise RuntimeError("The operating parameters request returned {} byte(s) instead of 6 !".format(
-                self.uart.in_waiting
-            ))
+            raise RuntimeError(
+                f"The operating parameters request returned {self.uart.in_waiting} byte(s) instead of 6 !"
+            )
         raw_config = self.uart.read(6)
         
         if original_mode != Modes.MODE_SLEEP:
@@ -537,6 +540,11 @@ class E32Device:
         return raw_config
     
     def get_config(self) -> E32DeviceConfig:
+        """
+        Get a named tuple containing the module's current operating configuration
+        
+        :return: A ``E32DeviceConfig`` with the module's current operating configuration.
+        """
         raw_config = self.get_raw_config()
         
         return E32DeviceConfig(
@@ -568,9 +576,9 @@ class E32Device:
         self.uart.write(b'\xC3\xC3\xC3')
         self.wait_aux()
         if self.uart.in_waiting != 4:
-            raise RuntimeError("The operating parameters request returned {} byte(s) instead of 4 !".format(
-                self.uart.in_waiting
-            ))
+            raise RuntimeError(
+                f"The operating parameters request returned {self.uart.in_waiting} byte(s) instead of 4 !"
+            )
         raw_version = self.uart.read(4)
         
         if original_mode != Modes.MODE_SLEEP:
@@ -628,12 +636,12 @@ class E32Device:
         
         **Changing this property will flush the UART buffer.**
         """
-        return self.m0.value, self.m1.value
+        return self._m0.value, self._m1.value
     
     @mode.setter
     def mode(self, value: Union[tuple[int, int], Modes]):
-        self.m0.value = value[0]
-        self.m1.value = value[1]
+        self._m0.value = value[0]
+        self._m1.value = value[1]
         self.wait_aux()
         self.prepare_uart(
             baudrate=9600 if self.mode == Modes.MODE_SLEEP else self._uart_rate[1],
@@ -661,7 +669,7 @@ class E32Device:
     
     @address.setter
     def address(self, value: int):
-        if not (0x0000 <= value <= 0xFFFF):
+        if not 0x0000 <= value <= 0xFFFF:
             raise ValueError(f"The 'address' isn't between 0x0000 and 0xFFFF !  (It's {value})")
         self._address = value
         self.update_config()
@@ -682,7 +690,7 @@ class E32Device:
     
     @uart_parity.setter
     def uart_parity(self, value: int):
-        if not (0b00 <= value <= 0b11):
+        if not 0b00 <= value <= 0b11:
             raise ValueError(f"The 'uart_parity' isn't between 0 and 3 !  (It's {value})")
         self._uart_parity = value
         self.update_config()
@@ -702,7 +710,7 @@ class E32Device:
     
     @uart_rate.setter
     def uart_rate(self, value: tuple[int, int] | SerialBaudRate):
-        if not (0b000 <= value[0] <= 0b111):
+        if not 0b000 <= value[0] <= 0b111:
             raise ValueError(f"The 'uart_rate' isn't between 0 and 7 !  (It's {value[0]})")
         self._uart_rate = value
         self.update_config()
@@ -720,7 +728,7 @@ class E32Device:
     
     @data_rate.setter
     def data_rate(self, value: int | AirDataRate):
-        if not (0b000 <= value <= 0b111):
+        if not 0b000 <= value <= 0b111:
             raise ValueError(f"The 'data_rate' isn't between 0 and 7 !  (It's {value})")
         self._data_rate = value
         self.update_config()
@@ -741,7 +749,7 @@ class E32Device:
     
     @channel.setter
     def channel(self, value: int):
-        if not (CHANNEL_MIN <= value <= CHANNEL_MAX):
+        if not CHANNEL_MIN <= value <= CHANNEL_MAX:
             raise ValueError(f"The 'channel' isn't between {CHANNEL_MIN} and {CHANNEL_MAX} !  (It's {value})")
         self._channel = value
         self.update_config()
@@ -759,7 +767,7 @@ class E32Device:
     
     @tx_mode.setter
     def tx_mode(self, value: int | TransmissionMode):
-        if not (0 <= value <= 1):
+        if not 0 <= value <= 1:
             raise ValueError(f"The 'tx_mode' isn't between 0 and 1 !  (It's {value})")
         self._tx_mode = value
         self.update_config()
@@ -777,7 +785,7 @@ class E32Device:
     
     @io_drive_mode.setter
     def io_drive_mode(self, value: int | IODriveMode):
-        if not (0 <= value <= 1):
+        if not 0 <= value <= 1:
             raise ValueError(f"The 'io_drive_mode' isn't between 0 and 1 !  (It's {value})")
         self._io_drive_mode = value
         self.update_config()
@@ -795,7 +803,7 @@ class E32Device:
     
     @wake_up_time.setter
     def wake_up_time(self, value: int | WakeUpTime):
-        if not (0b000 <= value <= 0b111):
+        if not 0b000 <= value <= 0b111:
             raise ValueError(f"The 'wake_up_time' isn't between 0 and 7 !  (It's {value})")
         self._wake_up_time = value
         self.update_config()
@@ -829,7 +837,7 @@ class E32Device:
     
     @tx_power.setter
     def tx_power(self, value: int):
-        if not (0b00 <= value <= 0b11):
+        if not 0b00 <= value <= 0b11:
             raise ValueError(f"The 'tx_power' isn't between 0 and 3 !  (It's {value})")
         self._tx_power = value
         self.update_config()

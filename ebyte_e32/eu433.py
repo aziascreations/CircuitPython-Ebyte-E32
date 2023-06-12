@@ -22,7 +22,7 @@ def channel_to_frequency(channel: int, strict: bool = True) -> float:
     :param strict: Whether a `ValueError` exception should be raised if an invalid value is given (Default: ``True``)
     :return: The corresponding frequency in MHz.
     """
-    if strict and not (channel in range(0, 32)):
+    if strict and channel not in range(0, 32):
         raise ValueError(f"The channel number should be between 0 and 31 !  (Got {channel})")
     
     return round(410 + 1 * channel)
@@ -36,7 +36,7 @@ def frequency_to_channel(frequency: float, strict: bool = True) -> float:
     :param strict: Whether a `ValueError` exception should be raised if an invalid value is given (Default: ``True``)
     :return: The closest corresponding channel number.
     """
-    if strict and not (409.5 <= frequency <= 441.5):
+    if strict and not 409.5 <= frequency <= 441.5:
         raise ValueError(f"The frequency should be between 409.5 and 441.5 !  (Got {frequency})")
     
     return max(0, min(31, round(frequency - 410)))
