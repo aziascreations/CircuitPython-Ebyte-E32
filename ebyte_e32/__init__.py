@@ -465,8 +465,8 @@ class E32Device:
         """
         Reads bytes waiting in the UART bus' buffer.
         
-        :param byte_count: Tha maximum amount of bytes to read.  (Default: `-1`)
-        :return: The data as a `bytearray` or `None`.  (Maybe smaller than expected if not enough data is available)
+        :param byte_count: Tha maximum amount of bytes to read.  (Default: ``-1``)
+        :return: The data as a ``bytearray`` or ``None``.
         """
         return self._uart.read(byte_count if byte_count >= 0 else self.in_buffer)
     
