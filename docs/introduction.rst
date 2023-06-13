@@ -68,6 +68,8 @@ Recommended Links
 
 * `LoRaWAN Regional Parameters  (By LoRa Alliance) <https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters>`_
 
+* https://www.raveon.com/the-lora-protocol/
+
 License
 ^^^^^^^
 This project is licensed under the `MIT license <https://github.com/aziascreations/CircuitPython-Ebyte-E32/blob/master/LICENSE>`_.

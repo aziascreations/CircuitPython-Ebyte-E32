@@ -13,6 +13,9 @@ FREQUENCY_MINIMUM = 410.0
 FREQUENCY_MAXIMUM = 441.0
 """Maximum LoRa EU443 frequency in MHz corresponding to channel `31`."""
 
+FREQUENCY_STEP = 1.0
+"""Frequency difference between channels in MHz."""
+
 
 def channel_to_frequency(channel: int, strict: bool = True) -> float:
     """

@@ -19,6 +19,8 @@ from busio import UART
 from digitalio import Direction, DigitalInOut
 from microcontroller import Pin
 
+from .exceptions import E32GenericError
+
 
 class Modes:
     """
@@ -215,9 +217,9 @@ class WakeUpTime:
 
 class IODriveMode:
     """
-    ???
+    Changes the way the module's internal pull-up resistor works.
     
-    **This setting hasn't been tested yet !**
+    Using the ``DRIVE_OPEN`` setting may require you to manually add pull-up resistors.
     
     This setting isn't related to the LoRa transmission rate and can be different between communicating modules.
     """
@@ -242,7 +244,9 @@ class IODriveMode:
 
 class ForwardErrorCorrection:
     """
-    ???
+    On/Off statuses available for the module's *Forward Error Correction*
+    
+    Turning the FEC off will reduce the the transmission time and will decrease the maximum transmission distance.
     
     FIXME: Figure out the ratio since LoRaWAN wants 5/4 !
     
@@ -288,7 +292,7 @@ E32DeviceConfig = namedtuple("E32DeviceConfig", (
 
 class E32Device:
     """
-    Generic class for interacting with E32 modules.
+    Generic class for interacting with E32 modules over UART.
     """
     
     _m0: DigitalInOut
@@ -488,7 +492,7 @@ class E32Device:
         :param make_permanent: Whether the config should be saved when the module is powered-down.  (Default: ``False``)
         :param verify: Whether the config should be fetched and checked afterward.  (Default: ``True``)
         :return: ``None``
-        :raises RuntimeError: If the config couldn't be applied.
+        :raises E32GenericError: If the config couldn't be applied.
         """
         original_mode = self.mode
         
@@ -514,7 +518,7 @@ class E32Device:
         
         # Sending config
         if self._uart.write(command) != 6:
-            raise RuntimeError("Failed to send the parameters configuration command !")
+            raise E32GenericError("Failed to send the parameters configuration command !")
         
         # Waiting for module to react
         self.wait_aux()
@@ -526,7 +530,7 @@ class E32Device:
         if verify:
             raw_config = self.get_raw_config()
             if raw_config[1:] != command[1:]:
-                raise RuntimeError("The module doesn't return the new config !")
+                raise E32GenericError("The module didn't return the new config !")
         
         if original_mode != Modes.MODE_SLEEP:
             self.mode = original_mode
@@ -547,7 +551,7 @@ class E32Device:
         self._uart.write(b'\xC1\xC1\xC1')
         self.wait_aux()
         if self._uart.in_waiting != 6:
-            raise RuntimeError(
+            raise E32GenericError(
                 f"The operating parameters request returned {self._uart.in_waiting} byte(s) instead of 6 !"
             )
         raw_config = self._uart.read(6)
@@ -585,6 +589,7 @@ class E32Device:
         **The module will temporarily go into sleep mode and flush the UART buffer.**
         
         :return: The raw response as a ``bytes`` object of length 4.
+        :raises E32GenericError: If the version couldn't be fetched.
         """
         original_mode = self.mode
         
@@ -594,7 +599,7 @@ class E32Device:
         self._uart.write(b'\xC3\xC3\xC3')
         self.wait_aux()
         if self._uart.in_waiting != 4:
-            raise RuntimeError(
+            raise E32GenericError(
                 f"The operating parameters request returned {self._uart.in_waiting} byte(s) instead of 4 !"
             )
         raw_version = self._uart.read(4)
@@ -610,15 +615,16 @@ class E32Device:
         
         **Ebyte's documentation doesn't explain the content of the second and third values in details.**
         
-        :return: A tuple containing the module's model, its version number, ant its features
+        :return: A tuple containing the module's model, its version number, ant its features.
+        :raises E32GenericError: If the version is invalid.
         """
         raw_version = self.get_raw_version()
         
         if raw_version[0] != 0xC3:
-            raise RuntimeError("The version data has a bad response code !")
+            raise E32GenericError("The version data has a bad response code !")
         
         if raw_version[1] != 0x32:
-            raise RuntimeError("The version data has an invalid model !")
+            raise E32GenericError("The version data has an invalid model !")
         
         return E32DeviceVersion(raw_version[1], raw_version[2], raw_version[3])
     
@@ -674,12 +680,13 @@ class E32Device:
     @property
     def address(self) -> int:
         """
-        Module's address that is used in "fixed transmissions" and ignored when receiving broadcast messages.
+        Module's address used to receive messages.  (Must be between ``0x0000`` and ``0xFFFF``)
         
-        Must be between ``0x0000`` and ``0xFFFF``.
+        If the module is in fixed communications mode the address has extra some extra behaviour:
         
-        If the module is in fixed communications mode, you can also use the special ``0xFFFF`` address to monitor
-        or broadcast messages on a given channel.
+        ⦁ The ``0xFFFF`` address can be used to monitor or broadcast messages on a given channel.
+        
+        ⦁ The address is ignored when receiving broadcast messages.
         
         **Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.**
         """
