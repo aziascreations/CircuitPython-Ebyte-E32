@@ -186,6 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="#ebyte-e32-eu433"><cite>ebyte_e32.eu433</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.channel_to_frequency"><code class="docutils literal notranslate"><span class="pre">channel_to_frequency()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#ebyte_e32.eu433.frequency_to_channel"><code class="docutils literal notranslate"><span class="pre">frequency_to_channel()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="#ebyte-e32-t20"><cite>ebyte_e32.t20</cite></a></li>
@@ -312,14 +313,14 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.E32Device">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">E32Device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin_m0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_m1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_aux</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_tx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin_rx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">microcontroller.Pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_parity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.SerialParity" title="ebyte_e32.SerialParity"><span class="pre">SerialParity</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uart_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.SerialBaudRate" title="ebyte_e32.SerialBaudRate"><span class="pre">SerialBaudRate</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(3,</span> <span class="pre">9600)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.AirDataRate" title="ebyte_e32.AirDataRate"><span class="pre">AirDataRate</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.TransmissionMode" title="ebyte_e32.TransmissionMode"><span class="pre">TransmissionMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">io_drive_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.IODriveMode" title="ebyte_e32.IODriveMode"><span class="pre">IODriveMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wake_up_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.WakeUpTime" title="ebyte_e32.WakeUpTime"><span class="pre">WakeUpTime</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_error_correction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ebyte_e32.ForwardErrorCorrection" title="ebyte_e32.ForwardErrorCorrection"><span class="pre">ForwardErrorCorrection</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tx_power</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ebyte_e32.E32Device" title="Permalink to this definition"></a></dt>
-<dd><p>Generic class for interacting with E32 modules.</p>
+<dd><p>Generic class for interacting with E32 modules over UART.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="ebyte_e32.E32Device.address">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#ebyte_e32.E32Device.address" title="Permalink to this definition"></a></dt>
-<dd><p>Module’s address that is used in “fixed transmissions” and ignored when receiving broadcast messages.</p>
-<p>Must be between <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> and <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>.</p>
-<p>If the module is in fixed communications mode, you can also use the special <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> address to monitor
-or broadcast messages on a given channel.</p>
+<dd><p>Module’s address used to receive messages.  (Must be between <code class="docutils literal notranslate"><span class="pre">0x0000</span></code> and <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code>)</p>
+<p>If the module is in fixed communications mode the address has extra some extra behaviour:</p>
+<p>⦁ The <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> address can be used to monitor or broadcast messages on a given channel.</p>
+<p>⦁ The address is ignored when receiving broadcast messages.</p>
 <p><strong>Changing this property will cause the module to temporarily go into sleep mode and flush the UART buffer.</strong></p>
 </dd></dl>
 
@@ -403,6 +404,9 @@ to the original one afterward.</p>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The raw response as a <code class="docutils literal notranslate"><span class="pre">bytes</span></code> object of length 4.</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>E32GenericError</strong> – If the version couldn’t be fetched.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -413,7 +417,10 @@ to the original one afterward.</p>
 <p><strong>Ebyte’s documentation doesn’t explain the content of the second and third values in details.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A tuple containing the module’s model, its version number, ant its features</p>
+<dd class="field-odd"><p>A tuple containing the module’s model, its version number, ant its features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>E32GenericError</strong> – If the version is invalid.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -562,7 +569,7 @@ as transmitted via the save parameters command.</p>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>RuntimeError</strong> – If the config couldn’t be applied.</p>
+<dd class="field-odd"><p><strong>E32GenericError</strong> – If the config couldn’t be applied.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -682,7 +689,8 @@ as transmitted via the save parameters command.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.ForwardErrorCorrection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">ForwardErrorCorrection</span></span><a class="headerlink" href="#ebyte_e32.ForwardErrorCorrection" title="Permalink to this definition"></a></dt>
-<dd><p>???</p>
+<dd><p>On/Off statuses available for the module’s <em>Forward Error Correction</em></p>
+<p>Turning the FEC off will reduce the the transmission time and will decrease the maximum transmission distance.</p>
 <p>FIXME: Figure out the ratio since LoRaWAN wants 5/4 !</p>
 <p><strong>This setting must be the same between all communicating modules.</strong></p>
 <dl class="py attribute">
@@ -708,8 +716,8 @@ as transmitted via the save parameters command.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ebyte_e32.IODriveMode">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ebyte_e32.</span></span><span class="sig-name descname"><span class="pre">IODriveMode</span></span><a class="headerlink" href="#ebyte_e32.IODriveMode" title="Permalink to this definition"></a></dt>
-<dd><p>???</p>
-<p><strong>This setting hasn’t been tested yet !</strong></p>
+<dd><p>Changes the way the module’s internal pull-up resistor works.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">DRIVE_OPEN</span></code> setting may require you to manually add pull-up resistors.</p>
 <p>This setting isn’t related to the LoRa transmission rate and can be different between communicating modules.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ebyte_e32.IODriveMode.DRIVE_DEFAULT">
@@ -982,6 +990,12 @@ address to each message.</p>
 <dt class="sig sig-object py" id="ebyte_e32.eu433.FREQUENCY_MINIMUM">
 <span class="sig-prename descclassname"><span class="pre">ebyte_e32.eu433.</span></span><span class="sig-name descname"><span class="pre">FREQUENCY_MINIMUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">410.0</span></em><a class="headerlink" href="#ebyte_e32.eu433.FREQUENCY_MINIMUM" title="Permalink to this definition"></a></dt>
 <dd><p>Minimum LoRa EU443 frequency in MHz corresponding to channel <cite>0</cite>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ebyte_e32.eu433.FREQUENCY_STEP">
+<span class="sig-prename descclassname"><span class="pre">ebyte_e32.eu433.</span></span><span class="sig-name descname"><span class="pre">FREQUENCY_STEP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#ebyte_e32.eu433.FREQUENCY_STEP" title="Permalink to this definition"></a></dt>
+<dd><p>Frequency difference between channels in MHz.</p>
 </dd></dl>
 
 <dl class="py function">
