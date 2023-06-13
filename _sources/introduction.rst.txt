@@ -68,7 +68,11 @@ Recommended Links
 
 * `LoRaWAN Regional Parameters  (By LoRa Alliance) <https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters>`_
 
-* https://www.raveon.com/the-lora-protocol/
+* `LoRa - Packet size considerations  (By SemTech) <https://lora-developers.semtech.com/documentation/tech-papers-and-guides/the-book/packet-size-considerations/>`_
+
+* `LoRaWAN - Regional parameters  (By LoRa Alliance) <https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters>`_
+
+* `LoRa data rate calculator (By rfwireless-world.com) <https://www.rfwireless-world.com/calculators/LoRa-Data-Rate-Calculator.html>`_
 
 License
 ^^^^^^^

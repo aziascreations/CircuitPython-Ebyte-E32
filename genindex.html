@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
+  <title>Index &mdash; CircuitPython Ebyte E32 Library 0.6.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/extra_styles.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -33,7 +34,7 @@
             CircuitPython Ebyte E32 Library
           </a>
               <div class="version">
-                0.3
+                0.6
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -51,11 +52,12 @@
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN (TODO)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="examples_wiring.html">Wiring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
@@ -80,18 +82,31 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.TX_POWER_MIN"><code class="docutils literal notranslate"><span class="pre">TX_POWER_MIN</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.TransmissionMode"><code class="docutils literal notranslate"><span class="pre">TransmissionMode</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.WakeUpTime"><code class="docutils literal notranslate"><span class="pre">WakeUpTime</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-eu433"><cite>ebyte_e32.eu433</cite></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.channel_to_frequency"><code class="docutils literal notranslate"><span class="pre">channel_to_frequency()</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.frequency_to_channel"><code class="docutils literal notranslate"><span class="pre">frequency_to_channel()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-exceptions"><cite>ebyte_e32.exceptions</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.exceptions.E32GenericError"><code class="docutils literal notranslate"><span class="pre">E32GenericError</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f443"><cite>ebyte_e32.f443</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f868"><cite>ebyte_e32.f868</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f915"><cite>ebyte_e32.f915</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t20"><cite>ebyte_e32.t20</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t20.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t30"><cite>ebyte_e32.t30</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t30.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t33"><cite>ebyte_e32.t33</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t33.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t37"><cite>ebyte_e32.t37</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t37.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
 </ul>
 
         </div>
@@ -190,13 +205,19 @@
         <li><a href="api.html#ebyte_e32.E32DeviceConfig.channel">(ebyte_e32.E32DeviceConfig attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api.html#ebyte_e32.f433.CHANNEL_COUNT">CHANNEL_COUNT (in module ebyte_e32.f433)</a>
+
+      <ul>
+        <li><a href="api.html#ebyte_e32.f868.CHANNEL_COUNT">(in module ebyte_e32.f868)</a>
+</li>
+        <li><a href="api.html#ebyte_e32.f915.CHANNEL_COUNT">(in module ebyte_e32.f915)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#ebyte_e32.CHANNEL_MAX">CHANNEL_MAX (in module ebyte_e32)</a>
 </li>
       <li><a href="api.html#ebyte_e32.CHANNEL_MIN">CHANNEL_MIN (in module ebyte_e32)</a>
-</li>
-      <li><a href="api.html#ebyte_e32.eu433.channel_to_frequency">channel_to_frequency() (in module ebyte_e32.eu433)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -232,6 +253,8 @@
 </li>
       <li><a href="api.html#ebyte_e32.E32DeviceVersion">E32DeviceVersion (class in ebyte_e32)</a>
 </li>
+      <li><a href="api.html#ebyte_e32.exceptions.E32GenericError">E32GenericError</a>
+</li>
       <li>
     ebyte_e32
 
@@ -240,14 +263,35 @@
 </li>
       </ul></li>
       <li>
-    ebyte_e32.eu433
+    ebyte_e32.exceptions
 
       <ul>
-        <li><a href="api.html#module-ebyte_e32.eu433">module</a>
+        <li><a href="api.html#module-ebyte_e32.exceptions">module</a>
+</li>
+      </ul></li>
+      <li>
+    ebyte_e32.f433
+
+      <ul>
+        <li><a href="api.html#module-ebyte_e32.f433">module</a>
+</li>
+      </ul></li>
+      <li>
+    ebyte_e32.f868
+
+      <ul>
+        <li><a href="api.html#module-ebyte_e32.f868">module</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    ebyte_e32.f915
+
+      <ul>
+        <li><a href="api.html#module-ebyte_e32.f915">module</a>
+</li>
+      </ul></li>
       <li>
     ebyte_e32.t20
 
@@ -267,6 +311,13 @@
 
       <ul>
         <li><a href="api.html#module-ebyte_e32.t33">module</a>
+</li>
+      </ul></li>
+      <li>
+    ebyte_e32.t37
+
+      <ul>
+        <li><a href="api.html#module-ebyte_e32.t37">module</a>
 </li>
       </ul></li>
   </ul></td>
@@ -291,18 +342,34 @@
         <li><a href="api.html#ebyte_e32.E32DeviceConfig.forward_error_correction">(ebyte_e32.E32DeviceConfig attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#ebyte_e32.ForwardErrorCorrection">ForwardErrorCorrection (class in ebyte_e32)</a>
 </li>
-      <li><a href="api.html#ebyte_e32.eu433.FREQUENCY_MAXIMUM">FREQUENCY_MAXIMUM (in module ebyte_e32.eu433)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#ebyte_e32.f433.FREQUENCY_MAXIMUM">FREQUENCY_MAXIMUM (in module ebyte_e32.f433)</a>
+
+      <ul>
+        <li><a href="api.html#ebyte_e32.f868.FREQUENCY_MAXIMUM">(in module ebyte_e32.f868)</a>
 </li>
-      <li><a href="api.html#ebyte_e32.eu433.FREQUENCY_MINIMUM">FREQUENCY_MINIMUM (in module ebyte_e32.eu433)</a>
+        <li><a href="api.html#ebyte_e32.f915.FREQUENCY_MAXIMUM">(in module ebyte_e32.f915)</a>
 </li>
-      <li><a href="api.html#ebyte_e32.eu433.FREQUENCY_STEP">FREQUENCY_STEP (in module ebyte_e32.eu433)</a>
+      </ul></li>
+      <li><a href="api.html#ebyte_e32.f433.FREQUENCY_MINIMUM">FREQUENCY_MINIMUM (in module ebyte_e32.f433)</a>
+
+      <ul>
+        <li><a href="api.html#ebyte_e32.f868.FREQUENCY_MINIMUM">(in module ebyte_e32.f868)</a>
 </li>
-      <li><a href="api.html#ebyte_e32.eu433.frequency_to_channel">frequency_to_channel() (in module ebyte_e32.eu433)</a>
+        <li><a href="api.html#ebyte_e32.f915.FREQUENCY_MINIMUM">(in module ebyte_e32.f915)</a>
 </li>
+      </ul></li>
+      <li><a href="api.html#ebyte_e32.f433.FREQUENCY_STEP">FREQUENCY_STEP (in module ebyte_e32.f433)</a>
+
+      <ul>
+        <li><a href="api.html#ebyte_e32.f868.FREQUENCY_STEP">(in module ebyte_e32.f868)</a>
+</li>
+        <li><a href="api.html#ebyte_e32.f915.FREQUENCY_STEP">(in module ebyte_e32.f915)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -355,8 +422,6 @@
 </li>
       <li><a href="api.html#ebyte_e32.E32DeviceVersion.model">model (ebyte_e32.E32DeviceVersion attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#ebyte_e32.Modes">Modes (class in ebyte_e32)</a>
 </li>
       <li>
@@ -365,13 +430,21 @@
       <ul>
         <li><a href="api.html#module-ebyte_e32">ebyte_e32</a>
 </li>
-        <li><a href="api.html#module-ebyte_e32.eu433">ebyte_e32.eu433</a>
+        <li><a href="api.html#module-ebyte_e32.exceptions">ebyte_e32.exceptions</a>
+</li>
+        <li><a href="api.html#module-ebyte_e32.f433">ebyte_e32.f433</a>
+</li>
+        <li><a href="api.html#module-ebyte_e32.f868">ebyte_e32.f868</a>
+</li>
+        <li><a href="api.html#module-ebyte_e32.f915">ebyte_e32.f915</a>
 </li>
         <li><a href="api.html#module-ebyte_e32.t20">ebyte_e32.t20</a>
 </li>
         <li><a href="api.html#module-ebyte_e32.t30">ebyte_e32.t30</a>
 </li>
         <li><a href="api.html#module-ebyte_e32.t33">ebyte_e32.t33</a>
+</li>
+        <li><a href="api.html#module-ebyte_e32.t37">ebyte_e32.t37</a>
 </li>
       </ul></li>
   </ul></td>
@@ -453,6 +526,8 @@
 </li>
         <li><a href="api.html#ebyte_e32.t33.TransmitPower">(class in ebyte_e32.t33)</a>
 </li>
+        <li><a href="api.html#ebyte_e32.t37.TransmitPower">(class in ebyte_e32.t37)</a>
+</li>
       </ul></li>
       <li><a href="api.html#ebyte_e32.E32Device.tx_mode">tx_mode (ebyte_e32.E32Device property)</a>
 
@@ -498,12 +573,16 @@
       </ul></li>
       <li><a href="api.html#ebyte_e32.t33.TransmitPower.TX_POWER_33DBM">TX_POWER_33DBM (ebyte_e32.t33.TransmitPower attribute)</a>
 </li>
+      <li><a href="api.html#ebyte_e32.t37.TransmitPower.TX_POWER_37DBM">TX_POWER_37DBM (ebyte_e32.t37.TransmitPower attribute)</a>
+</li>
       <li><a href="api.html#ebyte_e32.t20.TransmitPower.TX_POWER_DEFAULT">TX_POWER_DEFAULT (ebyte_e32.t20.TransmitPower attribute)</a>
 
       <ul>
         <li><a href="api.html#ebyte_e32.t30.TransmitPower.TX_POWER_DEFAULT">(ebyte_e32.t30.TransmitPower attribute)</a>
 </li>
         <li><a href="api.html#ebyte_e32.t33.TransmitPower.TX_POWER_DEFAULT">(ebyte_e32.t33.TransmitPower attribute)</a>
+</li>
+        <li><a href="api.html#ebyte_e32.t37.TransmitPower.TX_POWER_DEFAULT">(ebyte_e32.t37.TransmitPower attribute)</a>
 </li>
       </ul></li>
       <li><a href="api.html#ebyte_e32.TX_POWER_MAX">TX_POWER_MAX (in module ebyte_e32)</a>

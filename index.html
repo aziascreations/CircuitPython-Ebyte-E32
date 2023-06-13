@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CircuitPython Ebyte E32 Library &mdash; CircuitPython Ebyte E32 Library 0.3.0 documentation</title>
+  <title>CircuitPython Ebyte E32 Library &mdash; CircuitPython Ebyte E32 Library 0.6.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/extra_styles.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -35,7 +36,7 @@
             CircuitPython Ebyte E32 Library
           </a>
               <div class="version">
-                0.3
+                0.6
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -53,11 +54,12 @@
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN (TODO)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="examples_wiring.html">Wiring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
@@ -82,18 +84,31 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.TX_POWER_MIN"><code class="docutils literal notranslate"><span class="pre">TX_POWER_MIN</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.TransmissionMode"><code class="docutils literal notranslate"><span class="pre">TransmissionMode</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.WakeUpTime"><code class="docutils literal notranslate"><span class="pre">WakeUpTime</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-eu433"><cite>ebyte_e32.eu433</cite></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.channel_to_frequency"><code class="docutils literal notranslate"><span class="pre">channel_to_frequency()</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.frequency_to_channel"><code class="docutils literal notranslate"><span class="pre">frequency_to_channel()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-exceptions"><cite>ebyte_e32.exceptions</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.exceptions.E32GenericError"><code class="docutils literal notranslate"><span class="pre">E32GenericError</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f443"><cite>ebyte_e32.f443</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f868"><cite>ebyte_e32.f868</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f915"><cite>ebyte_e32.f915</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t20"><cite>ebyte_e32.t20</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t20.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t30"><cite>ebyte_e32.t30</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t30.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t33"><cite>ebyte_e32.t33</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t33.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t37"><cite>ebyte_e32.t37</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t37.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a></li>
 </ul>
 
         </div>
@@ -188,7 +203,9 @@ You should also really check the <a class="reference internal" href="technical_d
 <li><p><a class="reference external" href="https://www.ebyte.com/en/data-download.html?id=214&amp;cid=31">Ebyte documentation for most E32 170/400/433/868/900/915 modules  (On ebyte.com)</a></p></li>
 <li><p><a class="reference external" href="https://www.manualslib.com/manual/2924523/Ebyte-E32-433t33d.html?page=2#manual">Ebyte documentation for most E32-433T33D  (On manualslib.com)</a></p></li>
 <li><p><a class="reference external" href="https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters">LoRaWAN Regional Parameters  (By LoRa Alliance)</a></p></li>
-<li><p><a class="reference external" href="https://www.raveon.com/the-lora-protocol/">https://www.raveon.com/the-lora-protocol/</a></p></li>
+<li><p><a class="reference external" href="https://lora-developers.semtech.com/documentation/tech-papers-and-guides/the-book/packet-size-considerations/">LoRa - Packet size considerations  (By SemTech)</a></p></li>
+<li><p><a class="reference external" href="https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters">LoRaWAN - Regional parameters  (By LoRa Alliance)</a></p></li>
+<li><p><a class="reference external" href="https://www.rfwireless-world.com/calculators/LoRa-Data-Rate-Calculator.html">LoRa data rate calculator (By rfwireless-world.com)</a></p></li>
 </ul>
 </section>
 <section id="license">
@@ -208,7 +225,15 @@ You should also really check the <a class="reference internal" href="technical_d
 <li class="toctree-l2"><a class="reference internal" href="technical_details_preamble.html#legal-aside">Legal Aside</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="technical_details_wiring.html#voltage">Voltage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical_details_wiring.html#extra-passive-components">Extra Passive Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="technical_details_wiring.html#low-power-modules">Low power modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="technical_details_wiring.html#high-power-modules">High power modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#wiring">Wiring</a></li>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#model-number-structure">Model Number Structure</a><ul>
@@ -224,16 +249,22 @@ You should also really check the <a class="reference internal" href="technical_d
 <li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#datasheets">Datasheets</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_lora.html#spreading-factor">Spreading Factor</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN (TODO)</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="examples_wiring.html">Wiring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples_wiring.html#esp32-s3">ESP32-S3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_wiring.html#stm32-black-pill">STM32 Black Pill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_wiring.html#other-boards">Other boards</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples_instantiation.html#basic">Basic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples_instantiation.html#complete">Complete</a></li>
@@ -386,12 +417,23 @@ You should also really check the <a class="reference internal" href="technical_d
 <li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.WakeUpTime.WAKE_TIME_DEFAULT"><code class="docutils literal notranslate"><span class="pre">WakeUpTime.WAKE_TIME_DEFAULT</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-eu433"><cite>ebyte_e32.eu433</cite></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.channel_to_frequency"><code class="docutils literal notranslate"><span class="pre">channel_to_frequency()</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.eu433.frequency_to_channel"><code class="docutils literal notranslate"><span class="pre">frequency_to_channel()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-exceptions"><cite>ebyte_e32.exceptions</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.exceptions.E32GenericError"><code class="docutils literal notranslate"><span class="pre">E32GenericError</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f443"><cite>ebyte_e32.f443</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f433.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f868"><cite>ebyte_e32.f868</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f868.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-f915"><cite>ebyte_e32.f915</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.CHANNEL_COUNT"><code class="docutils literal notranslate"><span class="pre">CHANNEL_COUNT</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_MAXIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MAXIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_MINIMUM"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_MINIMUM</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.f915.FREQUENCY_STEP"><code class="docutils literal notranslate"><span class="pre">FREQUENCY_STEP</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t20"><cite>ebyte_e32.t20</cite></a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t20.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.t20.TransmitPower.TX_POWER_10DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_10DBM</span></code></a></li>
@@ -417,6 +459,12 @@ You should also really check the <a class="reference internal" href="technical_d
 <li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.t33.TransmitPower.TX_POWER_30DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_30DBM</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.t33.TransmitPower.TX_POWER_33DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_33DBM</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.t33.TransmitPower.TX_POWER_DEFAULT"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_DEFAULT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte-e32-t37"><cite>ebyte_e32.t37</cite></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#ebyte_e32.t37.TransmitPower"><code class="docutils literal notranslate"><span class="pre">TransmitPower</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.t37.TransmitPower.TX_POWER_37DBM"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_37DBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#ebyte_e32.t37.TransmitPower.TX_POWER_DEFAULT"><code class="docutils literal notranslate"><span class="pre">TransmitPower.TX_POWER_DEFAULT</span></code></a></li>
 </ul>
 </li>
 </ul>

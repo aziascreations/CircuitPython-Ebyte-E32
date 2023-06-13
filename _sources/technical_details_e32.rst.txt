@@ -19,14 +19,14 @@ Wiring
 +------------+---------------------------------+
 | `AUX`      | Any digital input pin**         |
 +------------+---------------------------------+
-| `VCC`      | Power supply***                 |
+| `VCC`      | Power supply                    |
 +------------+---------------------------------+
 
 \*: Some devices may require you to use very specific pins for the UART bus.
 :raw-html:`<br>`
 \*\*: This pin can be left floating, but the module's AUX response times will be estimated and inaccurate.
 :raw-html:`<br>`
-\*\*\*: Should be between 3.3V and 5.0V, more than 5.2V can cause damage, and some modules support 2.3V !
+\*\*\*: Should be between 3.3V and 5.0V **for less than 5W**, more than 5.2V can cause damage, and some modules support 2.3V !
 
 Model Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -64,13 +64,13 @@ Max Power
 :raw-html:`<br>`
 ``33`` ➜ 33dBm / 2W
 :raw-html:`<br>`
-``37`` ➜ 37dBm / 5W
+``37`` ➜ 37dBm / 5W  `(Special PSU requirements)`
 
 Form Factor
 """""""""""
-``D`` ➜ DIP (Dual In-line Package)
+``D`` ➜ DIP `(Dual In-line Package)`
 :raw-html:`<br>`
-``S`` ➜ SMD (Surface Mount Device)
+``S`` ➜ SMD `(Surface Mount Device)`
 
 Optional Variant
 """"""""""""""""
@@ -221,4 +221,4 @@ We also keep copies of them over at `files.nibblepoker.lu <https://files.nibblep
 just in case.
 
 Alternatively, `manualslib.com <https://www.manualslib.com/products/Ebyte-E32-Series-10450561.html>`_ has a pretty good
-collection of the most common one, as well as some that cannot be found elsewhere.
+collection of the most common ones.
