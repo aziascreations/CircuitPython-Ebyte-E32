@@ -59,7 +59,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#frequency">Frequency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#interface">Interface</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#max-power">Max Power</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#form-factor-suffix">Form Factor &amp; Suffix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#form-factor">Form Factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-variant">Optional Variant</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#supported-modules">Supported Modules</a></li>
@@ -173,11 +174,23 @@
 </section>
 <section id="model-number-structure">
 <h2>Model Number Structure<a class="headerlink" href="#model-number-structure" title="Permalink to this heading"></a></h2>
-<p>The E32 modules all have a unique name that can help you</p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-{Frequency}{Interface}{TX</span> <span class="pre">Power</span> <span class="pre">Max</span> <span class="pre">dBm}{Form</span> <span class="pre">Factor</span> <span class="pre">+</span> <span class="pre">Suffix}</span></code></p>
+<p>The E32 modules all have a unique name that gives you some information about its abilities, form factor and more.</p>
+<p>Here is the standard format:
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">E32-{Frequency}{Interface}{TX</span> <span class="pre">Power</span> <span class="pre">Max</span> <span class="pre">dBm}{Form</span> <span class="pre">Factor}{Optional</span> <span class="pre">Variant}</span></code></p>
 <section id="frequency">
 <h3>Frequency<a class="headerlink" href="#frequency" title="Permalink to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">170</span></code>, <code class="docutils literal notranslate"><span class="pre">400</span></code>, <code class="docutils literal notranslate"><span class="pre">433</span></code>, <code class="docutils literal notranslate"><span class="pre">900</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">170</span></code> ➜ 160-173.5 MHz
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">400</span></code> ➜ 410-525 MHz
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">433</span></code> ➜ 410-441 MHz
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">868</span></code> ➜ 862-893 MHz
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">900</span></code> ➜ 862-931 MHz
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">915</span></code> ➜ 900-931 MHz</p>
 </section>
 <section id="interface">
 <h3>Interface<a class="headerlink" href="#interface" title="Permalink to this heading"></a></h3>
@@ -187,22 +200,27 @@
 </section>
 <section id="max-power">
 <h3>Max Power<a class="headerlink" href="#max-power" title="Permalink to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">20</span></code>, <code class="docutils literal notranslate"><span class="pre">30</span></code>, <code class="docutils literal notranslate"><span class="pre">33</span></code>, <code class="docutils literal notranslate"><span class="pre">37</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">20</span></code> ➜ 20dBm / 100mW
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">30</span></code> ➜ 30dBm / 1W
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">33</span></code> ➜ 33dBm / 2W
+<span class="raw-html"><br></span>
+<code class="docutils literal notranslate"><span class="pre">37</span></code> ➜ 37dBm / 5W</p>
 </section>
-<section id="form-factor-suffix">
-<h3>Form Factor &amp; Suffix<a class="headerlink" href="#form-factor-suffix" title="Permalink to this heading"></a></h3>
+<section id="form-factor">
+<h3>Form Factor<a class="headerlink" href="#form-factor" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">D</span></code> ➜ DIP (Dual In-line Package)
 <span class="raw-html"><br></span>
-<code class="docutils literal notranslate"><span class="pre">DC</span></code> ➜ ???
+<code class="docutils literal notranslate"><span class="pre">S</span></code> ➜ SMD (Surface Mount Device)</p>
+</section>
+<section id="optional-variant">
+<h3>Optional Variant<a class="headerlink" href="#optional-variant" title="Permalink to this heading"></a></h3>
+<p>The optional variant can be a number that may have a letter after it, or just a letter:
 <span class="raw-html"><br></span>
-<code class="docutils literal notranslate"><span class="pre">DT</span></code> ➜ ???</p>
-<p><code class="docutils literal notranslate"><span class="pre">S</span></code> ➜ SMD (Surface Mount Device)
-<span class="raw-html"><br></span>
-<code class="docutils literal notranslate"><span class="pre">S2</span></code> ➜ ???
-<span class="raw-html"><br></span>
-<code class="docutils literal notranslate"><span class="pre">S2T</span></code> ➜ ???
-<span class="raw-html"><br></span>
-<code class="docutils literal notranslate"><span class="pre">S3</span></code> ➜ ???</p>
+<code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">2T</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span></code></p>
+<p>I don’t know what the letter mean for sure,
+it could be related to the minimum voltage input since it seems to be different on those.</p>
 </section>
 </section>
 <section id="supported-modules">
@@ -218,23 +236,27 @@
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-170T30D</span></code></p></td>
 <td><p>30 dBm / 1 W</p></td>
-<td><p>ISM 170 MHz</p></td>
+<td><p><em>160-173.5 MHz</em></p></td>
 <td rowspan="6"><p>SX1278</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-400T20S</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-400T20S</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">E32-400T20S3</span></code></p>
+</td>
 <td><p>20 dBm / 100 mW</p></td>
-<td><p>ISM 443 MHz</p>
-<p>ISM 470 MHz</p>
-<p>EU433</p>
+<td><p><em>410-525 MHz</em></p>
+<p>EU443</p>
+<p>CN470-510</p>
 </td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T20DC</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-443T20DT</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-443T20S</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">E32-433T20S1</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-443T20S2T</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">E32-443T20S3</span></code></p>
 </td>
 <td><p>20 dBm / 100 mW</p></td>
-<td><p>ISM 433MHz</p>
+<td rowspan="4"><p><em>410-441 MHz</em></p>
 <p>EU433</p>
 </td>
 </tr>
@@ -242,9 +264,6 @@
 <p><code class="docutils literal notranslate"><span class="pre">E32-443T30S</span></code></p>
 </td>
 <td><p>30 dBm / 1 W</p></td>
-<td rowspan="3"><p>ISM 433MHz</p>
-<p>EU433</p>
-</td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-443T33S</span></code></p></td>
 <td><p>33 dBm / 2W</p></td>
@@ -254,20 +273,59 @@
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-868T20D</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-868T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-868T30D</span></code></p>
+</td>
+<td><p>20 dBm / 100 mW</p></td>
+<td rowspan="2"><p><em>862-893 MHz</em></p>
+<p>EU863-870</p>
+<p>IN865-867</p>
+</td>
+<td rowspan="6"><p>SX1276</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-868T30D</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-868T30S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T20D</span></code></p>
+</td>
+<td><p>30 dBm / 1 W</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-900T20D</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">E32-900T30S</span></code></p>
+</td>
+<td><p>20 dBm / 100 mW</p></td>
+<td rowspan="2"><p><em>862-931 MHz</em></p>
+<p>EU863-870</p>
+<p>IN865-867</p>
+<p>AS920-923 (“AS1”)</p>
+<p>AS923-925 (“AS2”)</p>
+<p>AU915-928</p>
+<p>KR920-923</p>
+<p>US902-928</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-900T30D</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">E32-900T30S</span></code></p>
+</td>
+<td><p>30 dBm / 1 W</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">E32-915T20D</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-915T20S</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">E32-915T30D</span></code></p>
+</td>
+<td><p>20 dBm / 100 mW</p></td>
+<td rowspan="2"><p><em>900-931 MHz</em></p>
+<p>AS920-923</p>
+<p>AU915-928 (“AS1”)</p>
+<p>AS923-925 (“AS2”)</p>
+<p>KR920-923</p>
+<p>US902-928</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">E32-915T30D</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">E32-915T30S</span></code></p>
 </td>
-<td><p>TODO</p></td>
-<td><p>TODO</p></td>
-<td><p>SX1276</p></td>
+<td><p>30 dBm / 1 W</p></td>
 </tr>
 </tbody>
 </table>
-<p>All frequencies with another non-ISM name can be used for LoRaWAN.</p>
+<p>All frequencies with a <cite>{Region}xxx-yyy</cite> code used for LoRaWAN depending on your location.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">E32-400</span></code> and <code class="docutils literal notranslate"><span class="pre">E32-900</span></code> variants support more channels per modules.</p>
 </section>
 <section id="unsupported-modules">
 <h2>Unsupported Modules<a class="headerlink" href="#unsupported-modules" title="Permalink to this heading"></a></h2>
@@ -304,8 +362,9 @@
 </tbody>
 </table>
 <p>The <code class="docutils literal notranslate"><span class="pre">E32-***M**S</span></code> variants has very basic datasheets, no concrete frequencies could be found.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">E32-433T27D</span></code> variant is mentionned in the <a class="reference external" href="https://www.ebyte.com/en/pdf-down.aspx?id=775">E32 V1.30 User Manual</a>,
-but no other datasheet or product listing could be found for it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">E32-433T27D</span></code> variant is mentioned in the <a class="reference external" href="https://www.ebyte.com/en/pdf-down.aspx?id=775">E32 V1.30 User Manual</a>,
+and on its <a class="reference external" href="https://www.ebyte.com/en/product-view-news.html?id=141">product page</a>
+but no proper datasheet could be found for it.</p>
 </section>
 <section id="datasheets">
 <h2>Datasheets<a class="headerlink" href="#datasheets" title="Permalink to this heading"></a></h2>
@@ -318,20 +377,33 @@ but no other datasheet or product listing could be found for it.</p>
 <li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=130">E32-443T20DC</a></p></li>
 <li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=858">E32-443T20DT</a></p></li>
 <li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=1957">E32-443T20S</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=229">E32-433T20S1</a></p></li>
 <li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=227">E32-443T20S2T</a></p></li>
 <li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=108">E32-443T30D</a></p></li>
 <li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=2347">E32-443T30S</a></p></li>
 <li><p><a class="reference external" href="https://www.manualslib.com/manual/2938896/Ebyte-E32-433t33s.html">E32-433T33S</a> (manualslib.com)</p></li>
 <li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=2215">E32-443T37S</a></p></li>
-<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=1613">E32-900M20S</a></p></li>
-<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=1515">E32-900M30S</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=132">E32-868T20D</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=551">E32-868T20S</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=189">E32-868T30D</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=318">E32-868T30S</a></p></li>
+<li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=2322">E32-900T20D</a></p></li>
+<li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=2323">E32-900T20S</a></p></li>
+<li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=1875">E32-900M20S</a></p></li>
+<li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=1415">E32-900M30S</a></p></li>
+<li><p><a class="reference external" href="https://www.cdebyte.com/pdf-down.aspx?id=2348">E32-900T30S</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=1525">E32-900T30D</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=131">E32-915T20D</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=552">E32-915T20S</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=174">E32-915T30D</a></p></li>
+<li><p><a class="reference external" href="https://www.ebyte.com/en/downpdf.aspx?id=319">E32-915T30S</a></p></li>
 </ul>
 <p>If any datasheet becomes unavailable, please open an issue.
 <span class="raw-html"><br></span>
 We also keep copies of them over at <a class="reference external" href="https://files.nibblepoker.lu/datasheets/ebyte/e32/">files.nibblepoker.lu</a>
 just in case.</p>
 <p>Alternatively, <a class="reference external" href="https://www.manualslib.com/products/Ebyte-E32-Series-10450561.html">manualslib.com</a> has a pretty good
-collection of them.</p>
+collection of the most common one, as well as some that cannot be found elsewhere.</p>
 </section>
 </section>
 
