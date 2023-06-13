@@ -30,13 +30,25 @@ Wiring
 
 Model Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
-The E32 modules all have a unique name that can help you
+The E32 modules all have a unique name that gives you some information about its abilities, form factor and more.
 
-``E32-{Frequency}{Interface}{TX Power Max dBm}{Form Factor + Suffix}``
+Here is the standard format:
+:raw-html:`<br>`
+``E32-{Frequency}{Interface}{TX Power Max dBm}{Form Factor}{Optional Variant}``
 
 Frequency
 """""""""
-``170``, ``400``, ``433``, ``900``
+``170`` ➜ 160-173.5 MHz
+:raw-html:`<br>`
+``400`` ➜ 410-525 MHz
+:raw-html:`<br>`
+``433`` ➜ 410-441 MHz
+:raw-html:`<br>`
+``868`` ➜ 862-893 MHz
+:raw-html:`<br>`
+``900`` ➜ 862-931 MHz
+:raw-html:`<br>`
+``915`` ➜ 900-931 MHz
 
 Interface
 """""""""
@@ -46,71 +58,102 @@ Interface
 
 Max Power
 """""""""
-``20``, ``30``, ``33``, ``37``
+``20`` ➜ 20dBm / 100mW
+:raw-html:`<br>`
+``30`` ➜ 30dBm / 1W
+:raw-html:`<br>`
+``33`` ➜ 33dBm / 2W
+:raw-html:`<br>`
+``37`` ➜ 37dBm / 5W
 
-Form Factor & Suffix
-""""""""""""""""""""
+Form Factor
+"""""""""""
 ``D`` ➜ DIP (Dual In-line Package)
 :raw-html:`<br>`
-``DC`` ➜ ???
-:raw-html:`<br>`
-``DT`` ➜ ???
-
 ``S`` ➜ SMD (Surface Mount Device)
+
+Optional Variant
+""""""""""""""""
+The optional variant can be a number that may have a letter after it, or just a letter:
 :raw-html:`<br>`
-``S2`` ➜ ???
-:raw-html:`<br>`
-``S2T`` ➜ ???
-:raw-html:`<br>`
-``S3`` ➜ ???
+``1``, ``2``, ``2T``, ``3``, ``C``, ``T``
+
+I don't know what the letter mean for sure,
+it could be related to the minimum voltage input since it seems to be different on those.
 
 Supported Modules
 ^^^^^^^^^^^^^^^^^
-+-------------------+-----------------+-------------+---------+
-| Model             | Max TX Power    | Frequencies | Chipset |
-+===================+=================+=============+=========+
-| ``E32-170T30D``   | 30 dBm / 1 W    | ISM 170 MHz | SX1278  |
-+-------------------+-----------------+-------------+         |
-| ``E32-400T20S``   | 20 dBm / 100 mW | ISM 443 MHz |         |
-|                   |                 |             |         |
-|                   |                 | ISM 470 MHz |         |
-|                   |                 |             |         |
-|                   |                 | EU433       |         |
-+-------------------+-----------------+-------------+         |
-| ``E32-443T20DC``  | 20 dBm / 100 mW | ISM 433MHz  |         |
-|                   |                 |             |         |
-| ``E32-443T20DT``  |                 | EU433       |         |
-|                   |                 |             |         |
-| ``E32-443T20S``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-443T20S2T`` |                 |             |         |
-+-------------------+-----------------+-------------+         |
-| ``E32-443T30D``   | 30 dBm / 1 W    | ISM 433MHz  |         |
-|                   |                 |             |         |
-| ``E32-443T30S``   |                 | EU433       |         |
-+-------------------+-----------------+             |         |
-| ``E32-443T33S``   | 33 dBm / 2W     |             |         |
-+-------------------+-----------------+             |         |
-| ``E32-443T37S``   | 37 dBm / 5W     |             |         |
-+-------------------+-----------------+-------------+---------+
-| ``E32-868T20D``   | TODO            | TODO        | SX1276  |
-|                   |                 |             |         |
-| ``E32-868T20S``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-868T30D``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-868T30S``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-915T20D``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-915T20S``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-915T30D``   |                 |             |         |
-|                   |                 |             |         |
-| ``E32-915T30S``   |                 |             |         |
-+-------------------+-----------------+-------------+---------+
++-------------------+-----------------+----------------------+---------+
+| Model             | Max TX Power    | Frequencies          | Chipset |
++===================+=================+======================+=========+
+| ``E32-170T30D``   | 30 dBm / 1 W    | *160-173.5 MHz*      | SX1278  |
++-------------------+-----------------+----------------------+         |
+| ``E32-400T20S``   | 20 dBm / 100 mW | *410-525 MHz*        |         |
+|                   |                 |                      |         |
+| ``E32-400T20S3``  |                 | EU443                |         |
+|                   |                 |                      |         |
+|                   |                 | CN470-510            |         |
++-------------------+-----------------+----------------------+         |
+| ``E32-443T20DC``  | 20 dBm / 100 mW | *410-441 MHz*        |         |
+|                   |                 |                      |         |
+| ``E32-443T20DT``  |                 | EU433                |         |
+|                   |                 |                      |         |
+| ``E32-443T20S``   |                 |                      |         |
+|                   |                 |                      |         |
+| ``E32-433T20S1``  |                 |                      |         |
+|                   |                 |                      |         |
+| ``E32-443T20S2T`` |                 |                      |         |
+|                   |                 |                      |         |
+| ``E32-443T20S3``  |                 |                      |         |
++-------------------+-----------------+                      |         |
+| ``E32-443T30D``   | 30 dBm / 1 W    |                      |         |
+|                   |                 |                      |         |
+| ``E32-443T30S``   |                 |                      |         |
++-------------------+-----------------+                      |         |
+| ``E32-443T33S``   | 33 dBm / 2W     |                      |         |
++-------------------+-----------------+                      |         |
+| ``E32-443T37S``   | 37 dBm / 5W     |                      |         |
++-------------------+-----------------+----------------------+---------+
+| ``E32-868T20D``   | 20 dBm / 100 mW | *862-893 MHz*        | SX1276  |
+|                   |                 |                      |         |
+| ``E32-868T20S``   |                 | EU863-870            |         |
++-------------------+-----------------+                      |         |
+| ``E32-868T30D``   | 30 dBm / 1 W    | IN865-867            |         |
+|                   |                 |                      |         |
+| ``E32-868T30S``   |                 |                      |         |
++-------------------+-----------------+----------------------+         |
+| ``E32-900T20D``   | 20 dBm / 100 mW | *862-931 MHz*        |         |
+|                   |                 |                      |         |
+| ``E32-900T30S``   |                 | EU863-870            |         |
++-------------------+-----------------+                      |         |
+| ``E32-900T30D``   | 30 dBm / 1 W    | IN865-867            |         |
+|                   |                 |                      |         |
+| ``E32-900T30S``   |                 | AS920-923 ("AS1")    |         |
+|                   |                 |                      |         |
+|                   |                 | AS923-925 ("AS2")    |         |
+|                   |                 |                      |         |
+|                   |                 | AU915-928            |         |
+|                   |                 |                      |         |
+|                   |                 | KR920-923            |         |
+|                   |                 |                      |         |
+|                   |                 | US902-928            |         |
++-------------------+-----------------+----------------------+         |
+| ``E32-915T20D``   | 20 dBm / 100 mW | *900-931 MHz*        |         |
+|                   |                 |                      |         |
+| ``E32-915T20S``   |                 | AS920-923            |         |
++-------------------+-----------------+                      |         |
+| ``E32-915T30D``   | 30 dBm / 1 W    | AU915-928 ("AS1")    |         |
+|                   |                 |                      |         |
+| ``E32-915T30S``   |                 | AS923-925 ("AS2")    |         |
+|                   |                 |                      |         |
+|                   |                 | KR920-923            |         |
+|                   |                 |                      |         |
+|                   |                 | US902-928            |         |
++-------------------+-----------------+----------------------+---------+
 
-All frequencies with another non-ISM name can be used for LoRaWAN.
+All frequencies with a `{Region}xxx-yyy` code used for LoRaWAN depending on your location.
+
+The ``E32-400`` and ``E32-900`` variants support more channels per modules.
 
 Unsupported Modules
 ^^^^^^^^^^^^^^^^^^^
@@ -130,9 +173,10 @@ Unsupported Modules
 
 The ``E32-***M**S`` variants has very basic datasheets, no concrete frequencies could be found.
 
-The ``E32-433T27D`` variant is mentionned in the `E32 V1.30 User Manual
+The ``E32-433T27D`` variant is mentioned in the `E32 V1.30 User Manual
 <https://www.ebyte.com/en/pdf-down.aspx?id=775>`_,
-but no other datasheet or product listing could be found for it.
+and on its `product page <https://www.ebyte.com/en/product-view-news.html?id=141>`_
+but no proper datasheet could be found for it.
 
 Datasheets
 ^^^^^^^^^^
@@ -147,14 +191,29 @@ All datasheets are hosted by Ebyte on *ebyte.com* and *cdebyte.com* unless speci
 * `E32-443T20DC <https://www.ebyte.com/en/downpdf.aspx?id=130>`_
 * `E32-443T20DT <https://www.cdebyte.com/pdf-down.aspx?id=858>`_
 * `E32-443T20S <https://www.cdebyte.com/pdf-down.aspx?id=1957>`_
+* `E32-433T20S1 <https://www.ebyte.com/en/downpdf.aspx?id=229>`_
 * `E32-443T20S2T <https://www.ebyte.com/en/downpdf.aspx?id=227>`_
 * `E32-443T30D <https://www.ebyte.com/en/downpdf.aspx?id=108>`_
 * `E32-443T30S <https://www.cdebyte.com/pdf-down.aspx?id=2347>`_
 * `E32-433T33S <https://www.manualslib.com/manual/2938896/Ebyte-E32-433t33s.html>`_ (manualslib.com)
 * `E32-443T37S <https://www.cdebyte.com/pdf-down.aspx?id=2215>`_
 
-* `E32-900M20S <https://www.ebyte.com/en/downpdf.aspx?id=1613>`_
-* `E32-900M30S <https://www.ebyte.com/en/downpdf.aspx?id=1515>`_
+* `E32-868T20D <https://www.ebyte.com/en/downpdf.aspx?id=132>`_
+* `E32-868T20S <https://www.ebyte.com/en/downpdf.aspx?id=551>`_
+* `E32-868T30D <https://www.ebyte.com/en/downpdf.aspx?id=189>`_
+* `E32-868T30S <https://www.ebyte.com/en/downpdf.aspx?id=318>`_
+
+* `E32-900T20D <https://www.cdebyte.com/pdf-down.aspx?id=2322>`_
+* `E32-900T20S <https://www.cdebyte.com/pdf-down.aspx?id=2323>`_
+* `E32-900M20S <https://www.cdebyte.com/pdf-down.aspx?id=1875>`_
+* `E32-900M30S <https://www.cdebyte.com/pdf-down.aspx?id=1415>`_
+* `E32-900T30S <https://www.cdebyte.com/pdf-down.aspx?id=2348>`_
+* `E32-900T30D <https://www.ebyte.com/en/downpdf.aspx?id=1525>`_
+
+* `E32-915T20D <https://www.ebyte.com/en/downpdf.aspx?id=131>`_
+* `E32-915T20S <https://www.ebyte.com/en/downpdf.aspx?id=552>`_
+* `E32-915T30D <https://www.ebyte.com/en/downpdf.aspx?id=174>`_
+* `E32-915T30S <https://www.ebyte.com/en/downpdf.aspx?id=319>`_
 
 If any datasheet becomes unavailable, please open an issue.
 :raw-html:`<br>`
@@ -162,4 +221,4 @@ We also keep copies of them over at `files.nibblepoker.lu <https://files.nibblep
 just in case.
 
 Alternatively, `manualslib.com <https://www.manualslib.com/products/Ebyte-E32-Series-10450561.html>`_ has a pretty good
-collection of them.
+collection of the most common one, as well as some that cannot be found elsewhere.
