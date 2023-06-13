@@ -26,4 +26,4 @@ class TransmitPower:
     "~250 mW"
     
     TX_POWER_DEFAULT = TX_POWER_33DBM
-    "Default TX power for T33 modules"
+    "Default TX power for modules with the T33 suffix"

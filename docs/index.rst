@@ -21,6 +21,7 @@ Table of Contents
 .. toctree::
     :caption: Examples
 
+    examples_wiring
     examples_instantiation
     examples_config
     examples_uart

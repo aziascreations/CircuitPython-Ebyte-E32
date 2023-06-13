@@ -1,4 +1,4 @@
-# CircuitPython Ebyte E32 Library (W.I.P.)
+# CircuitPython Ebyte E32 Library
 CircuitPython driver for Ebyte's E32 UART LoRa modules.
 
 ## Features
@@ -19,8 +19,8 @@ CircuitPython driver for Ebyte's E32 UART LoRa modules.
 * No built-in protocol:
   * All LoRa packets are glued back-to-back when received.
   * **No LoraWAN support**
-* Missing extra support for some modules:
-  * Modules with `170`, `400`, `868`, `900`, and `915` prefix.  *(Will improve overtime)*
+* Missing support for some modules:
+  * Modules with `170`, `400` and `900` prefix.  *(Will improve overtime)*
 
 ## Dependencies
 This driver depends on:
@@ -28,29 +28,39 @@ This driver depends on:
 * [Adafruit Blinka](https://github.com/adafruit/Adafruit_Blinka)
 
 ## Installing
-TODO
+Go to the [Releases page](https://github.com/aziascreations/CircuitPython-Ebyte-E32/releases/) and download one of the
+packages.
+
+Here is a short description of the available packages:
+
+| Package suffix | Description                                         |
+|----------------|-----------------------------------------------------|
+| `py`           | Python files from [ebyte_e32/](ebyte_e32)           |
+| `py-min`       | Minified version of this repository's code.         |
+| `mpy-8`        | Python files compiled using *mpy-cross v8*          |
+| `mpy-8-min`    | Minified python files compiled using *mpy-cross v8* |
 
 ## Usage
 Usage examples can be found in the [examples](examples) folder,
 or in the *Examples* section of the [documentation](https://aziascreations.github.io/CircuitPython-Ebyte-E32/).
 
 ### Wiring
-| E32 Module | MCU                             |
-|------------|---------------------------------|
-| `M0`       | Any digital output pin          |
-| `M1`       | Any digital output pin          |
-| `RXD`      | Any UART **TX** capable pin*    |
-| `TXD`      | Any UART **RX** capable pin*    |
-| `AUX`      | Any digital input pin**         |
-| `VCC`      | Power supply 2.3V to 5.2V DC*** |
+| E32 Module | MCU                                                             |
+|------------|-----------------------------------------------------------------|
+| `M0`       | Any digital output pin                                          |
+| `M1`       | Any digital output pin                                          |
+| `RXD`      | Any UART **TX** capable pin*                                    |
+| `TXD`      | Any UART **RX** capable pin*                                    |
+| `AUX`      | Any digital input pin**                                         |
+| `VCC`      | Power supply 2.3V to 5.2V DC, or 4.5V to 15V for E32-443T37S*** |
 
 *: Some devices like the *STM32 Black Pill* may require you to use very specific pins for the UART bus.<br>
 **: Analogue input pins might work, but this type of setup isn't supported !<br>
-***: More than 5.2V can cause damage, and make sure to double-check the datasheet !
+***: Higher voltages can cause damage, make sure to double-check the datasheet !
 
 ### *"Making sure it works"*
-The `E32Device` class will raise a `RuntimeError` exception during instantiation if it can't communicate to
-your module.
+The `E32Device` class will raise a `ebyte_e32.exceptions.E32GenericError` exception during instantiation if
+it can't communicate to your module.
 
 The same error may be raised when you change any operating setting.
 
@@ -58,30 +68,19 @@ The same error may be raised when you change any operating setting.
 
 ### Resources
 * [Effevee's E32 driver for MicroPython](https://github.com/effevee/loraE32/)
-
+* [LoRa and LoRaWAN quick overview  (By SemTech)](https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan)
 * [LoRa frequency plan by country (By The Things Network)](https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/)
-
-* [Ebyte documentation for most E32 170/400/433/868/900/915 modules](https://www.ebyte.com/en/data-download.html?id=214&cid=31)
-
+* [LoRa RF modulation basics  (On wiki.lahoud.fr)](http://wiki.lahoud.fr/lib/exe/fetch.php?media=an1200.22.pdf)
+* [Ebyte documentation for most E32 170/400/433/868/900/915 modules  (On ebyte.com)](https://www.ebyte.com/en/data-download.html?id=214&cid=31)
 * [Ebyte documentation for most E32-433T33D  (On manualslib.com)](https://www.manualslib.com/manual/2924523/Ebyte-E32-433t33d.html?page=2#manual)
-
-* [???](https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan)
-
-* [???](https://lora-developers.semtech.com/documentation/tech-papers-and-guides/the-book/packet-size-considerations/)
-
-* [???](https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters)
-
-* [???](https://www.rfwireless-world.com/calculators/LoRa-Data-Rate-Calculator.html)
+* [LoRaWAN Regional Parameters  (By LoRa Alliance)](https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters)
+* [LoRa - Packet size considerations  (By SemTech)](https://lora-developers.semtech.com/documentation/tech-papers-and-guides/the-book/packet-size-considerations/)
+* [LoRaWAN - Regional parameters  (By LoRa Alliance)](https://resources.lora-alliance.org/home/rp002-1-0-4-regional-parameters)
+* [LoRa data rate calculator (By rfwireless-world.com)](https://www.rfwireless-world.com/calculators/LoRa-Data-Rate-Calculator.html)
 
 ### Datasheets
-All datasheets are hosted by Ebyte on ebyte.com unless specified otherwise.
-
-* [E32-443T20DT](https://www.ebyte.com/en/downpdf.aspx?id=660)
-* [E32-443T30D](https://www.ebyte.com/en/downpdf.aspx?id=108)
-* [E32-433T33S](https://www.manualslib.com/manual/2938896/Ebyte-E32-433t33s.html) (manualslib.com)
-
-If any datasheet become unavailable, please open an issue.<br>
-We also keep copies of them over at [files.nibblepoker.lu](https://files.nibblepoker.lu/datasheets/ebyte/e32/) just in case.
+All datasheets can be found in
+[the documentation](https://aziascreations.github.io/CircuitPython-Ebyte-E32/technical_details_e32.html#datasheets).
 
 ## Legal Disclaimer
 Proper usage of E32 modules and adherence to your local laws and other RF-related laws all fall under your

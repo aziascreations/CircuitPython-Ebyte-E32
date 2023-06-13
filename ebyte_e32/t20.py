@@ -26,4 +26,4 @@ class TransmitPower:
     "10 mW"
     
     TX_POWER_DEFAULT = TX_POWER_20DBM
-    "Default TX power for T20 modules"
+    "Default TX power for modules with the T20 suffix"

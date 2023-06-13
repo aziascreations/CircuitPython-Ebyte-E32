@@ -26,4 +26,4 @@ class TransmitPower:
     "~125 mW"
     
     TX_POWER_DEFAULT = TX_POWER_30DBM
-    "Default TX power for T30 modules"
+    "Default TX power for modules with the T30 suffix"
