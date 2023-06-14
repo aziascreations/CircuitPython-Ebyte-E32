@@ -60,9 +60,10 @@ jobs:
         with:
           registry: registry.hub.docker.com
           image: aziascreations/cpy-mpy-cross:8.1.0
-          options: -v output-py:/data/input -v output-mpy:/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
+          options: -v "${{ github.workspace }}/output-py":/data/input -v "${{ github.workspace }}/output-mpy":/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
           run: |
             echo "Running Script"
+            ls -laR /data/input
             /entrypoint.sh
 
       - name: Compiling Minified Module
@@ -70,9 +71,10 @@ jobs:
         with:
           registry: registry.hub.docker.com
           image: aziascreations/cpy-mpy-cross:8.1.0
-          options: -v output-min:/data/input -v output-min-mpy:/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
+          options: -v "${{ github.workspace }}/output-min":/data/input -v "${{ github.workspace }}/output-min-mpy":/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
           run: |
             echo "Running Script"
+            ls -laR /data/input
             /entrypoint.sh
 
       - name: Make ZIP Archives
