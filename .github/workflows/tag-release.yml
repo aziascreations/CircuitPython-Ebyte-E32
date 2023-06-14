@@ -26,7 +26,6 @@ jobs:
         with:
           version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
           create_draft: true
-          update_existing: true
           changelog_file: changelog.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
