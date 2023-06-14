@@ -53,7 +53,7 @@ jobs:
           mkdir -p output-py/ebyte_e32
           mkdir output-mpy
           mkdir output-min-mpy
-          cp -r ./ebyte_e32 ./output-py/ebyte_e32
+          cp -r ./ebyte_e32 ./output-py
 
       - name: Compiling Normal Module
         uses: addnab/docker-run-action@v3
@@ -71,13 +71,27 @@ jobs:
 
       - name: Make ZIP Archives
         run: |
+          echo "Doing regular files..."
           cd output-py
+          ls -laR ./
           zip -r -9 ../nibblepoker-circuitpython-e32-driver_${{ github.ref_name }}_py.zip ebyte_e32
-          cd ../output-min
+          cd ..
+          
+          echo "Doing minified files..."
+          cd output-min
+          ls -laR ./
           zip -r -9 ../nibblepoker-circuitpython-e32-driver_${{ github.ref_name }}_py-min.zip ebyte_e32
-          cd ../output-mpy
+          cd ..
+          
+          echo "Doing compiled files..."
+          cd output-mpy
+          ls -laR ./
           zip -r -9 ../nibblepoker-circuitpython-e32-driver_${{ github.ref_name }}_mpy-8.zip ebyte_e32
-          cd ../output-min-mpy
+          cd ..
+          
+          echo "Doing compiled minified files..."
+          cd output-min-mpy
+          ls -laR ./
           zip -r -9 ../nibblepoker-circuitpython-e32-driver_${{ github.ref_name }}_mpy-8-min.zip ebyte_e32
           cd ..
 
