@@ -3,16 +3,26 @@
 
 LoRa
 ----
-Also referred to as `LoRa PHY`.
+LoRa is a RF modulation technology engineered to be quite resilient to allow long-distance communications with a
+relatively low power-consumption.
 
-TODO: Add more.
+It is also referred to as `LoRa PHY`.
 
 Max Message Length
 ^^^^^^^^^^^^^^^^^^
 ⚠️ **Do not confuse with LoRaWAN limits** ⚠️
 
+Due to some legal limitations regarding the maximum RF air-time that can be used by LoRa, there is a limit to how
+long each packet can be.
+
+If given more data than what should be transmitted in a single packet, the E32 modules will segment that data
+and transfer it as individual packets.
+
+This automatic segmentation can be a problem in fixed transmissions since it completely erase the target address and
+channel from any subsequent packet.
+
 This limit can be **somewhat** ignored when using transparent communications since the message doesn't
-contain the target address and channel.
+contain the target address and channel, but steps should be taken to not rely on this behaviour.
 
 Official limits
 """""""""""""""
@@ -20,6 +30,8 @@ I couldn't find any concrete limits for packet size on LoRa PHY.
 
 All I know is that is depends on a maximum air-time limit enforced by local RF laws which is defined by the
 air data rate and some other parameters.
+
+As of now, you should try different sizes at your desired operating settings in fixed mode to find that limit.
 
 Here is an excerpt from the `"LoraWAN Regional Parameters RP002-1.0.4"` document:
 
@@ -32,7 +44,7 @@ Here is an excerpt from the `"LoraWAN Regional Parameters RP002-1.0.4"` document
 
 Observed limits
 """""""""""""""
-TODO: Check if it depends on that `"mystical"` spread factor or just parameters and region.
+TODO: Check if it depends on the spread factor or just operating parameters and region.
 
 If you can, please contribute to these tables by raising an issue.
 

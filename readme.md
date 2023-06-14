@@ -1,11 +1,10 @@
 # CircuitPython Ebyte E32 Library
-CircuitPython driver for Ebyte's E32 UART LoRa modules.
+CircuitPython driver for Ebyte's E32 UART LoRa modules that use the SX1278/SX1276 chipsets.
 
 ## Features
 * Supports all standard E32 UART modules.
 * Extra support on a per-frequency and per-power basis:
   * More descriptive constants for TX power.
-  * Channel <-> frequency converters.
   * ~~Maximum packet size calculators~~.  (TODO)
   * Entirely optional via separate modules.
 * Minified versions for devices with tiny storage space:
@@ -67,6 +66,7 @@ The same error may be raised when you change any operating setting.
 ## Links
 
 ### Resources
+* [xreef's E32 driver for Arduino](https://github.com/xreef/LoRa_E32_Series_Library)
 * [Effevee's E32 driver for MicroPython](https://github.com/effevee/loraE32/)
 * [LoRa and LoRaWAN quick overview  (By SemTech)](https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan)
 * [LoRa frequency plan by country (By The Things Network)](https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/)
