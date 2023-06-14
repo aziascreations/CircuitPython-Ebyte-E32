@@ -411,7 +411,7 @@ class E32Device:
         """
         self._uart.reset_input_buffer()
     
-    def wait_aux(self, max_wait_ms: int = 150):
+    def wait_aux(self, max_wait_ms: int = 250):
         """
         Wait for the `AUX` pin to go high meaning that the module is ready for communications.
         

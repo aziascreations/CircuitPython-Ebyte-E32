@@ -16,6 +16,18 @@ due to RF regulations.**
     :emphasize-lines: 19,22,26-40
     :linenos:
 
+Monitor
+^^^^^^^
+Monitors channel `4` for messages by using the `0xFFFF` address.
+
+⚠️ **Received messages may be truncated at specific lengths depending on the frequencies and operating parameters used
+due to RF regulations.**
+
+.. literalinclude:: ../examples/transmit_transparent/monitor.py
+    :caption: examples/transmit_transparent/monitor.py
+    :emphasize-lines: 19,22,26-40
+    :linenos:
+
 Sender
 ^^^^^^
 Sends a message to any modules on channel `4` with the `0x1337` address.
@@ -25,5 +37,18 @@ due to RF regulations.**
 
 .. literalinclude:: ../examples/transmit_transparent/sender.py
     :caption: examples/transmit_transparent/sender.py
+    :emphasize-lines: 19,22,27,30,35-38
+    :linenos:
+
+
+Broadcast
+^^^^^^^^^
+Broadcasts a messages to all modules on channel `4` by using the `0xFFFF` address.
+
+⚠️ **Sent messages may be truncated at specific lengths depending on the frequencies and operating parameters used
+due to RF regulations.**
+
+.. literalinclude:: ../examples/transmit_transparent/broadcast.py
+    :caption: examples/transmit_transparent/broadcast.py
     :emphasize-lines: 19,22,27,30,35-38
     :linenos:
