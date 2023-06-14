@@ -20,16 +20,19 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Create GitHub release
+      - name: Create Release
         id: create_release
-        uses: Roang-zero1/github-create-release-action@v3
-        with:
-          version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
-          create_draft: true
-          changelog_file: changelog.md
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Test release ${{ github.ref }}
+          body: |
+            TODO: Fill this in...
+          draft: false
+          prerelease: true
+      
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
