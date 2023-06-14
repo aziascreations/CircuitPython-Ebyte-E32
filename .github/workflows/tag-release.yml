@@ -27,11 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Test release ${{ github.ref }}
-          body: |
-            TODO: Fill this in...
-          draft: false
-          prerelease: true
+          release_name: ${{ github.ref }} Release
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -62,8 +58,6 @@ jobs:
           image: aziascreations/cpy-mpy-cross:8.1.0
           options: -v ${{ github.workspace }}/output-py:/data/input -v ${{ github.workspace }}/output-mpy:/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
           run: |
-            echo "Running Script"
-            ls -laR /data/input
             /entrypoint.sh
 
       - name: Compiling Minified Module
@@ -73,8 +67,6 @@ jobs:
           image: aziascreations/cpy-mpy-cross:8.1.0
           options: -v ${{ github.workspace }}/output-min:/data/input -v ${{ github.workspace }}/output-min-mpy:/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
           run: |
-            echo "Running Script"
-            ls -laR /data/input
             /entrypoint.sh
 
       - name: Make ZIP Archives
