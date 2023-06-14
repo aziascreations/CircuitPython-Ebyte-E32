@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoRa &mdash; CircuitPython Ebyte E32 Library 0.8.0 documentation</title>
+  <title>Error Handling ⚠️ Must-read ⚠️ &mdash; CircuitPython Ebyte E32 Library 0.8.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/extra_styles.css" type="text/css" />
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="LoRaWAN" href="technical_details_lorawan.html" />
-    <link rel="prev" title="E32 Modules" href="technical_details_e32.html" /> 
+    <link rel="next" title="ebyte_e32" href="api.html" />
+    <link rel="prev" title="Transparent Transmissions" href="examples_transmit_transparent.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,31 +51,25 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">CircuitPython Ebyte E32 Library</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Technical Details</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">LoRa</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#max-message-length">Max Message Length</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#official-limits">Official limits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#observed-limits">Observed limits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#spreading-factor-sf">Spreading Factor (SF)</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="examples_wiring.html">Wiring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_instantiation.html">Instantiation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples_error_handling.html">Error Handling ⚠️ Must-read ⚠️</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Error Handling ⚠️ Must-read ⚠️</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#config-changes">Config Changes</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -136,9 +130,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">LoRa</li>
+      <li class="breadcrumb-item active">Error Handling ⚠️ Must-read ⚠️</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/technical_details_lora.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/examples_error_handling.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -146,62 +140,91 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="lora">
-<h1>LoRa<a class="headerlink" href="#lora" title="Permalink to this heading"></a></h1>
-<p>LoRa is a RF modulation technology engineered to be quite resilient to allow long-distance communications with a
-relatively low power-consumption.</p>
-<p>It is also referred to as <cite>LoRa PHY</cite>.</p>
-<section id="max-message-length">
-<h2>Max Message Length<a class="headerlink" href="#max-message-length" title="Permalink to this heading"></a></h2>
-<p>⚠️ <strong>Do not confuse with LoRaWAN limits</strong> ⚠️</p>
-<p>Due to some legal limitations regarding the maximum RF air-time that can be used by LoRa, there is a limit to how
-long each packet can be.</p>
-<p>If given more data than what should be transmitted in a single packet, the E32 modules will segment that data
-and transfer it as individual packets.</p>
-<p>This automatic segmentation can be a problem in fixed transmissions since it completely erase the target address and
-channel from any subsequent packet.</p>
-<p>This limit can be <strong>somewhat</strong> ignored when using transparent communications since the message doesn’t
-contain the target address and channel, but steps should be taken to not rely on this behaviour.</p>
-<section id="official-limits">
-<h3>Official limits<a class="headerlink" href="#official-limits" title="Permalink to this heading"></a></h3>
-<p>I couldn’t find any concrete limits for packet size on LoRa PHY.</p>
-<p>All I know is that is depends on a maximum air-time limit enforced by local RF laws which is defined by the
-air data rate and some other parameters.</p>
-<p>As of now, you should try different sizes at your desired operating settings in fixed mode to find that limit.</p>
-<p>Here is an excerpt from the <cite>“LoraWAN Regional Parameters RP002-1.0.4”</cite> document:</p>
-<a class="reference internal image-reference" href="_images/lora-phy-size-limit-mention.png"><img alt="Mention of PHY restrictions influencing LoRaWAN max packet size." class="align-center" src="_images/lora-phy-size-limit-mention.png" style="width: 80%;" /></a>
-<p><span class="raw-html"><span class="image-caption">Mention of PHY restrictions finfluencing LoRaWAN max packet size.</span></span></p>
-</section>
-<section id="observed-limits">
-<h3>Observed limits<a class="headerlink" href="#observed-limits" title="Permalink to this heading"></a></h3>
-<p>TODO: Check if it depends on the spread factor or just operating parameters and region.</p>
-<p>If you can, please contribute to these tables by raising an issue.</p>
-</section>
-<section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h3>
+  <section id="error-handling-must-read">
+<h1>Error Handling ⚠️ Must-read ⚠️<a class="headerlink" href="#error-handling-must-read" title="Permalink to this heading"></a></h1>
+<p>These examples will show you how to recover from errors returned by the <code class="docutils literal notranslate"><span class="pre">E32Device</span></code> class.</p>
+<section id="config-changes">
+<h2>Config Changes<a class="headerlink" href="#config-changes" title="Permalink to this heading"></a></h2>
+<p>If you get an <code class="docutils literal notranslate"><span class="pre">E32GenericError</span></code> exception when changing the module’s config, you will need to follow this procedure.</p>
+<p><strong>Expected error:</strong></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">E32GenericError:</span> <span class="pre">The</span> <span class="pre">module</span> <span class="pre">didn't</span> <span class="pre">return</span> <span class="pre">the</span> <span class="pre">new</span> <span class="pre">config</span> <span class="pre">!</span></code></p>
+</div></blockquote>
+<p><strong>Resolution procedure:</strong></p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://lora-developers.semtech.com/documentation/tech-papers-and-guides/the-book/packet-size-considerations">LoRaWAN Packet Size Considerations (By The Things Network)</a></p></li>
+<li><p>Catch error in a <code class="docutils literal notranslate"><span class="pre">try</span> <span class="pre">except</span></code> block.</p></li>
+<li><p>Reset the module via <code class="docutils literal notranslate"><span class="pre">E32Device.reset()</span></code>.</p></li>
+<li><p>Wait some time for it to restart.</p></li>
+<li><p>Re-apply the config with <code class="docutils literal notranslate"><span class="pre">E32Device.update_config()</span></code>.</p></li>
+<li><p>Go back into the original mode.</p></li>
+<li><p>Retry the code that raised the error</p></li>
 </ul>
-</section>
-</section>
-<section id="spreading-factor-sf">
-<h2>Spreading Factor (SF)<a class="headerlink" href="#spreading-factor-sf" title="Permalink to this heading"></a></h2>
-<p>The spreading factor is a mechanism that influence the air data rate, time-on-air and the receiver’s sensitivity.
-<span class="raw-html"><br></span>
-It can be one of 6 values between <code class="docutils literal notranslate"><span class="pre">SF7</span></code> and <code class="docutils literal notranslate"><span class="pre">SF12</span></code>.</p>
-<p>I can’t for the life of me give you a clear and concise explanation or table of these values and their effect
-as well as the operating parameters that would be appropriate for them.
-<span class="raw-html"><br></span>
-<strong>Absolutely nobody who should be able to</strong> can make a document that is concise, complete and
-doesn’t expect the reader to glue bits and pieces from 20+ different documents to get a complete view that
-doesn’t only cover part of these SF values because of some arcane reasons.</p>
-<p>Here are some links to documentation I’d recommend on the subject:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.thethingsnetwork.org/docs/lorawan/spreading-factors/">Spreading Factors (By The Things Network)</a></p></li>
-<li><p><a class="reference external" href="https://iotjourney.orange.com/en/support/faq/spreading-factor-(sf)">Spreading Factor (By iotjourney.orange.com)</a></p></li>
-<li><p><a class="reference external" href="https://blog.ttulka.com/lora-spreading-factor-explained/">LoRa SF explained (By blog.ttulka.com)</a></p></li>
-</ul>
-<p>Good luck.</p>
+<p><strong>Warning:</strong></p>
+<blockquote>
+<div><p>Failure to follow the procedure WILL result in a module that no longer applies new operating parameters
+given to it !</p>
+</div></blockquote>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">examples/error_handling.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># SPDX-FileCopyrightText: 2023 Herwin Bozet</span>
+<span class="linenos"> 2</span><span class="c1">#</span>
+<span class="linenos"> 3</span><span class="c1"># SPDX-License-Identifier: Unlicense</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">board</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kn">import</span> <span class="nn">ebyte_e32</span>
+<span class="linenos"> 9</span><span class="kn">import</span> <span class="nn">ebyte_e32.exceptions</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">PIN_M0</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">B3</span>
+<span class="linenos">12</span><span class="n">PIN_M1</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">B4</span>
+<span class="linenos">13</span><span class="n">PIN_RXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">A2</span>  <span class="c1"># Pin marked as RX on the module</span>
+<span class="linenos">14</span><span class="n">PIN_TXD</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">A3</span>  <span class="c1"># Pin marked as TX on the module</span>
+<span class="linenos">15</span><span class="n">PIN_AUX</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">B7</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">e32</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">E32Device</span><span class="p">(</span><span class="n">PIN_M0</span><span class="p">,</span> <span class="n">PIN_M1</span><span class="p">,</span> <span class="n">PIN_AUX</span><span class="p">,</span> <span class="n">PIN_TXD</span><span class="p">,</span> <span class="n">PIN_RXD</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="mh">0x1337</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># We&#39;ll be iterating over each channel</span>
+<span class="linenos">20</span><span class="n">channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">21</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">22</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Moving to channel </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">23</span>    
+<span class="hll"><span class="linenos">24</span>    <span class="k">try</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">25</span>        <span class="c1"># Can cause errors if the module fails to respond to config request when validating it.</span>
+</span><span class="hll"><span class="linenos">26</span>        <span class="n">e32</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span>
+</span><span class="hll"><span class="linenos">27</span>        <span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">28</span>    <span class="k">except</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">E32GenericError</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">29</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to change !&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">30</span>        
+</span><span class="hll"><span class="linenos">31</span>        <span class="c1"># We reset it and wait more than what AUX indicates.</span>
+</span><span class="hll"><span class="linenos">32</span>        <span class="n">e32</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">33</span>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">34</span>        
+</span><span class="hll"><span class="linenos">35</span>        <span class="c1"># We re-apply the `E32Device` class&#39; config</span>
+</span><span class="hll"><span class="linenos">36</span>        <span class="n">e32</span><span class="o">.</span><span class="n">update_config</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">37</span>        <span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">38</span>        
+</span><span class="hll"><span class="linenos">39</span>        <span class="c1"># Going back to the appropriate mode</span>
+</span><span class="hll"><span class="linenos">40</span>        <span class="n">e32</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">Modes</span><span class="o">.</span><span class="n">MODE_NORMAL</span>
+</span><span class="hll"><span class="linenos">41</span>        <span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">42</span>        
+</span><span class="hll"><span class="linenos">43</span>        <span class="c1"># Retrying to change channels and send the message.</span>
+</span><span class="hll"><span class="linenos">44</span>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">45</span>        <span class="k">continue</span>
+</span><span class="linenos">46</span>    
+<span class="linenos">47</span>    <span class="n">e32</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello World !&#39;</span><span class="p">)</span>
+<span class="linenos">48</span>    <span class="n">e32</span><span class="o">.</span><span class="n">wait_aux</span><span class="p">()</span>
+<span class="linenos">49</span>    
+<span class="linenos">50</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="linenos">51</span>    
+<span class="linenos">52</span>    <span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">53</span>    <span class="k">if</span> <span class="n">channel</span> <span class="o">&gt;</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">CHANNEL_MAX</span><span class="p">:</span>
+<span class="linenos">54</span>        <span class="n">channel</span> <span class="o">=</span> <span class="n">ebyte_e32</span><span class="o">.</span><span class="n">CHANNEL_MIN</span>
+<span class="linenos">55</span>    
+<span class="linenos">56</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -209,8 +232,8 @@ doesn’t only cover part of these SF values because of some arcane reasons.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="technical_details_e32.html" class="btn btn-neutral float-left" title="E32 Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="technical_details_lorawan.html" class="btn btn-neutral float-right" title="LoRaWAN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="examples_transmit_transparent.html" class="btn btn-neutral float-left" title="Transparent Transmissions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="ebyte_e32" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -7,18 +7,22 @@ The pictures in this section will be changed to better ones soon.
 
 ESP32-S3
 ^^^^^^^^
-TODO
+In this example, the E32-433T20DC module is connected to a ESP32-S3.
 
-.. image:: _static/wiring_esp32s3_temp.jpg
-   :width: 80%
-   :alt: Picture of a E32-433T20D connected to an ESP32-S3.
+This MCU serves as an example for MCU's that don't restrict certain functionalities such as UART to specific pins.
+
+The only issue that could be pointed out is the fact it is powered by 3.3V which could cause power dips more easily.
+
+.. image:: _static/wiring_esp32s3.png
+   :width: 90%
+   :alt: Schematic of an E32-433T20D connected to an ESP32-S3.
    :align: center
 
-:raw-html:`<span class="image-caption">[Insert caption here...]</span>`
+:raw-html:`<span class="image-caption">Configuration used in all <i>sender</i> examples.</span>`
 
 STM32 Black Pill
 ^^^^^^^^^^^^^^^^
-In this example, E32 module is connected to a STM32F411CE Black Pill.
+In this example, the E32-433T20DC module is connected to a STM32F411CE Black Pill.
 
 This MCU requires the some specific pins to be used for the UART bus.
 :raw-html:`<br>`
@@ -38,12 +42,12 @@ The MCU's `USART1` pins are both used out-of-the-box, so we'll need to use the `
 | **AUX** | ``board.B7`` | ``PB7``   | Generic I/O   | Any input pin    |
 +---------+--------------+-----------+---------------+------------------+
 
-.. image:: _static/wiring_blackpill_temp.jpg
-   :width: 80%
-   :alt: Picture of a E32-433T20D connected to a STM32F411CE Black Pill.
+.. image:: _static/wiring_blackpill.png
+   :width: 90%
+   :alt: Schematic of an E32-433T20D connected to a STM32F411CE Black Pill.
    :align: center
 
-:raw-html:`<span class="image-caption">[Insert caption here...]</span>`
+:raw-html:`<span class="image-caption">Configuration used in all <i>receiver</i> examples.</span>`
 
 Other boards
 ^^^^^^^^^^^^

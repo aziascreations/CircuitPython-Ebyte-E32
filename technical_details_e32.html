@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E32 Modules &mdash; CircuitPython Ebyte E32 Library 0.7.0 documentation</title>
+  <title>E32 Modules &mdash; CircuitPython Ebyte E32 Library 0.8.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/extra_styles.css" type="text/css" />
@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="LoRa (TODO)" href="technical_details_lora.html" />
+    <link rel="next" title="LoRa" href="technical_details_lora.html" />
     <link rel="prev" title="Power-supply Considerations" href="technical_details_wiring.html" /> 
 </head>
 
@@ -37,7 +37,7 @@
             CircuitPython Ebyte E32 Library
           </a>
               <div class="version">
-                0.7
+                0.8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -66,10 +66,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#supported-modules">Supported Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unsupported-modules">Unsupported Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transmission-modes">Transmission Modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#datasheets">Datasheets</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
@@ -80,6 +81,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_error_handling.html">Error Handling ⚠️ Must-read ⚠️</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -381,6 +383,17 @@ it could be related to the minimum voltage input since it seems to be different 
 and on its <a class="reference external" href="https://www.ebyte.com/en/product-view-news.html?id=141">product page</a>
 but no proper datasheet could be found for it.</p>
 </section>
+<section id="transmission-modes">
+<h2>Transmission Modes<a class="headerlink" href="#transmission-modes" title="Permalink to this heading"></a></h2>
+<p>The E32 modules support 2 modes of communication named <cite>“Transparent”</cite> and <cite>“Fixed”</cite>.</p>
+<p>The main characteristic of <cite>“Fixed”</cite> mode is that it requires you to prepend you message with a target
+address and channel.</p>
+<p>And for <cite>“Transparent”</cite> mode, you can broadcast as well as monitor.</p>
+<p>Please note that Ebyte’s infographic shown below doesn’t state that modules in <cite>“Transparent”</cite> modes needs
+to be set on the same channel and address, but you absolutely need to.</p>
+<a class="reference internal image-reference" href="_images/ebyte-graph-tx-modes.jpg"><img alt="Ebyte E32 modules transmissions modes infographic" class="align-center" src="_images/ebyte-graph-tx-modes.jpg" style="width: 80%;" /></a>
+<p><span class="raw-html"><span class="image-caption">E32 Transmission modes.  Credit: Ebyte's official store on aliexpress.com</span></span></p>
+</section>
 <section id="datasheets">
 <h2>Datasheets<a class="headerlink" href="#datasheets" title="Permalink to this heading"></a></h2>
 <p>All datasheets are hosted by Ebyte on <em>ebyte.com</em> and <em>cdebyte.com</em> unless specified otherwise.</p>
@@ -427,7 +440,7 @@ collection of the most common ones.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="technical_details_wiring.html" class="btn btn-neutral float-left" title="Power-supply Considerations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="technical_details_lora.html" class="btn btn-neutral float-right" title="LoRa (TODO)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="technical_details_lora.html" class="btn btn-neutral float-right" title="LoRa" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

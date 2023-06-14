@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wiring &mdash; CircuitPython Ebyte E32 Library 0.7.0 documentation</title>
+  <title>Wiring &mdash; CircuitPython Ebyte E32 Library 0.8.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/extra_styles.css" type="text/css" />
@@ -37,7 +37,7 @@
             CircuitPython Ebyte E32 Library
           </a>
               <div class="version">
-                0.7
+                0.8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -55,7 +55,7 @@
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
@@ -71,6 +71,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_error_handling.html">Error Handling ⚠️ Must-read ⚠️</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -146,13 +147,15 @@
 <p>The pictures in this section will be changed to better ones soon.</p>
 <section id="esp32-s3">
 <h2>ESP32-S3<a class="headerlink" href="#esp32-s3" title="Permalink to this heading"></a></h2>
-<p>TODO</p>
-<a class="reference internal image-reference" href="_images/wiring_esp32s3_temp.jpg"><img alt="Picture of a E32-433T20D connected to an ESP32-S3." class="align-center" src="_images/wiring_esp32s3_temp.jpg" style="width: 80%;" /></a>
-<p><span class="raw-html"><span class="image-caption">[Insert caption here...]</span></span></p>
+<p>In this example, the E32-433T20DC module is connected to a ESP32-S3.</p>
+<p>This MCU serves as an example for MCU’s that don’t restrict certain functionalities such as UART to specific pins.</p>
+<p>The only issue that could be pointed out is the fact it is powered by 3.3V which could cause power dips more easily.</p>
+<a class="reference internal image-reference" href="_images/wiring_esp32s3.png"><img alt="Schematic of an E32-433T20D connected to an ESP32-S3." class="align-center" src="_images/wiring_esp32s3.png" style="width: 90%;" /></a>
+<p><span class="raw-html"><span class="image-caption">Configuration used in all <i>sender</i> examples.</span></span></p>
 </section>
 <section id="stm32-black-pill">
 <h2>STM32 Black Pill<a class="headerlink" href="#stm32-black-pill" title="Permalink to this heading"></a></h2>
-<p>In this example, E32 module is connected to a STM32F411CE Black Pill.</p>
+<p>In this example, the E32-433T20DC module is connected to a STM32F411CE Black Pill.</p>
 <p>This MCU requires the some specific pins to be used for the UART bus.
 <span class="raw-html"><br></span>
 The MCU’s <cite>USART1</cite> pins are both used out-of-the-box, so we’ll need to use the <cite>USART2</cite> pins.</p>
@@ -198,8 +201,8 @@ The MCU’s <cite>USART1</cite> pins are both used out-of-the-box, so we’ll ne
 </tr>
 </tbody>
 </table>
-<a class="reference internal image-reference" href="_images/wiring_blackpill_temp.jpg"><img alt="Picture of a E32-433T20D connected to a STM32F411CE Black Pill." class="align-center" src="_images/wiring_blackpill_temp.jpg" style="width: 80%;" /></a>
-<p><span class="raw-html"><span class="image-caption">[Insert caption here...]</span></span></p>
+<a class="reference internal image-reference" href="_images/wiring_blackpill.png"><img alt="Schematic of an E32-433T20D connected to a STM32F411CE Black Pill." class="align-center" src="_images/wiring_blackpill.png" style="width: 90%;" /></a>
+<p><span class="raw-html"><span class="image-caption">Configuration used in all <i>receiver</i> examples.</span></span></p>
 </section>
 <section id="other-boards">
 <h2>Other boards<a class="headerlink" href="#other-boards" title="Permalink to this heading"></a></h2>

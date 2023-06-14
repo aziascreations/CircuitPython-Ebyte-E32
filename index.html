@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CircuitPython Ebyte E32 Library &mdash; CircuitPython Ebyte E32 Library 0.7.0 documentation</title>
+  <title>CircuitPython Ebyte E32 Library &mdash; CircuitPython Ebyte E32 Library 0.8.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/extra_styles.css" type="text/css" />
@@ -36,7 +36,7 @@
             CircuitPython Ebyte E32 Library
           </a>
               <div class="version">
-                0.7
+                0.8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,7 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="technical_details_preamble.html">Preamble  ⚠️ Must-read ⚠️</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_wiring.html">Power-supply Considerations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_e32.html">E32 Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a></li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
@@ -65,6 +65,7 @@
 <li class="toctree-l1"><a class="reference internal" href="examples_uart.html">UART Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_fixed.html">Fixed Transmissions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_error_handling.html">Error Handling ⚠️ Must-read ⚠️</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
@@ -138,7 +139,7 @@
   <a class="reference internal image-reference" href="_images/computer_v1_happy_strong.png"><img alt="Drawing of an old computer with a warning sign shown on its screen." class="align-right" src="_images/computer_v1_happy_strong.png" style="width: 132.0px; height: 125.0px;" /></a>
 <section id="circuitpython-ebyte-e32-library">
 <h1>CircuitPython Ebyte E32 Library<a class="headerlink" href="#circuitpython-ebyte-e32-library" title="Permalink to this heading"></a></h1>
-<p>CircuitPython driver for Ebyte’s E32 LoRa modules.</p>
+<p>CircuitPython driver for Ebyte’s E32 UART LoRa modules that use the SX1278/SX1276 chipsets.</p>
 <section id="legal-preamble">
 <h2>Legal Preamble<a class="headerlink" href="#legal-preamble" title="Permalink to this heading"></a></h2>
 <p>I’m not responsible for what you do with your module, act responsibly.
@@ -152,7 +153,6 @@ You should also really check the <a class="reference internal" href="technical_d
 <li><p>Extra support on a per-frequency and per-power basis:</p>
 <ul>
 <li><p>More descriptive constants for TX power.</p></li>
-<li><p>Channel &lt;-&gt; frequency converters.</p></li>
 <li><p>Maximum packet size calculators.  (TODO)</p></li>
 <li><p>Entirely optional via separate modules.</p></li>
 </ul>
@@ -180,9 +180,9 @@ You should also really check the <a class="reference internal" href="technical_d
 <li><p><strong>No LoraWAN support</strong></p></li>
 </ul>
 </li>
-<li><p>Missing extra support for some modules:</p>
+<li><p>Missing support for some modules:</p>
 <ul>
-<li><p>Modules with <cite>170</cite>, <cite>400</cite>, <cite>868</cite>, <cite>900</cite>, and <cite>915</cite> prefix.  <em>(Will improve overtime)</em></p></li>
+<li><p>Modules with <code class="docutils literal notranslate"><span class="pre">170</span></code>, <code class="docutils literal notranslate"><span class="pre">400</span></code> and <code class="docutils literal notranslate"><span class="pre">900</span></code> prefix.  <em>(Will improve overtime)</em></p></li>
 </ul>
 </li>
 </ul>
@@ -246,14 +246,22 @@ You should also really check the <a class="reference internal" href="technical_d
 </li>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#supported-modules">Supported Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#unsupported-modules">Unsupported Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#transmission-modes">Transmission Modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_e32.html#datasheets">Datasheets</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa (TODO)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="technical_details_lora.html#spreading-factor">Spreading Factor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_details_lora.html">LoRa</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="technical_details_lora.html#max-message-length">Max Message Length</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="technical_details_lora.html#official-limits">Official limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="technical_details_lora.html#observed-limits">Observed limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="technical_details_lora.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="technical_details_lora.html#spreading-factor-sf">Spreading Factor (SF)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="technical_details_lorawan.html">LoRaWAN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="technical_details_lorawan.html#technical-details">Technical details</a></li>
 <li class="toctree-l2"><a class="reference internal" href="technical_details_lorawan.html#frequencies">Frequencies</a></li>
 </ul>
 </li>
@@ -293,7 +301,13 @@ You should also really check the <a class="reference internal" href="technical_d
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples_transmit_transparent.html">Transparent Transmissions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples_transmit_transparent.html#receiver">Receiver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_transmit_transparent.html#monitor">Monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples_transmit_transparent.html#sender">Sender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_transmit_transparent.html#broadcast">Broadcast</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples_error_handling.html">Error Handling ⚠️ Must-read ⚠️</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples_error_handling.html#config-changes">Config Changes</a></li>
 </ul>
 </li>
 </ul>

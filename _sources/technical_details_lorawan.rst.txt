@@ -3,6 +3,10 @@
 
 LoRaWAN
 -------
+⚠️ **LoRaWAN isn't supported by this project !** ⚠️
+
+Technical details
+^^^^^^^^^^^^^^^^^
 This section will only contain some basic information about some of LoRaWAN's mechanisms.
 
 We strongly recommend you consult the documentation provided by `The Things Network` and `LoRa Alliance`
