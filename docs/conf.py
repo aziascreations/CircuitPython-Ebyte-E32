@@ -40,6 +40,6 @@ html_favicon = "_static/favicon.ico"
 html_css_files = ["extra_styles.css"]
 
 # The short X.Y version.
-version = "0.7"
+version = "0.8"
 # The full version, including alpha/beta/rc tags.
-release = "0.7.0"
+release = "0.8.0"

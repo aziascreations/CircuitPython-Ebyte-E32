@@ -27,6 +27,7 @@ Table of Contents
     examples_uart
     examples_transmit_fixed
     examples_transmit_transparent
+    examples_error_handling
 
 .. toctree::
    :maxdepth: 2

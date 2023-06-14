@@ -8,7 +8,7 @@
 
 CircuitPython Ebyte E32 Library
 ===============================
-CircuitPython driver for Ebyte's E32 LoRa modules.
+CircuitPython driver for Ebyte's E32 UART LoRa modules that use the SX1278/SX1276 chipsets.
 
 Legal Preamble
 ^^^^^^^^^^^^^^
@@ -23,7 +23,6 @@ Features
 - Extra support on a per-frequency and per-power basis:
 
   - More descriptive constants for TX power.
-  - Channel <-> frequency converters.
   - Maximum packet size calculators.  (TODO)
   - Entirely optional via separate modules.
 
@@ -44,9 +43,9 @@ Limitations
   - All LoRa packets are glued back-to-back when received.
   - **No LoraWAN support**
 
-- Missing extra support for some modules:
+- Missing support for some modules:
 
-  - Modules with `170`, `400`, `868`, `900`, and `915` prefix.  *(Will improve overtime)*
+  - Modules with ``170``, ``400`` and ``900`` prefix.  *(Will improve overtime)*
 
 Dependencies
 ^^^^^^^^^^^^

@@ -178,6 +178,25 @@ The ``E32-433T27D`` variant is mentioned in the `E32 V1.30 User Manual
 and on its `product page <https://www.ebyte.com/en/product-view-news.html?id=141>`_
 but no proper datasheet could be found for it.
 
+Transmission Modes
+^^^^^^^^^^^^^^^^^^
+The E32 modules support 2 modes of communication named `"Transparent"` and `"Fixed"`.
+
+The main characteristic of `"Fixed"` mode is that it requires you to prepend you message with a target
+address and channel.
+
+And for `"Transparent"` mode, you can broadcast as well as monitor.
+
+Please note that Ebyte's infographic shown below doesn't state that modules in `"Transparent"` modes needs
+to be set on the same channel and address, but you absolutely need to.
+
+.. image:: _static/ebyte-graph-tx-modes.jpg
+   :width: 80%
+   :alt: Ebyte E32 modules transmissions modes infographic
+   :align: center
+
+:raw-html:`<span class="image-caption">E32 Transmission modes.  Credit: Ebyte's official store on aliexpress.com</span>`
+
 Datasheets
 ^^^^^^^^^^
 All datasheets are hosted by Ebyte on *ebyte.com* and *cdebyte.com* unless specified otherwise.

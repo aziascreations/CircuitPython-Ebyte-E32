@@ -296,22 +296,9 @@ class E32Device:
     """
     
     _m0: DigitalInOut
-    """M0 pin used to set the module's mode."""
-    
     _m1: DigitalInOut
-    """M1 pin used to set the module's mode."""
-    
     _aux: Optional[DigitalInOut]
-    """
-    AUX pin used by the module to indicate its working status or to wake up the MCU.
-    
-    May be left floating and ignored during normal operations.
-    """
-    
     _uart: UART
-    """
-    UART connection to the E32 module.
-    """
     
     _uart_pin_tx: Pin
     _uart_pin_rx: Pin
@@ -424,7 +411,7 @@ class E32Device:
         """
         self._uart.reset_input_buffer()
     
-    def wait_aux(self, max_wait_ms: int = 150):
+    def wait_aux(self, max_wait_ms: int = 250):
         """
         Wait for the `AUX` pin to go high meaning that the module is ready for communications.
         

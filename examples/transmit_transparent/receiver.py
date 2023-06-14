@@ -21,7 +21,7 @@ e32.tx_mode = ebyte_e32.TransmissionMode.TRANSMISSION_TRANSPARENT
 # Switching to mode 0.  (Normal mode)
 e32.mode = ebyte_e32.Modes.MODE_NORMAL
 
-print(f"Waiting for messages... on channel {e32.channel} between devices with the 0x{e32.address:x} address ...")
+print(f"Waiting for messages on channel {e32.channel} between devices with the 0x{e32.address:x} address ...")
 
 while True:
     # Checking if the module sent us some data
