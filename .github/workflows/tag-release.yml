@@ -60,7 +60,7 @@ jobs:
         with:
            registry: registry.hub.docker.com
            image: aziascreations/cpy-mpy-cross:8.1.0
-           options: -v ./output-py:/data/input -v ./output-mpy:/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
+           options: -v output-py:/data/input -v output-mpy:/data/output -e MPY_CROSS_EXTRA_ARGS=-O1
 
       - name: Make ZIP Archives
         run: |
