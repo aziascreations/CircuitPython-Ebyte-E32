@@ -27,9 +27,13 @@ def ig_f(directory, files):
 
 
 printf("Preparing directories...")
-shutil.rmtree("./output/", ignore_errors=True)
-os.mkdir("./output")
-shutil.copytree('ebyte_e32', 'output/ebyte_e32', ignore=ig_f)
+shutil.rmtree("./output-min/", ignore_errors=True)
+os.mkdir("./output-min")
+shutil.rmtree("./output-mpy/", ignore_errors=True)
+shutil.rmtree("./output-min-mpy/", ignore_errors=True)
+
+printf("Copying some files...")
+shutil.copytree('ebyte_e32', 'output-min/ebyte_e32', ignore=ig_f)
 
 printf("Scanning files...")
 result = list(Path("./ebyte_e32/").rglob("*.[Pp][Yy]"))
@@ -37,7 +41,7 @@ result = list(Path("./ebyte_e32/").rglob("*.[Pp][Yy]"))
 printf("Minifying files...")
 for input_path in result:
     input_path: Path
-    output_path = os.path.abspath(os.path.join(input_path.cwd(), "./output", input_path))
+    output_path = os.path.abspath(os.path.join(input_path.cwd(), "./output-min", input_path))
     
     printf(f"> {input_path}")
     

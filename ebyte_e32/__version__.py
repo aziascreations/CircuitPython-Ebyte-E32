@@ -6,6 +6,6 @@ Contains the module's version numbers and semver representation.
 """
 
 MAJOR = 0
-MINOR = 6
+MINOR = 7
 PATCH = 0
 VERSION = f"{MAJOR}.{MINOR}.{PATCH}"

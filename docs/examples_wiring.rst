@@ -14,7 +14,7 @@ TODO
    :alt: Picture of a E32-433T20D connected to an ESP32-S3.
    :align: center
 
-:raw-html:`<br>`
+:raw-html:`<span class="image-caption">[Insert caption here...]</span>`
 
 STM32 Black Pill
 ^^^^^^^^^^^^^^^^
@@ -43,7 +43,7 @@ The MCU's `USART1` pins are both used out-of-the-box, so we'll need to use the `
    :alt: Picture of a E32-433T20D connected to a STM32F411CE Black Pill.
    :align: center
 
-:raw-html:`<br>`
+:raw-html:`<span class="image-caption">[Insert caption here...]</span>`
 
 Other boards
 ^^^^^^^^^^^^

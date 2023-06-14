@@ -21,6 +21,6 @@ __pycache__
 docs/build/
 
 # Build artifacts
-output/
+output*/
 build/
 *.egg-info/

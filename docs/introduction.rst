@@ -58,7 +58,7 @@ Recommended Links
 ^^^^^^^^^^^^^^^^^
 * `LoRa and LoRaWAN quick overview  (By SemTech) <https://lora-developers.semtech.com/documentation/tech-papers-and-guides/lora-and-lorawan>`_
 
-* `LoRa frequency plan by country (By The Things Network) <https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/>`_
+* `LoRaWAN frequency plan by country (By The Things Network) <https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/>`_
 
 * `LoRa RF modulation basics  (On wiki.lahoud.fr) <http://wiki.lahoud.fr/lib/exe/fetch.php?media=an1200.22.pdf>`_
 
